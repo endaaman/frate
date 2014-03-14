@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}フラテ山の会 - BBS - {{thread.title}}{% endblock %}
+
+
+{% block content %}
+
+<div class="box">
+    <p><a href="{%url "bbs.home"%}">スレッド一覧に戻る</a></p>
+    <article>
+        <h1 class="ribbon">{%if thread.locked%}<i class="fa fa-lock"></i> {%endif%}{{ thread.title }}</h1>
+        <div class="right f14">
+            投稿者：{{ thread.author }} / 投稿日時：{{ thread.pub_date}}
+        </div>
+        
+        {{ thread.message_html|safe }}     
+        
+        <div class="right f14">
+            <a href="{%url "bbs.thread.edit" thread.id%}">編集</a> / <a class="btn-confirm-delete" href="#confirm-delete" data-url="{%url "bbs.thread.delete" thread.id%}">削除</a>
+        </div>
+    </article>
+
+    <article>
+        <h1 class="ribbon">コメント</h1>
+        {%if comments %}
+        {% for comment in comments %}
+        <article>
+            <div class="right f14">
+                <span>投稿者：{{comment.author}} / 投稿日時：{{comment.pub_date}}</span>
+            </div>
+            <h2>{{comment.title}}</h2>
+            {{comment.message_html|safe}}
+            <div class="right f14">
+                <a href="{%url "bbs.comment.edit" thread.id comment.id%}">編集</a> / <a class="btn-confirm-delete" href="#confirm-delete" data-url="{% url "bbs.comment.delete" thread.id comment.id %}">削除</a>
+            </div>
+        </article>
+        {% endfor %}
+        {% else %}
+        <p class="gray">現在コメントはありません。</p>
+        {% endif %}
+    </article>
+
+    <section class="content">
+        <h2>コメントする</h2>
+        <div class="well">
+            <form action="." method="post" data-validation="true">                
+                <table class="form centered">
+                    {% csrf_token %}
+                    {{ comment_form }}
+                    <tr>
+                        <th></th>
+                        <td><input type="submit" class="btn btn-primary" value="確定" /></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </section>
+</div>
+
+{% include "bbs/confirm-delete.html" %}
+
+
+{% endblock %}
+
+

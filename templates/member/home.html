@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}フラテ山の会 - 部員紹介{% endblock %}
+
+
+{% block script %}
+<script type="text/javascript">
+
+$(function() {
+    $(".fancybox").fancybox({
+        openEffect : 'none',
+        closeEffect : 'none',
+        prevEffect : 'none',
+        nextEffect : 'none'
+    });
+}); 
+    
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="main box">
+
+    <h1 class="ribbon">部員紹介</h1>
+
+    {% for ms in members %}
+    <section>
+        <h2>{{ms.0.belonging_for}}年目</h2>
+        
+        {% for m in ms %}
+        <section class="bordered float-adjust">
+            <span class="inner_link_fixer" id="member_id_{{m.id}}"></span>
+            <h3>{{m.name}}</h3>
+            <p>
+            {% if m.image %}
+            <a class="fancybox float-left m8" rel="{{album.id}}" href="{{m.image.url}}" title="{{m.name}} - {{ m.description }}">
+                <img class="thumb" src="{{ m.image.url_200x200 }}" alt="{{m.name}}" />
+            </a>
+            {% endif %}
+            {{m.description}}
+            </p>
+        </section>
+        {% endfor %}
+
+    </section>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

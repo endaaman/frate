@@ -1,0 +1,75 @@
+{% extends "photo/base.html" %}
+
+{% block title %}フラテ山の会 - アルバム{% endblock %}
+
+{% block script %}
+{{ block.super }}
+<script type="text/javascript">
+$(function() {
+ 	var owl = $('.album-carousel');
+	owl.owlCarousel({
+		autoPlay: 3000,
+		lazyLoad : true,
+		items : 7,
+		itemsDesktop : [900,4], 
+		itemsDesktopSmall : [700,3], 
+		itemsTablet: [500,2],
+		itemsMobile: [300,1],
+	})
+});	
+</script>
+{% endblock %}
+{% block content %}
+
+<div class="box">
+
+	<article>
+
+		<h1 class="ribbon">アルバム一覧</h1>
+		{% if perms.album.can_add %}
+		<p><a href="{%url "album.add"%}">アルバムを追加</a></p>
+		{% endif %}
+
+		{% for album in albums %}
+		<article class="p12">
+			<h1><a href="{% url "album.show" album.id %}">{{album.title}}</a></h1>	
+			<div class="right f14 mp">
+				投稿者:<a href="{%url "member.home" %}#member_id_{{album.author.id}}">{{ album.author.name }}</a> / 投稿日時:{{album.pub_date}}
+			</div>
+			{{ album.message_html|safe }}
+			{% if album.photo_set.all %}
+			<div class="well">
+				<div class="album-carousel carousel">
+					{%for p in album.photo_set.all %}		      
+					<div class="item center">
+						<a class="fancybox-photo" rel="{{album.id}}" href="{{p.image.url}}" title="{{ p.raw_message }}">
+							<img class="lazyOwl thumb" data-src="{{ p.image.url_200x200 }}" alt="{{p.title}}" />
+						</a>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+			{% else %}
+			<p class="gray">このアルバムにはまだ画像が投稿されていません。</p>
+			{% endif %}
+
+  			{% if user.is_active %}
+			<div class="right f14 mp">
+	  			{% if perms.photo.add_photo %}
+				<a href="{%url "photo.add" album.id%}">写真の追加</a>
+				{% endif %}
+	  			{% if perms.photo.change_album %}
+				<a href="{%url "album.edit" album.id%}">編集</a>
+				{% endif %}
+			</div>
+			{%endif%}
+		</article>
+		{% endfor %}
+		
+	</article>
+
+</div>
+
+{% endblock %}
+
+

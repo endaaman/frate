@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}フラテ山の会 - BBS{% endblock %}
+
+{% block content %}
+<div class="box main">
+    <section>
+
+        <h1 class="ribbon">掲示板 - スレッド一覧</h1>
+
+        <p><a href="{%url "bbs.thread.add"%}">スレッドを作成する</a></p>
+        {% for thread in threads %}
+        {% if thread.locked and user.is_active or not thread.locked %}
+        <article class="content">
+            <h2>{%if thread.locked %}<i class="fa fa-lock"></i> {%endif%}<a href="{%url "bbs.thread.show" thread.id%}">{{ thread.title }}</a></h2>
+            <div class="right f14">
+                投稿者：{{ thread.author }} / 投稿日時:{{thread.pub_date}}
+            </div>                
+        </article>
+        {% endif %}
+        {% endfor %}
+
+    </section>
+
+</div>
+
+{% endblock %}
+
+
