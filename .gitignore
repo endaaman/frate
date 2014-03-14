@@ -1,5 +1,0 @@
-tmp/
-.idea/
-.*
-db.sqlite3
-*.pyc
