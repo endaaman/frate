@@ -20,25 +20,25 @@
         </div>
     </article>
 
-    <article>
+    <section>
         <h1 class="ribbon">コメント</h1>
         {%if comments %}
         {% for comment in comments %}
-        <article>
+        <section class="bordered">
             <div class="right f14">
                 <span>投稿者：{{comment.author}} / 投稿日時：{{comment.pub_date}}</span>
             </div>
-            <h2>{{comment.title}}</h2>
+            <h3>{{comment.title}}</h3>
             {{comment.message_html|safe}}
             <div class="right f14">
                 <a href="{%url "bbs.comment.edit" thread.id comment.id%}">編集</a> / <a class="btn-confirm-delete" href="#confirm-delete" data-url="{% url "bbs.comment.delete" thread.id comment.id %}">削除</a>
             </div>
-        </article>
+        </section>
         {% endfor %}
         {% else %}
         <p class="gray">現在コメントはありません。</p>
         {% endif %}
-    </article>
+    </section>
 
     <section class="content">
         <h2>コメントする</h2>

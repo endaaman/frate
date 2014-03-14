@@ -68,7 +68,7 @@
 	margin: 16px;
 }
 .mp{
-	margin: 8px 0;
+	margin: 8px 8px 8px 0;
 }
 .f8{
 	font-size: 8px;
@@ -117,7 +117,6 @@
 	margin-right: auto;
 }
 
-$page_bg_color : #ececec;
 
 body,html{
 	height: 100%;	
@@ -125,7 +124,7 @@ body,html{
 	overflow-x: hidden;
 }
 html{
-	background: $page_bg_color;	
+	background: #ececec;	
 }
 body{
 	@extend .basic-font;
@@ -145,8 +144,8 @@ table{
 $box-padding : 16px;
 
 .box{
-	background-color: #fff;
-	// box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+	background-color: #fdfdfd;
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 	padding: $box-padding;
 	margin-bottom: 10px;
 	z-index: 0;
@@ -247,7 +246,7 @@ pre{
 	@extend .basic-font;
 }
 
-ul{
+ul:not(.errorlist){
 	li{
 		margin: 0.5em 16px 0.5em 0;
 		line-height: 2em;
@@ -268,12 +267,11 @@ ul{
 	padding: 8px 32px;
 	// width: 100%;
 	margin-left: - $box-padding - 12px;
-	margin-right: 0; //- $box-padding - 12px;
+	margin-right: 0;
 	color: #ecf0f1;
 	border: 0;
 	// z-index: 2;
     box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.4);
-	display: inline-block;
 	&:before{
 		display: block;
 		content: '';
@@ -501,6 +499,13 @@ table.table-default{
 $nav-count : 6;
 $nav-h : 48px;
 
+.inner_link_fixer{
+	$offset  : $nav-h + 20px;
+	margin-top: -$offset;
+	padding-top: $offset;
+	// display: block;
+	// visibility: hidden;
+}
 
 #g-nav{
 	margin: 0;

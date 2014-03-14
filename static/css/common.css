@@ -83,7 +83,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   margin: 16px; }
 
 .mp, h1, h2, h3, p, .bordered {
-  margin: 8px 0; }
+  margin: 8px 8px 8px 0; }
 
 .f8 {
   font-size: 8px; }
@@ -146,7 +146,9 @@ table tbody {
   width: 100%; }
 
 .box {
-  background-color: #fff;
+  background-color: #fdfdfd;
+  -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   padding: 16px;
   margin-bottom: 10px;
   z-index: 0; }
@@ -235,10 +237,10 @@ pre {
   margin: 8px 16px 8px;
   line-height: 2em; }
 
-ul li {
+ul:not(.errorlist) li {
   margin: 0.5em 16px 0.5em 0;
   line-height: 2em; }
-  ul li:before {
+  ul:not(.errorlist) li:before {
     content: '・'; }
 
 .ribbon {
@@ -255,7 +257,6 @@ ul li {
   border: 0;
   -webkit-box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.4);
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.4);
-  display: inline-block;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px; }
   .ribbon:before {
@@ -436,6 +437,10 @@ table.table-default {
       text-align: center; }
     table.table-default tr td {
       text-align: left; }
+
+.inner_link_fixer {
+  margin-top: -68px;
+  padding-top: 68px; }
 
 #g-nav {
   margin: 0;

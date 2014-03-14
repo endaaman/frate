@@ -7,6 +7,7 @@ from models import *
 from django.views.decorators.csrf import csrf_protect
 from abstract.views import MessageBaseForm
 import json
+from django.core.urlresolvers import reverse
 
 
 class EditKeyError(forms.ValidationError):
@@ -54,7 +55,7 @@ class DeleteForm(forms.Form):
 
     def __init__(self, data={}, initial={}, instance=None):
         self.instance = instance
-        return forms.Form.__init__(self, data=data, initial=initial)
+        return super(DeleteForm, self).__init__(data=data, initial=initial)
 
     def clean_delete_key(self):
         base = self.data.get('delete_key', '')
@@ -86,11 +87,19 @@ def show_thread(request, thread_id):
         comment = Comment()
         comment.thread_id = thread_id
         comment_form = CommentForm(request.POST, instance=comment)
-        if comment_form.is_valid():
-            comment_form.save()
-            return HttpResponseRedirect('/bbs/%s' % thread.id )
+        v = comment_form.is_valid()
+        if v:
+            thread = comment_form.save()
+
+        v_flag = request.GET.get('validation', None)
+        if v_flag != 'true':
+            if v:
+                return HttpResponseRedirect(reverse('bbs.thread.show', args=(thread_id,)))
+            else:
+                context = request.POST
         else:
-            context = request.POST
+            content = dict(result=v, errors=comment_form.errors, redirect_to=reverse('bbs.thread.show', args=(thread_id,)))
+            return HttpResponse(json.dumps(content), mimetype='text/plain')
 
     else:
         context = {}
@@ -141,7 +150,8 @@ def edit_thread(request, thread_id=None):
                 context = request.POST
         else:
             # ajaxなときvalid,invalid問わず
-            content = dict(result=v, errors=thread_form.errors, redirect_to='/bbs/%s' % thread.id)
+            rt = '/bbs/%s' % thread.id
+            content = dict(result=v, errors=thread_form.errors, redirect_to=rt)
             return HttpResponse(json.dumps(content), mimetype='text/plain')
 
     else:

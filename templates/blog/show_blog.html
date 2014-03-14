@@ -26,27 +26,31 @@
     </article>
 
     
-    <article>
+    <section>
         <h1 class="ribbon">コメント</h1>
-        {% if comments %}    
+        <p class="gray">現在ブログへのコメント機能は実装中です……</p>
+<!--{#         
+        {% if comments %}      
         {% for comment in comments %}
-        <div class="content">
+        <section class="bordered">
             <div class="right f14">
                 <span>投稿者：{{comment.author}}</span>
             </div>
             <h3>{{comment.title}}</h3>
-            <p class="message">コメント：{{comment.message}}</p>
+            {{comment.message}}
             <div class="right f14">
                 <span>{{comment.pub_date}}</span>
             </div>
-        </div>
+        </section> 
         {% endfor %}
         {% else %}
         <p class="gray">現在この記事にコメントはありません。</p>
         {% endif %}
-    </article>
-
-    <section class="content">
+#}-->
+    </section>
+    
+<!--{#     
+        <section class="content">
         <h2>コメントする</h2>
         <div class="well">
             <form action="./" method="post" data-validation="true">
@@ -60,7 +64,8 @@
                 </table>
             </form>
         </div>
-    </section>
+    </section> 
+#}--> 
 </div>
 
 {% include "blog/confirm-delete.html" %}

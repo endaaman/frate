@@ -20,9 +20,7 @@ $(function() {
 </script>
 {% endblock %}
 {% block content %}
-
 <div class="box">
-
 	<article>
 
 		<h1 class="ribbon">アルバム一覧</h1>
@@ -60,7 +58,8 @@ $(function() {
 				{% endif %}
 	  			{% if perms.photo.change_album %}
 				<a href="{%url "album.edit" album.id%}">編集</a>
-				{% endif %}
+				<a class="btn-confirm-delete" href="#confirm-delete" data-url="{%url "album.delete" album.id %}">削除</a>
+				{% endif%}			
 			</div>
 			{%endif%}
 		</article>
@@ -71,5 +70,3 @@ $(function() {
 </div>
 
 {% endblock %}
-
-

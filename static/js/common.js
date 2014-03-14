@@ -9,6 +9,7 @@ $(function(){
 	if( $('form').data('validation') ){
 		
 	    $('form').bind("submit", function(e) {
+			
 	        e.stopPropagation();
 
 	        var form = $(this);        

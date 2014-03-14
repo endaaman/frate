@@ -29,8 +29,7 @@ $(function() {
         
         {% for m in ms %}
         <section class="bordered float-adjust">
-            <span class="inner_link_fixer" id="member_id_{{m.id}}"></span>
-            <h3>{{m.name}}</h3>
+            <h3 class="inner_link_fixer" id="member_id_{{m.id}}">{{m.name}}</h3>
             <p>
             {% if m.image %}
             <a class="fancybox float-left m8" rel="{{album.id}}" href="{{m.image.url}}" title="{{m.name}} - {{ m.description }}">

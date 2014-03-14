@@ -10,7 +10,7 @@
 	<p><a href="{%url "album.home"%}">アルバム一覧に戻る</a></p>
 	<article class="content_">
 
-		<h1>{{album.title}}</h1>
+		<h1 class="ribbon">{{album.title}}</h1>
 		<div class="right f14 mp">
 			投稿者:<a href="{%url "member.home" %}#member_id_{{album.author.id}}">{{ album.author.name }}</a> / 投稿日時:{{album.pub_date}}
 		</div>
