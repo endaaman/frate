@@ -245,6 +245,8 @@ pre {
   list-style-type: disc; }
 .article ol li {
   list-style-type: decimal; }
+.article strong {
+  font-weight: bold; }
 
 .ribbon {
   font-weight: 500;
