@@ -14,7 +14,9 @@
             <span class="half-size-font">投稿日時:{{blog.pub_date}}</span>
         </div>    
         <h1 class="ribbon">{{ blog.title }}</h1>
-        <p>{{ blog.message_html|safe}}</p>
+        <div class="article">                
+        {{ blog.message_html|safe}}
+        </div>
         <div class="right f14">
             {% if perms.blog.chnage_blog %}
             <a href="{%url "blog.edit" blog.url_name%}">編集</a>

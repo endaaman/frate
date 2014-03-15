@@ -245,15 +245,19 @@ pre{
 	line-height: 2em;
 	@extend .basic-font;
 }
-
-ul:not(.errorlist){
+.article{
 	li{
 		margin: 0.5em 16px 0.5em 0;
 		line-height: 2em;
-		&:before{
-			content: '・';
-		}
-
+	}
+	ul,ol{
+		padding-left:2em;
+	}
+	ul li{
+		list-style-type:disc;
+	}
+	ol li{
+		list-style-type:decimal;
 	}
 }
 
