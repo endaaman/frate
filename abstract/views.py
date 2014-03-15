@@ -7,6 +7,6 @@ class MessageBaseForm(forms.ModelForm):
         help_texts = {
             'message': '本文には<a href="%s" target="_blank">Markdown記法</a>が使えます。'
                        # % urlresolvers.reverse('blog.show', args=('markdown', ))
-                       % '/blog/a/markdown/'
+                       % '/blog/markdown/'
             ,
         }
