@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}フラテ山の会 - 写真の{{op}}{% endblock %}
+
+{% block script %}
+{% if album.id %}
+<script type="text/javascript">
+$(function(){
+    $('.btn-delete').on('click', function(){
+        $(this).parents('form').attr('action', '{%url "photo.delete" photo.id%}')
+    })
+</script>
+{% endif %}
+{% endblock%}
+
+
+{% block content %}
+<div class="main box">
+
+	<p><a href="{%url "album.home"%}">アルバム一覧に戻る</a></p>
+	<section>
+        <h1>写真の{{op}}</h1>
+        <div class="well">
+
+			<form enctype="multipart/form-data" action="./" method="post" data-validation="false">
+				<table class="form centered">
+	                {% csrf_token %}
+	                {{photo_form}}
+					<tr>
+	                    <th></th>
+	                    <td>
+	                    	<input type="submit" class="btn btn-primary" value="確定" />
+	                    </td>
+	                </tr>
+				</table>
+			</form>
+		</div>
+
+	</section>
+	
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}フラテ山の会 - BBS - コメントの編集{% endblock %}
+
+
+
+{% block content %}
+<div class="main box">
+	<p><a href="{%url "bbs.home"%}">スレッド一覧に戻る</a></p>
+	<section>
+        <h1>コメントの編集</h1>
+        <div class="well">
+
+			<form action="{%url "bbs.comment.edit" comment.thread.id comment.id%}" method="post" data-validation="true">
+				<table class="form centered">
+	                {% csrf_token %}
+	                {{ comment_form }}
+					<tr>
+	                    <th></th>
+	                    <td>
+	                    	<button type="submit" class="btn btn-primary">確定</button>
+	                    </td>
+	                </tr>
+				</table>
+			</form>
+		</div>
+
+	</section>
+	
+</div>
+{% endblock %}
+
+

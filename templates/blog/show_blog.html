@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}フラテ山の会 - ブログ - {{blog.title}}{% endblock %}
+
+
+{% block content %}
+
+<div class="box">
+    <p><a href="{%url "blog.home"%}">ブログ一覧に戻る</a></p>
+
+    <article>
+        <div class="right f14">
+            <span>投稿者：<a href="{%url "member.home" %}#member_id_{{blog.author.id}}">{{ blog.author.name }}</a></span>
+            <span class="half-size-font">投稿日時:{{blog.pub_date}}</span>
+        </div>    
+        <h1 class="ribbon">{{ blog.title }}</h1>
+        <div class="article">                
+        {{ blog.message_html|safe}}
+        </div>
+        <div class="right f14">
+            {% if perms.blog.chnage_blog %}
+            <a href="{%url "blog.edit" blog.url_name%}">編集</a>
+            {% endif%}          
+            {% if perms.blog.delete_blog %}
+            <a class="btn-confirm-delete" href="#confirm-delete" data-url="{%url "blog.delete" blog.id %}">削除</a>
+            {% endif%}          
+        </div>
+    </article>
+
+    
+    <section>
+        <h1 class="ribbon">コメント</h1>
+        <p class="gray">現在ブログへのコメント機能は実装中です……</p>
+<!--{#         
+        {% if comments %}      
+        {% for comment in comments %}
+        <section class="bordered">
+            <div class="right f14">
+                <span>投稿者：{{comment.author}}</span>
+            </div>
+            <h3>{{comment.title}}</h3>
+            {{comment.message}}
+            <div class="right f14">
+                <span>{{comment.pub_date}}</span>
+            </div>
+        </section> 
+        {% endfor %}
+        {% else %}
+        <p class="gray">現在この記事にコメントはありません。</p>
+        {% endif %}
+#}-->
+    </section>
+    
+<!--{#     
+        <section class="content">
+        <h2>コメントする</h2>
+        <div class="well">
+            <form action="./" method="post" data-validation="true">
+                <table class="form centered">
+                    {% csrf_token %}
+                    {{ comment_form }}
+                    <tr>
+                        <th></th>
+                        <td><input type="submit" class="btn btn-primary" value="確定" /></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </section> 
+#}--> 
+</div>
+
+{% include "blog/confirm-delete.html" %}
+
+
+{% endblock %}
+
+

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<title>{% block title %}フラテ山の会{% endblock %}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<!-- <meta name="robots" content="noindex,nofollow"> -->
+<link rel="stylesheet" href="{{STATIC_URL}}css/common.css" />
+<script src="{{STATIC_URL}}js/jquery-2.0.3.min.js"></script>
+<script src="{{STATIC_URL}}js/common.js"></script>
+<link rel="stylesheet" href="{{STATIC_URL}}font-awesome/css/font-awesome.min.css" type="text/css" />
+<link rel="stylesheet" href="{{STATIC_URL}}owl-carousel/owl.carousel.css">
+<link rel="stylesheet" href="{{STATIC_URL}}owl-carousel/owl.theme.css">
+<script src="{{STATIC_URL}}owl-carousel/owl.carousel.js"></script>
+<link rel="stylesheet" href="{{STATIC_URL}}fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script src="{{STATIC_URL}}fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+<link rel="stylesheet" href="{{STATIC_URL}}fancybox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
+{% block head %}{% endblock %}{% block style %}{% endblock %}
+{% block script %}{% endblock %}
+<body>	
+{%block pre_process%}{% endblock %}
+{%block nav%}
+<nav id="g-nav">
+	<ul class="nav-list">
+		<li class="nav-menu">
+			<a class="link" href="{% url "home" %}"><i class="fa fa-home"></i> ホーム</a>
+		</li>
+		<li class="nav-menu">
+			<a class="link" href="{% url "member.home" %}"><i class="fa fa-group"></i> 部員紹介</a>
+		</li>
+		<li class="nav-menu">
+			<a class="link" href="{% url "album.home" %}"><i class="fa fa-picture-o"></i> アルバム</a>
+		</li>
+		<li class="nav-menu">
+			<a class="link" href="{% url "bbs.home" %}"><i class="fa fa-pencil-square"></i> 新掲示板</a>
+		</li>
+		<li class="nav-menu">
+			<a class="link" href="{% url "blog.home" %}"><i class="fa fa-bookmark"></i> ブログ</a>
+		</li>
+		<li class="nav-menu">
+			<label class="dropdown">
+				<input class="dropdown-trigger" type="checkbox" >
+				<div class="dropping">
+					<span class="link btn-dropdown"><i class="fa fa-bars"></i> その他</span>
+					<ul class="dropdown-list">
+						<li class="dropdown-menu"><a class="link" target="_blank" href="http://frate.web.fc2.com/">旧ホームページ</a></li>
+						<li class="dropdown-menu"><a class="link" target="_blank" href="http://asp.atomicweb.co.jp/id/frate1839/bbs/">旧画像掲示板</a></li>
+						<li class="dropdown-menu"><a class="link" target="_blank" href="http://8208.teacup.com/frate/bbs">旧掲示板</a></li>
+						<li class="dropdown-menu"><a class="link" target="_blank" href="http://frate.bbs.fc2.com/">旧掲示板(パス付き)</a></li>
+			  			{% if user.is_authenticated %}
+						<li class="dropdown-menu"><a class="link" href="{% url "auth.logout" %}?next={{request.path}}"><i class="fa fa-user"></i> ログアウト</a></li>
+						{%else%}
+						<li class="dropdown-menu"><a class="link" href="{% url "auth.login" %}?next={{request.path}}"><i class="fa fa-user"></i> ログイン</a></li>
+						{%endif%}
+					</ul>
+				</div>
+			</label>
+		</li>
+	</ul>
+</nav>
+{%endblock%}
+
+<div id="wrap">
+{% block content %}{% endblock %}
+
+{%if user.is_authenticated%}
+<div class="box">	
+	<p>{{user.username}} としてログインしています。</p>
+</div>
+{%endif%}
+
+</div>
+{%block post_process%}{%endblock%}
+</body>
+</html>
+
