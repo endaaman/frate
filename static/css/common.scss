@@ -616,17 +616,21 @@ $nav-h : 48px;
 	left: 0;
 	top: 0;
 	z-index: -2;
+<<<<<<< HEAD
 
 	width: 100%;
 	height: 100%;
 
 
+=======
+>>>>>>> tmp
 	.bg{
 		position: absolute;
 		left: 0;
 		top: 0;
 	}
 	.bg-front{
+<<<<<<< HEAD
 		z-index: -1;		
 		opacity: 1;
 	}
@@ -643,6 +647,13 @@ $nav-h : 48px;
 		transition : opacity 2s ease;
 	}
 
+=======
+		z-index: -3;		
+	}
+	.bg-back{
+		z-index: -4;				
+	}
+>>>>>>> tmp
 }
 
 

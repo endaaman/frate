@@ -10,22 +10,32 @@ $(function() {
 	$.ajax({
 		type: "POST",
 		url: "/ajax/mail/",
+<<<<<<< HEAD
 		data: $("#csrf-token").serialize()
+=======
+>>>>>>> tmp
 	}).done(function( t ) {
 		$('.ml').text(t).attr('href', 'mailto:'+t)
 	}).fail(function(jqXHR, textStatus, errorThrown){
 		alert(errorThrown)
 	});
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> tmp
 	bg_flip()
     update_bg()
 
 
     $('.box').addClass('glass')
+<<<<<<< HEAD
 
     {%if css3%}
     $('.bg').addClass('bg-css3')
     {%endif%}
+=======
+>>>>>>> tmp
 });	
 
 var bg_files = new Array(
@@ -35,10 +45,13 @@ var bg_files = new Array(
 	'{{STATIC_URL}}img/hero/4.jpg',
 	'{{STATIC_URL}}img/hero/5.jpg');
 
+<<<<<<< HEAD
 var bg_fade_duration = 2000
 var bg_fade_interval = 10000
 
 
+=======
+>>>>>>> tmp
 var bg_imgs = new Array(bg_files.length);
 for (i = 0; i < bg_files.length; i++) {
 	bg_imgs[i] = null
@@ -92,6 +105,7 @@ function update_bg(){
 		return
 	}
 
+<<<<<<< HEAD
 
 	{%if css3%}
 
@@ -119,6 +133,25 @@ function update_bg(){
 	)
 	{%endif%}
 
+=======
+	bg_back.attr('src', bg_img().src)
+	bg_back.data('orgWidth', bg_img().width)
+	bg_back.data('orgHeight', bg_img().height)
+	console.log('attached '+ bg_img().src + ' to '+ bg_back.attr('id'))
+	adjust_bg(bg_back)
+
+	bg_back.show()
+	// bg_front.show()
+	bg_front.fadeOut(
+    	2000,
+    	function(){
+			console.log('fade done')
+			bg_flip()
+			bg_proceed()
+			setTimeout(update_bg, 10000);
+    	}
+    )
+>>>>>>> tmp
 
 }
 
@@ -141,10 +174,15 @@ function adjust_bg(img){
 }
 
 function resize(){    
+<<<<<<< HEAD
 	{%if not css3%}
 	adjust_bg(bg_front)
 	adjust_bg(bg_back)
 	{%endif%}
+=======
+	adjust_bg(bg_front)
+	adjust_bg(bg_back)
+>>>>>>> tmp
 }
 
 var timer = false;
@@ -158,6 +196,7 @@ $(window).resize(function() {
 </script>
 {% endblock %}
 
+<<<<<<< HEAD
 {%block pre_process%}
 <div id="bg-container">
 	{%if css3%}
@@ -169,6 +208,15 @@ $(window).resize(function() {
 	{%endif%}
 </div>
 {%endblock%}
+=======
+{% block wrap-outer%}
+<div id="bg-container">
+	<img id="bg-a" class="bg" />
+	<img id="bg-b" class="bg" />
+</div>
+{% endblock %}
+
+>>>>>>> tmp
 {% block content %}
 
 <div class="box">
@@ -195,7 +243,11 @@ $(window).resize(function() {
 				</tr>
 				<tr>
 					<th class="bg-gray">メールアドレス</th>
+<<<<<<< HEAD
 					<td><a class="ml">xxxxxxxxxxxxxxxxxxx</a><form id="csrf-token">{%csrf_token%}</form></td>
+=======
+					<td><a class="ml">xxxxxxxxxxxxxxxxxxx</a><form id="csrf-token"><input type='hidden' name='csrfmiddlewaretoken' value='F8gA9sniX4x9x6yEMXDpILsZwP9fTgJr' /></form></td>
+>>>>>>> tmp
 				</tr>
 			</table>
 		</article>
@@ -208,7 +260,10 @@ $(window).resize(function() {
 					<th class="bg-gray">2014年3月15日</th>
 					<td>ホームページをリニューアルしました。</td>
 				</tr>
+<<<<<<< HEAD
 
+=======
+>>>>>>> tmp
 			</table>					
 				
 		</article>
