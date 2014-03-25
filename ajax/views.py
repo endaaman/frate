@@ -1,5 +1,4 @@
 from django import http
-<<<<<<< HEAD
 from django.views.decorators.csrf import csrf_exempt
 
 
