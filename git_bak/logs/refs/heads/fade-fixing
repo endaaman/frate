@@ -1,3 +1,0 @@
-0000000000000000000000000000000000000000 5b21794fd49de452d950c935c724057a622de534 endaaman <buhibuhidog@gmail.com> 1395063441 +0900	branch: Created from HEAD
-5b21794fd49de452d950c935c724057a622de534 48bcd135aa40852f1c560fbfec20656579df9db5 endaaman <buhibuhidog@gmail.com> 1395064567 +0900	commit: chage fading logic from js-animation to css3 transition
-48bcd135aa40852f1c560fbfec20656579df9db5 31b7de77cc01942a63238c6df90c056adec74068 endaaman <buhibuhidog@gmail.com> 1395068962 +0900	commit: 背景のフェード方式をcss3とjsで切り替えられるようにした。

@@ -24,7 +24,7 @@ $(function() {
 	<article>
 
 		<h1 class="ribbon">アルバム一覧</h1>
-		{% if perms.album.can_add %}
+		{% if perms.photo.add_album %}
 		<p><a href="{%url "album.add"%}">アルバムを追加</a></p>
 		{% endif %}
 
