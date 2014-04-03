@@ -21,9 +21,10 @@ urlpatterns = patterns(
     url(r'^album/', include('photo.urls')),
     url(r'^member/', include('member.urls')),
     url(r'^bbs/', include('bbs.urls')),
-    url(r'^ajax/', include('ajax.urls')),
     url(r'^auth/', include('auth.urls')),
     url(r'^blog/', include('blog.urls')),
+
+    url(r'^ajax/mail/$', views.mail, name='ajax.mail'),
 )
 
 urlpatterns += patterns('django.views.static',

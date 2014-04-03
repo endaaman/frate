@@ -17,7 +17,10 @@ fs = FileSystemStorage()
 
 
 class Album(MessageBase):
+    pub_date = models.DateTimeField(auto_now_add=True, editable=False, verbose_name="投稿日時")
+    title = models.CharField(max_length=200, blank=False, verbose_name="タイトル")
     author = models.ForeignKey(Member, blank=True, null=True, default=None)
+    message = models.TextField(blank=False, verbose_name="本文")
 
     class Meta:
         verbose_name = verbose_name_plural = 'アルバム'
@@ -28,10 +31,13 @@ class Album(MessageBase):
 
 
 class Photo(MessageBase):
-    image = ImageWithThumbsField(upload_to='photo', storage=fs, sizes=((200, 200),) )
-    author = models.ForeignKey(Member, related_name='author')
-    member = models.ManyToManyField(Member, blank=True, related_name='member')
     album = models.ForeignKey(Album)
+    pub_date = models.DateTimeField(auto_now_add=True, editable=False, verbose_name="投稿日時")
+    title = models.CharField(max_length=200, blank=False, verbose_name="タイトル")
+    author = models.ForeignKey(Member, related_name='author')
+    message = models.TextField(blank=False, verbose_name="本文")
+    member = models.ManyToManyField(Member, blank=True, related_name='member')
+    image = ImageWithThumbsField(upload_to='photo', storage=fs, sizes=((200, 200),), verbose_name="写真")
 
     class Meta:
         verbose_name = verbose_name_plural = '写真'

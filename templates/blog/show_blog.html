@@ -31,7 +31,8 @@
     <section>
         <h1 class="ribbon">コメント</h1>
         <p class="gray">現在ブログへのコメント機能は実装中です……</p>
-<!--{#         
+
+        {% comment %}
         {% if comments %}      
         {% for comment in comments %}
         <section class="bordered">
@@ -48,11 +49,11 @@
         {% else %}
         <p class="gray">現在この記事にコメントはありません。</p>
         {% endif %}
-#}-->
+       {% endcomment %} 
     </section>
     
-<!--{#     
-        <section class="content">
+    {% comment %} 
+    <section class="content">
         <h2>コメントする</h2>
         <div class="well">
             <form action="./" method="post" data-validation="true">
@@ -67,7 +68,8 @@
             </form>
         </div>
     </section> 
-#}--> 
+    {% endcomment %} 
+
 </div>
 
 {% include "blog/confirm-delete.html" %}

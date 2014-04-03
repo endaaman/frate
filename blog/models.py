@@ -4,8 +4,11 @@ from django import forms
 from abstract.models import MessageBase
 
 
-class Blog(MessageBase):
+class Blog(models.Model):
+    pub_date = models.DateTimeField(auto_now_add=True, editable=False, verbose_name="投稿日時")
+    title = models.CharField(max_length=200, blank=False, verbose_name="タイトル")
     author = models.ForeignKey('member.Member', verbose_name='投稿者')
+    message = models.TextField(blank=False, verbose_name="本文")
     url_name = models.CharField(max_length=100, verbose_name='名前')
 
     class Meta:
@@ -15,9 +18,10 @@ class Blog(MessageBase):
         return self.title
 
 
-class Comment(MessageBase):
+class Comment(models.Model):
     blog = models.ForeignKey(Blog)
     author = models.CharField(max_length=100, blank=False, verbose_name='投稿者')
+    message = models.TextField(blank=False, verbose_name="本文")
     edit_key = models.CharField(max_length=10, verbose_name="編集キー")
 
     class Meta:
