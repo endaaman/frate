@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{%load filter_markdown%}
 
 {% block title %}フラテ山の会 - BBS - {{thread.title}}{% endblock %}
 
@@ -13,7 +14,7 @@
             投稿者：{{ thread.author }} / 投稿日時：{{ thread.pub_date}}
         </div>
         <div class="article">
-        {{ thread.message_html|safe }}                 
+        {{ thread.message|md2html|safe }}                 
         </div>        
         <div class="right f14">
             <a href="{%url "bbs.thread.edit" thread.id%}">編集</a> / <a class="btn-confirm-delete" href="#confirm-delete" data-url="{%url "bbs.thread.delete" thread.id%}">削除</a>
@@ -30,7 +31,7 @@
             </div>
             <h3>{{comment.title}}</h3>
             <div class="article">                
-            {{comment.message_html|safe}}
+            {{comment.message|linebreaks}}
             </div>
             <div class="right f14">
                 <a href="{%url "bbs.comment.edit" thread.id comment.id%}">編集</a> / <a class="btn-confirm-delete" href="#confirm-delete" data-url="{% url "bbs.comment.delete" thread.id comment.id %}">削除</a>
@@ -45,7 +46,7 @@
     <section class="content">
         <h2>コメントする</h2>
         <div class="well">
-            <form action="." method="post" data-validation="true">                
+            <form action="." method="post" data-use-ajax="true">                
                 <table class="form centered">
                     {% csrf_token %}
                     {{ comment_form }}

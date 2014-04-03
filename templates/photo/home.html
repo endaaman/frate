@@ -1,4 +1,4 @@
-{% extends "photo/base.html" %}
+{% extends "base.html" %}
 
 {% block title %}フラテ山の会 - アルバム{% endblock %}
 
@@ -34,13 +34,13 @@ $(function() {
 			<div class="right f14 mp">
 				投稿者:<a href="{%url "member.home" %}#member_id_{{album.author.id}}">{{ album.author.name }}</a> / 投稿日時:{{album.pub_date}}
 			</div>
-			{{ album.message_html|safe }}
+			{{ album.message | linebreaks}}
 			{% if album.photo_set.all %}
 			<div class="well">
 				<div class="album-carousel carousel">
 					{%for p in album.photo_set.all %}		      
 					<div class="item center">
-						<a class="fancybox-photo" rel="{{album.id}}" href="{{p.image.url}}" title="{{ p.raw_message }}">
+						<a class="fancybox-photo" rel="{{album.id}}" href="{{p.image.url}}" title="{{ p.message }}">
 							<img class="lazyOwl thumb" data-src="{{ p.image.url_200x200 }}" alt="{{p.title}}" />
 						</a>
 					</div>
@@ -68,5 +68,8 @@ $(function() {
 	</article>
 
 </div>
+
+{% include "photo/confirm-delete.html" %}
+
 
 {% endblock %}

@@ -6,7 +6,7 @@ $.fn.visible = function() {
 $(function(){
 
 	// form ajax
-	if( $('form').data('validation') ){
+	if( $('form').data('use-ajax') ){
 		
 	    $('form').bind("submit", function(e) {
 			
@@ -16,7 +16,7 @@ $(function(){
 	        var button = form.find('button');
 
 	        $.ajax({
-	            url: form.attr('action')+'?validation=true',
+	            url: form.attr('action')+'?use-ajax=true',
 	            type: form.attr('method'),
 	            data: form.serialize(),
 	            timeout: 10000,

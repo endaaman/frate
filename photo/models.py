@@ -3,7 +3,6 @@
 from django.db import models
 from django import forms
 # from django.conf import settings
-from abstract.models import MessageBase
 from django.core.files.storage import FileSystemStorage
 from django_thumbs.db.models import ImageWithThumbsField
 from member.models import Member

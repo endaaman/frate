@@ -2,7 +2,6 @@
 from django.db import models
 from django.utils import html
 from django import forms
-from abstract.models import MessageBase
 
 
 class Thread(models.Model):
@@ -25,7 +24,6 @@ class Comment(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True, editable=False, verbose_name="投稿日時")
     author = models.CharField(max_length=100, verbose_name="投稿者")
     message = models.TextField(blank=False, verbose_name="本文")
-    locked = models.BooleanField(default=False, verbose_name="パスワードをかける")
     edit_key = models.CharField(max_length=10, verbose_name="編集キー")
 
 

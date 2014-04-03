@@ -1,5 +1,9 @@
 # -*- encoding: utf-8 -*-
 
+from django.utils.safestring import mark_safe
 
-def css3(request):
-    return {'css3': True}
+
+def custom_context(request):
+    return {'css3': True,
+            }
+

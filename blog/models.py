@@ -1,7 +1,6 @@
 #-*- encoding: utf-8 -*-
 from django.db import models
 from django import forms
-from abstract.models import MessageBase
 
 
 class Blog(models.Model):

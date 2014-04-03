@@ -8,7 +8,7 @@
         <section class="content">
             <h3>スレッドを{% if thread.id %}編集{% else %}追加{% endif %}する</h3>
             <div class="well">
-                <form action="." method="post" data-validation="true">
+                <form action="." method="post" data-use-ajax="true">
                     <table class="form centered">
                         {% csrf_token %}
                         {{ thread_form }}                                    

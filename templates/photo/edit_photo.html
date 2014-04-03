@@ -22,7 +22,7 @@ $(function(){
         <h1>写真の{{op}}</h1>
         <div class="well">
 
-			<form enctype="multipart/form-data" action="./" method="post" data-validation="false">
+			<form enctype="multipart/form-data" action="./" method="post" data-use-ajax="false">
 				<table class="form centered">
 	                {% csrf_token %}
 	                {{photo_form}}

@@ -22,7 +22,7 @@ $(function(){
 		<h1>アルバムの{{op}}</h1>		
 		<div class="well">
 
-			<form action="./" method="post" data-validation="true">
+			<form action="./" method="post" data-use-ajax="true">
 				<table class="form centered">
 	                {% csrf_token %}
 	                {{ album_form }}

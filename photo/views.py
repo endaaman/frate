@@ -7,26 +7,21 @@ from django.template import RequestContext
 from django.views.decorators.csrf import csrf_protect
 from django import forms
 from django.contrib.auth.decorators import login_required
-from abstract.views import MessageBaseForm
 from django.core.urlresolvers import reverse
 
-class AlbumForm(MessageBaseForm):
+class AlbumForm(forms.ModelForm):
 
-    class Meta(MessageBaseForm.Meta):
+    class Meta:
         model = Album
-        exclude = MessageBaseForm.Meta.exclude + ('mountain', )
 
 
-class PhotoForm(MessageBaseForm):
+class PhotoForm(forms.ModelForm):
 
-    class Meta(MessageBaseForm.Meta):
+    class Meta:
         model = Photo
-        exclude = ('album', ) + MessageBaseForm.Meta.exclude
-        widgets = {
-            'description': forms.Textarea(attrs={'cols': 1, 'rows': 1}),
-        }
+        exclude = ('album', )
 
-@csrf_protect
+
 def get_bg(request):
     albums=Album.objects.all()
 
@@ -38,7 +33,6 @@ def get_bg(request):
     return HttpResponse('frate1839@gmail.com', mimetype='text/plain')
 
 
-@csrf_protect
 def home(request):
     albums=Album.objects.order_by('-pub_date')
 
@@ -61,15 +55,15 @@ def edit_album(request, album_id=None):
         album = get_object_or_404(Album, pk=album_id)
         op = '編集'
 
-    if request.POST:
+    if request.method == 'POST':
         album_form = AlbumForm(request.POST, instance=album)
         v = album_form.is_valid()
         if v:
             album = album_form.save()
             album_id = album.id
 
-        v_flag = request.GET.get('validation', None)
-        if v_flag == 'true':
+        ajax = request.GET.get('use-ajax', None)
+        if ajax == 'true':
             content = dict(result=v, errors=album_form.errors, redirect_to=reverse('album.show', args=(album_id,)))
             import json
             return HttpResponse(json.dumps(content), mimetype='text/plain')
@@ -98,7 +92,7 @@ def edit_album(request, album_id=None):
 @csrf_protect
 def delete_album(request, album_id):
     album = get_object_or_404(Album, pk=album_id)
-    if request.POST:
+    if request.method == 'POST':
         album.delete()
         return HttpResponseRedirect(reverse('album.home'))
     else:
@@ -133,14 +127,14 @@ def edit_photo(request, album_id=None, photo_id=None):
 
     photo.album_id = album_id
 
-    if request.POST:
+    if request.method == 'POST':
         photo_form = PhotoForm(request.POST, request.FILES, instance=photo)
         v = photo_form.is_valid()
         if v:
             photo_form.save()
 
-        v_flag = request.GET.get('validation', None)
-        if v_flag == 'true':
+        ajax = request.GET.get('use-ajax', None)
+        if ajax == 'true':
             # ajaxなときvalid,invalid問わず
             content = dict(result=v, errors=photo_form.errors, redirect_to=reverse('album.show', args=(album_id,)))
             import json
@@ -175,7 +169,7 @@ def edit_photo(request, album_id=None, photo_id=None):
 def delete_photo(request, album_id, photo_id):
     get_object_or_404(Album, pk=album_id)
     photo = get_object_or_404(Photo, pk=photo_id)
-    if request.POST:
+    if request.method == 'POST':
         photo.delete()
         return HttpResponseRedirect(reverse('album.show', args=(album_id,)))
     else:

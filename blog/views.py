@@ -4,7 +4,6 @@ from django import http
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_protect
 from models import *
-from abstract.views import MessageBaseForm
 from django.contrib.auth.decorators import user_passes_test, permission_required
 from django.core.urlresolvers import reverse
 
@@ -14,7 +13,7 @@ class UrlNameError(forms.ValidationError):
         return forms.ValidationError.__init__(self, 'This name is already allocated.')
 
 
-class BlogForm(MessageBaseForm):
+class BlogForm(forms.ModelForm):
 
     def clear_name(self):
         base = self.data.get('url_name', None)
@@ -24,16 +23,18 @@ class BlogForm(MessageBaseForm):
                 raise UrlNameError()
         return base
 
-    class Meta(MessageBaseForm.Meta):
+    class Meta:
         model = Blog
-        def __init__(self):
-            self.help_texts['url_name'] = 'URLに使われる名前です。「test」の場合はhttp:/frate.tk/blog/test/が記事のURLになります。'
+        help_texts = {
+            'message': '本文には<a href="%s" target="_blank">Markdown記法</a>が使えます。' % '/blog/markdown/',
+            'url_name': 'URLに使われる名前です。「test」の場合はhttp:/frate.tk/blog/test/が記事のURLになります。',
+        }
 
 
-class CommentForm(MessageBaseForm):
-    class Meta(MessageBaseForm.Meta):
+class CommentForm(forms.ModelForm):
+    class Meta:
         model = Comment
-        exclude = ('blog', ) + MessageBaseForm.Meta.exclude
+        exclude = ('blog', )
 
 
 
@@ -54,7 +55,7 @@ def show_blog(request, blog_name):
     except Blog.DoesNotExist:
         return http.HttpResponseNotFound()
 
-    if request.POST:
+    if request.method == 'POST':
         comment = Comment()
         comment.blog_id = blog.id
         comment_form = CommentForm(request.POST, instance=comment)
@@ -62,8 +63,8 @@ def show_blog(request, blog_name):
         if v:
             comment_form.save()
 
-        v_flag = request.GET.get('validation', None)
-        if v_flag != 'true':
+        ajax = request.GET.get('use-ajax', None)
+        if ajax != 'true':
             # ajaxでない
             if v:
                 # validならリダイレクト
@@ -104,15 +105,15 @@ def edit_blog(request, blog_name=None):
     else:
         blog = get_object_or_404(Blog, url_name=blog_name)
 
-    if request.POST:
+    if request.method == 'POST':
         blog_form = BlogForm(request.POST, instance=blog)
         v = blog_form.is_valid()
         if v:
             blog = blog_form.save()
             blog_name = blog.url_name
 
-        v_flag = request.GET.get('validation', None)
-        if v_flag != 'true':
+        ajax = request.GET.get('use-ajax', None)
+        if ajax != 'true':
             # ajaxでない
             if v:
                 # validならリダイレクト
@@ -142,7 +143,7 @@ def edit_blog(request, blog_name=None):
 @user_passes_test(lambda u: u.has_module_perms('blog'))
 def delete_blog(request, blog_name):
     blog = get_object_or_404(Blog, url_name=blog_name)
-    if request.POST:
+    if request.method == 'POST':
         blog.delete()
         return http.HttpResponseRedirect(reverse('blog.home'))
     else:

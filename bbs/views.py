@@ -11,7 +11,7 @@ from django import forms
 
 class EditKeyError(forms.ValidationError):
     def __init__(self):
-        return forms.ValidationError.__init__(self, 'Inputted Edit Key is invalid')
+        return forms.ValidationError.__init__(self, 'キーが間違っています。')
 
 
 class ThreadForm(forms.ModelForm):
@@ -24,13 +24,16 @@ class ThreadForm(forms.ModelForm):
                     raise EditKeyError()
         return base
 
-    class Meta(MessageBaseForm.Meta):
+    class Meta:
         model = Thread
+        help_texts = {
+            'message': '本文には<a href="%s" target="_blank">Markdown記法</a>が使えます。' % '/blog/markdown/',
+        }
 
 
 class ThreadFormForAnon(ThreadForm):
-    class Meta(ThreadForm.Meta):
-        exclude = ('locked', ) + Thread.exclude()
+    class Meta:
+        exclude = ('locked', )
 
 
 class CommentForm(forms.ModelForm):
@@ -45,7 +48,7 @@ class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        exclude = 'thread'
+        exclude = ('thread', )
 
 
 # generic form in thread and comment
@@ -75,6 +78,7 @@ def home(request):
     )
 
 
+
 @csrf_protect
 def show_thread(request, thread_id):
     thread = get_object_or_404(Thread, pk = thread_id)
@@ -82,7 +86,7 @@ def show_thread(request, thread_id):
         if not request.user.is_active:
             return HttpResponseRedirect('/auth/login?next=%s'%request.path)
 
-    if request.POST:
+    if request.method == 'POST':
         comment = Comment()
         comment.thread_id = thread_id
         comment_form = CommentForm(request.POST, instance=comment)
@@ -90,8 +94,8 @@ def show_thread(request, thread_id):
         if v:
             thread = comment_form.save()
 
-        v_flag = request.GET.get('validation', None)
-        if v_flag != 'true':
+        ajax = request.GET.get('use-ajax', None)
+        if ajax != 'true':
             if v:
                 return HttpResponseRedirect(reverse('bbs.thread.show', args=(thread_id,)))
             else:
@@ -132,14 +136,14 @@ def edit_thread(request, thread_id=None):
     else:
         tf = ThreadFormForAnon
 
-    if request.POST:
+    if request.method == 'POST':
         thread_form = tf(request.POST, instance=thread)
         v = thread_form.is_valid()
         if v:
             thread = thread_form.save()
 
-        v_flag = request.GET.get('validation', None)
-        if v_flag != 'true':
+        ajax = request.GET.get('use-ajax', None)
+        if ajax != 'true':
             # ajaxでない
             if v:
                 # validならリダイレクト
@@ -166,15 +170,15 @@ def edit_thread(request, thread_id=None):
 
 @csrf_protect
 def delete_thread(request, thread_id):
-    if request.POST:
+    if request.method == 'POST':
         thread = get_object_or_404(Thread, pk=thread_id)
         form = DeleteForm(request.POST, instance=thread)
         v = form.is_valid()
         if v:
             thread.delete()
 
-        v_flag = request.GET.get('validation', None)
-        if v_flag == 'true':
+        ajax = request.GET.get('use-ajax', None)
+        if ajax == 'true':
             # ajaxなときvalid,invalid問わず
             content = dict(result=v, errors=form.errors, redirect_to='/bbs/')
             return HttpResponse(json.dumps(content), mimetype='text/plain')
@@ -194,15 +198,15 @@ def edit_comment(request, thread_id, comment_id=None):
         comment = Comment()
         comment.thread_id = thread_id
 
-    if request.POST:
+    if request.method == 'POST':
         comment_form = CommentForm(request.POST, instance=comment)
         v = comment_form.is_valid()
         if v:
             comment_form.save()
 
         # validationがtrueならjsonで結果を返す
-        v_flag = request.GET.get('validation', None)
-        if v_flag != 'true':
+        ajax = request.GET.get('use-ajax', None)
+        if ajax != 'true':
             # ajaxでない
             if v:
                 # validならリダイレクト
@@ -226,9 +230,10 @@ def edit_comment(request, thread_id, comment_id=None):
                               ),
                               context_instance=RequestContext(request, context))
 
+
 @csrf_protect
 def delete_comment(request, thread_id, comment_id):
-    if request.POST:
+    if request.method == 'POST':
         get_object_or_404(Thread, pk=thread_id)
         comment = get_object_or_404(Comment, pk=comment_id)
         form = DeleteForm(request.POST, instance=comment)
@@ -236,8 +241,8 @@ def delete_comment(request, thread_id, comment_id):
         if v:
             comment.delete()
 
-        v_flag = request.GET.get('validation', None)
-        if v_flag == 'true':
+        ajax = request.GET.get('use-ajax', None)
+        if ajax == 'true':
             content = dict(result=v, errors=form.errors, redirect_to='/bbs/%s' % thread_id)
             return HttpResponse(json.dumps(content), mimetype='text/plain')
         else:

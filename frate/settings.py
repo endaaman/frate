@@ -74,7 +74,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.csrf',
     'django.core.context_processors.request',
-    'frate.context_processor.css3'
+    'frate.context_processor.custom_context'
 )
 
 

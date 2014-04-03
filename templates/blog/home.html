@@ -17,7 +17,6 @@
             <span class="half-size-font">投稿日時:{{blog.pub_date}}</span>
             <span>投稿者：<a href="{%url "member.home" %}#member_id_{{blog.author.id}}">{{ blog.author.name }}</a></span>
         </div>                
-        <p>{{ blog.message_stripped }}<span class="f14"> ...<a href="{%url "blog.show" blog.url_name %}">続きを読む</a></span></p>
     </article>
     {% endfor %}            
 
