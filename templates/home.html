@@ -124,11 +124,9 @@ function adjust_bg(img){
 	var img_w = img.data('orgWidth')
 	var img_h = img.data('orgHeight')
 	if ( body_w/body_h > img_w/img_h){
-		// 画面のほうが横長 -> 画像の上下が余る
 		var h = body_w * img_h / img_w
 		img.css({width: body_w, height: h, top: -(h - body_h)/2, left: 0 })
 	}else{
-		// 画像のほうが横長
 		var w = body_h * img_w / img_h
 		img.css({width: w, height: body_h, top: 0, left: -(w - body_w)/2})
 	}
@@ -172,8 +170,8 @@ $(window).resize(function() {
 
 		<article class="flex-content flex3 p12 pickup">
 			<h1>フラテ山の会のホームページをリニューアルしました。</h1>
-			<p>OB/OGの方は変更に伴うお知らせがあります。<a href="{%url "bbs.thread.show" 1%}">こちら</a>(ログインが必要)を御覧ください。</p>
-			<p>　ログインに必要なユーザー名・パスワードについては、<a href="http://frate.bbs.fc2.com/">今までのパスワード付き掲示板</a>にを書いておきましたので、そちらを御覧ください。</p>
+			<p>OB/OGの方は変更に伴うお知らせがあります。<a href="{%url "bbs.thread.show" 1%}">こちら</a>を御覧ください。</p>
+			<p>　鍵マーク付きのスレッドの閲覧にはログインが必要になります。ユーザー名・パスワードについては、<a href="http://frate.bbs.fc2.com/">今までのパスワード付き掲示板</a>にを書いておきましたので、そちらを御覧ください。</p>
 			<p>　また、古いホームページ等は上のメニューの「その他」からアクセス可能です。</p>
 		</article>
 
@@ -191,7 +189,7 @@ $(window).resize(function() {
 				</tr>
 				<tr>
 					<th class="bg-gray">メールアドレス</th>
-					<td><a class="ml">xxxxxxxxxxxxxxxxxxx</a><form id="csrf-token">{%csrf_token%}</form></td>
+					<td><a class="ml">xxxxxxxxxxxxxxxxxxx</a></td>
 				</tr>
 			</table>
 		</article>

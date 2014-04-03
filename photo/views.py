@@ -1,13 +1,15 @@
 #-*- encoding: utf-8 -*-
 
-from django.shortcuts import render, render_to_response, get_object_or_404, HttpResponseRedirect
-from django.http import HttpResponse, HttpResponseNotFound
+from django.shortcuts import render, render_to_response, get_object_or_404
+from django import http
 from models import *
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_protect
 from django import forms
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+import json
+
 
 class AlbumForm(forms.ModelForm):
 
@@ -30,7 +32,7 @@ def get_bg(request):
     for p in ps:
         p.album_id = 1
     # albums.apped(other)
-    return HttpResponse('frate1839@gmail.com', content_type='text/plain')
+    return http.HttpResponse('frate1839@gmail.com', content_type='text/plain')
 
 
 def home(request):
@@ -44,7 +46,6 @@ def home(request):
 
 
 
-@csrf_protect
 @login_required(redirect_field_name='next')
 def edit_album(request, album_id=None):
 
@@ -66,10 +67,10 @@ def edit_album(request, album_id=None):
         if ajax == 'true':
             content = dict(result=v, errors=album_form.errors, redirect_to=reverse('album.show', args=(album_id,)))
             import json
-            return HttpResponse(json.dumps(content), content_type='text/plain')
+            return http.HttpResponse(json.dumps(content), content_type='text/plain')
         else:
             if v:
-                return HttpResponseRedirect(reverse('album.show', args=(album_id,)) )
+                return http.HttpResponseRedirect(reverse('album.show', args=(album_id,)) )
             else:
                 context = request.POST
 
@@ -89,18 +90,21 @@ def edit_album(request, album_id=None):
 
 
 
-@csrf_protect
 def delete_album(request, album_id):
     album = get_object_or_404(Album, pk=album_id)
     if request.method == 'POST':
         album.delete()
-        return HttpResponseRedirect(reverse('album.home'))
+        ajax = request.GET.get('use-ajax', None)
+        if ajax == 'true':
+            content = dict(result=True, errors={}, redirect_to=reverse('album.home'))
+            return http.HttpResponse(json.dumps(content), content_type='text/plain')
+        else:
+            return http.HttpResponseRedirect(reverse('album.home'))
     else:
-        return HttpResponseNotFound()
+        return http.HttpResponseNotFound()
 
 
 
-@csrf_protect
 def show_album(request, album_id):
     album = get_object_or_404(Album, pk=album_id)
     return render_to_response('photo/show_album.html',
@@ -113,7 +117,6 @@ def show_album(request, album_id):
 
 
 
-@csrf_protect
 def edit_photo(request, album_id=None, photo_id=None):
     if not album_id is None:
         album = get_object_or_404(Album, pk=album_id)
@@ -137,13 +140,12 @@ def edit_photo(request, album_id=None, photo_id=None):
         if ajax == 'true':
             # ajaxなときvalid,invalid問わず
             content = dict(result=v, errors=photo_form.errors, redirect_to=reverse('album.show', args=(album_id,)))
-            import json
-            return HttpResponse(json.dumps(content), content_type='text/plain')
+            return http.HttpResponse(json.dumps(content), content_type='text/plain')
         else:
             # ajaxでない
             if v:
                 # validならリダイレクト
-                return HttpResponseRedirect(reverse('album.show', args=(album_id,)))
+                return http.HttpResponseRedirect(reverse('album.show', args=(album_id,)))
             else:
                 # invalidなら下で処理
                 context = request.POST
@@ -165,12 +167,18 @@ def edit_photo(request, album_id=None, photo_id=None):
 
 
 
-@csrf_protect
 def delete_photo(request, album_id, photo_id):
     get_object_or_404(Album, pk=album_id)
     photo = get_object_or_404(Photo, pk=photo_id)
     if request.method == 'POST':
         photo.delete()
-        return HttpResponseRedirect(reverse('album.show', args=(album_id,)))
+        ajax = request.GET.get('use-ajax', None)
+        if ajax == 'true':
+            content = dict(result=True, errors={}, redirect_to=reverse('album.show', args=(album_id, )))
+            return http.HttpResponse(json.dumps(content), content_type='text/plain')
+        else:
+            return http.HttpResponseRedirect(reverse('album.show', args=(album_id,)))
     else:
-        return HttpResponseNotFound()
+        return http.HttpResponseNotFound()
+
+

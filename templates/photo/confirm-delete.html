@@ -24,7 +24,7 @@ $(function() {
 <div id="confirm-delete" class="hidden">
 	<div class="well">
 		<p>削除しますか？</p>
-		<form id="delete-form" method="post">
+		<form id="delete-form" method="post" data-use-ajax="true">
 		    {% csrf_token %}
 			<button class="btn btn-danger" type="submit">削除する</button>
 			<button class="btn-confirm-delete-close btn btn-default" type="reset">閉じる</button>

@@ -2,7 +2,7 @@
 	<div class="well">
 		<p class="center">削除しますか？</p>
 		<p class="center" id="confirm-delete-message"></p>
-		<form id="delete-form" method="post" data-validation="true">
+		<form id="delete-form" method="post" data-use-ajax="true">
 			<table class="form">			
 			    {% csrf_token %}
 			    {{ delete_form }}

@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_protect
 from models import *
 from django.contrib.auth.decorators import user_passes_test, permission_required
 from django.core.urlresolvers import reverse
+import json
 
 
 class UrlNameError(forms.ValidationError):
@@ -48,7 +49,7 @@ def home(request):
         context_instance=RequestContext(request)
     )
 
-@csrf_protect
+
 def show_blog(request, blog_name):
     try:
         blog = Blog.objects.get(url_name=blog_name)
@@ -96,7 +97,7 @@ def show_blog(request, blog_name):
     )
 
 
-@csrf_protect
+
 @user_passes_test(lambda u: u.has_module_perms('blog'))
 def edit_blog(request, blog_name=None):
 
@@ -139,12 +140,18 @@ def edit_blog(request, blog_name=None):
                               context_instance=RequestContext(request, context))
 
 
-@csrf_protect
+
 @user_passes_test(lambda u: u.has_module_perms('blog'))
 def delete_blog(request, blog_name):
     blog = get_object_or_404(Blog, url_name=blog_name)
+
     if request.method == 'POST':
         blog.delete()
-        return http.HttpResponseRedirect(reverse('blog.home'))
+        ajax = request.GET.get('use-ajax', None)
+        if ajax == 'true':
+            content = dict(result=True, errors={}, redirect_to=reverse('blog.home'))
+            return http.HttpResponse(json.dumps(content), mimetype='text/plain')
+        else:
+            return http.HttpResponseRedirect(reverse('blog.home'))
     else:
         return http.HttpResponseForbidden()

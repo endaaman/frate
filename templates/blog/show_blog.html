@@ -23,7 +23,7 @@
             <a href="{%url "blog.edit" blog.url_name%}">編集</a>
             {% endif%}          
             {% if perms.blog.delete_blog %}
-            <a class="btn-confirm-delete" href="#confirm-delete" data-url="{%url "blog.delete" blog.id %}">削除</a>
+            <a class="btn-confirm-delete" href="#confirm-delete" data-url="{%url "blog.delete" blog.url_name %}">削除</a>
             {% endif%}          
         </div>
     </article>
