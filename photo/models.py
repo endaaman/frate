@@ -16,7 +16,7 @@ import os
 fs = FileSystemStorage()
 
 
-class Album(MessageBase):
+class Album(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True, editable=False, verbose_name="投稿日時")
     title = models.CharField(max_length=200, blank=False, verbose_name="タイトル")
     author = models.ForeignKey(Member, blank=True, null=True, default=None)
@@ -30,7 +30,7 @@ class Album(MessageBase):
 
 
 
-class Photo(MessageBase):
+class Photo(models.Model):
     album = models.ForeignKey(Album)
     pub_date = models.DateTimeField(auto_now_add=True, editable=False, verbose_name="投稿日時")
     title = models.CharField(max_length=200, blank=False, verbose_name="タイトル")

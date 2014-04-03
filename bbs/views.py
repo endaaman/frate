@@ -5,17 +5,16 @@ from models import Thread, Comment
 from django.template import RequestContext
 from models import *
 from django.views.decorators.csrf import csrf_protect
-from abstract.views import MessageBaseForm
 import json
 from django.core.urlresolvers import reverse
-
+from django import forms
 
 class EditKeyError(forms.ValidationError):
     def __init__(self):
         return forms.ValidationError.__init__(self, 'Inputted Edit Key is invalid')
 
 
-class ThreadForm(MessageBaseForm):
+class ThreadForm(forms.ModelForm):
 
     def clean_edit_key(self):
         base = self.data.get('edit_key', '')
@@ -34,7 +33,7 @@ class ThreadFormForAnon(ThreadForm):
         exclude = ('locked', ) + Thread.exclude()
 
 
-class CommentForm(MessageBaseForm):
+class CommentForm(forms.ModelForm):
 
     def clean_edit_key(self):
         base = self.data.get('edit_key', '')
@@ -44,9 +43,9 @@ class CommentForm(MessageBaseForm):
                     raise EditKeyError()
         return base
 
-    class Meta(MessageBaseForm.Meta):
+    class Meta:
         model = Comment
-        exclude = MessageBaseForm.Meta.exclude + ('thread', )
+        exclude = 'thread'
 
 
 # generic form in thread and comment
