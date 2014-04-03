@@ -439,6 +439,7 @@ table.table-default {
       padding: 16px;
       border: 1px solid #cccccc; }
     table.table-default tr th {
+      background: #f8f8f8;
       text-align: center; }
     table.table-default tr td {
       text-align: left; }
