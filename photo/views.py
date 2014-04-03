@@ -30,7 +30,7 @@ def get_bg(request):
     for p in ps:
         p.album_id = 1
     # albums.apped(other)
-    return HttpResponse('frate1839@gmail.com', mimetype='text/plain')
+    return HttpResponse('frate1839@gmail.com', content_type='text/plain')
 
 
 def home(request):
@@ -66,7 +66,7 @@ def edit_album(request, album_id=None):
         if ajax == 'true':
             content = dict(result=v, errors=album_form.errors, redirect_to=reverse('album.show', args=(album_id,)))
             import json
-            return HttpResponse(json.dumps(content), mimetype='text/plain')
+            return HttpResponse(json.dumps(content), content_type='text/plain')
         else:
             if v:
                 return HttpResponseRedirect(reverse('album.show', args=(album_id,)) )
@@ -138,7 +138,7 @@ def edit_photo(request, album_id=None, photo_id=None):
             # ajaxなときvalid,invalid問わず
             content = dict(result=v, errors=photo_form.errors, redirect_to=reverse('album.show', args=(album_id,)))
             import json
-            return HttpResponse(json.dumps(content), mimetype='text/plain')
+            return HttpResponse(json.dumps(content), content_type='text/plain')
         else:
             # ajaxでない
             if v:

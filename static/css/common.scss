@@ -151,7 +151,7 @@ $box-padding : 16px;
 	z-index: 0;
 }
 .box.glass{
-	background-color: rgba(255, 255, 255, 0.6);	
+	background-color: rgba(255, 255, 255, 0.7);	
 }
 
 .btn{
@@ -396,6 +396,31 @@ $flex-base-width : 200px;
 	}	
 }
 
+.loading{
+	$size : 24px;
+	$weight: 2px;
+	animation-name: rotate_loading;
+	animation-duration: 1s;
+	animation-timing-function: ease;
+	animation-iteration-count: infinite;
+	width: $size;
+	height: $size;
+	border-radius: $size + $weight;
+	border: $weight solid rgba(0,0,0,0.4);
+	border-top: $weight solid rgba(0,0,0,0.8);
+	margin: 8px;
+}
+
+@keyframes rotate_loading{
+	0% {
+		transform: rotateZ(0deg);
+	}
+	100% {		
+		transform: rotateZ(360deg);
+	}
+}
+
+
 img.thumb{
 	width: 100px;
 	height: 100px;
@@ -514,6 +539,7 @@ $nav-h : 48px;
 	// display: block;
 	// visibility: hidden;
 }
+
 
 #g-nav{
 	margin: 0;

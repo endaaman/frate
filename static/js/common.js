@@ -3,29 +3,47 @@ $.fn.visible = function() {
     return $.expr.filters.visible(this[0]);
 };
 
+
 $(function(){
 
 	// form ajax
+
+	var req;
+
 	if( $('form').data('use-ajax') ){
 		
 	    $('form').bind("submit", function(e) {
 			
 	        e.stopPropagation();
+				
 
 	        var form = $(this);        
-	        var button = form.find('button');
+	        var submit_btn = form.find('*[type="submit"]');
 
-	        $.ajax({
+
+	        req = $.ajax({
 	            url: form.attr('action')+'?use-ajax=true',
 	            type: form.attr('method'),
 	            data: form.serialize(),
-	            timeout: 10000,
+	            timeout: 50000,
 	            beforeSend: function(xhr, settings) {
-	                button.attr('disabled', true);
+	                // submit_btn
+	                // 	.attr('type', '')
+	                // 	.removeClass('btn-primary')
+	                // 	.addClass('btn-danger')
+	                // 	.on('click', abort_event)
+	                // 	.after($('<div />', {class: 'loading'}))
+	                // 	.text('中止')
 	                $('.errorlist').remove()
 	            },
 	            complete: function(xhr, textStatus) {
-	                button.attr('disabled', false);
+	                // submit_btn
+	                // 	.attr('type', 'submit')
+	                // 	.removeClass('btn-danger')
+	                // 	.addClass('btn-primary')
+	                // 	.off('click')
+	                // 	.text('確定')
+	                // $('.loading').remove()
 	            },
 	            success: function(result, textStatus, xhr) {
 	            	console.log(result)
@@ -43,14 +61,17 @@ $(function(){
 						})
 					}
 	            },
-	            
-	            // 通信失敗時の処理
 	            error: function(xhr, textStatus, error) {
 					console.log('error')					
 			        console.log(error)
 			        console.log(xhr.statusText)
 	            }
 	        });
+
+	        // var abort_event = function(){
+	        // 	req.abort()
+	        // }
+
 			return false;
 		});
 	}

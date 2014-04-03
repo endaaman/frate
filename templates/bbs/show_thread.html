@@ -46,13 +46,15 @@
     <section class="content">
         <h2>コメントする</h2>
         <div class="well">
-            <form action="." method="post" data-use-ajax="true">                
+            <form action="." method="post" data-use-ajax="false">                
                 <table class="form centered">
                     {% csrf_token %}
                     {{ comment_form }}
                     <tr>
                         <th></th>
-                        <td><input type="submit" class="btn btn-primary" value="確定" /></td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">確定</button>
+                        </td>
                     </tr>
                 </table>
             </form>

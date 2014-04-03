@@ -19,7 +19,7 @@
         {{ blog.message|md2html|safe}}
         </div>
         <div class="right f14">
-            {% if perms.blog.chnage_blog %}
+            {% if perms.blog.change_blog %}
             <a href="{%url "blog.edit" blog.url_name%}">編集</a>
             {% endif%}          
             {% if perms.blog.delete_blog %}
@@ -31,9 +31,11 @@
     
     <section>
         <h1 class="ribbon">コメント</h1>
-        <p class="gray">現在ブログへのコメント機能は実装中です……</p>
 
         {% comment %}
+        <p class="gray">現在ブログへのコメント機能は実装中です……</p>
+        {% endcomment %} 
+
         {% if comments %}      
         {% for comment in comments %}
         <section class="bordered">
@@ -50,14 +52,12 @@
         {% else %}
         <p class="gray">現在この記事にコメントはありません。</p>
         {% endif %}
-       {% endcomment %} 
     </section>
     
-    {% comment %} 
     <section class="content">
         <h2>コメントする</h2>
         <div class="well">
-            <form action="./" method="post" data-validation="true">
+            <form action="./" method="post" data-use-ajax="false">
                 <table class="form centered">
                     {% csrf_token %}
                     {{ comment_form }}
@@ -69,7 +69,6 @@
             </form>
         </div>
     </section> 
-    {% endcomment %} 
 
 </div>
 

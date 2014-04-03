@@ -153,7 +153,7 @@ table tbody {
   z-index: 0; }
 
 .box.glass {
-  background-color: rgba(255, 255, 255, 0.6); }
+  background-color: rgba(255, 255, 255, 0.7); }
 
 .btn {
   display: inline-block;
@@ -373,6 +373,42 @@ pre {
     width: 100%;
     text-align: center;
     display: block; }
+
+.loading {
+  -webkit-animation-name: rotate_loading;
+  animation-name: rotate_loading;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  width: 24px;
+  height: 24px;
+  border-radius: 26px;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  border-top: 2px solid rgba(0, 0, 0, 0.8);
+  margin: 8px; }
+
+@-webkit-keyframes rotate_loading {
+  0% {
+    -webkit-transform: rotateZ(0deg);
+    transform: rotateZ(0deg); }
+
+  100% {
+    -webkit-transform: rotateZ(360deg);
+    transform: rotateZ(360deg); } }
+
+@keyframes rotate_loading {
+  0% {
+    -webkit-transform: rotateZ(0deg);
+    -ms-transform: rotateZ(0deg);
+    transform: rotateZ(0deg); }
+
+  100% {
+    -webkit-transform: rotateZ(360deg);
+    -ms-transform: rotateZ(360deg);
+    transform: rotateZ(360deg); } }
 
 img.thumb {
   width: 100px;
