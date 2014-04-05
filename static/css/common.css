@@ -374,22 +374,6 @@ pre {
     text-align: center;
     display: block; }
 
-.loading {
-  -webkit-animation-name: rotate_loading;
-  animation-name: rotate_loading;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-timing-function: ease;
-  animation-timing-function: ease;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
-  width: 24px;
-  height: 24px;
-  border-radius: 26px;
-  border: 2px solid rgba(0, 0, 0, 0.4);
-  border-top: 2px solid rgba(0, 0, 0, 0.8);
-  margin: 8px; }
-
 @-webkit-keyframes rotate_loading {
   0% {
     -webkit-transform: rotateZ(0deg);
@@ -428,6 +412,21 @@ table.form {
     table.form ul.errorlist * {
       padding: 0;
       margin: 0; }
+  table.form .loading {
+    -webkit-animation-name: rotate_loading;
+    animation-name: rotate_loading;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-timing-function: ease;
+    animation-timing-function: ease;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    width: 24px;
+    height: 24px;
+    border-radius: 26px;
+    border: 2px solid rgba(0, 0, 0, 0.4);
+    border-top: 2px solid rgba(0, 0, 0, 0.8);
+    margin: 8px; }
 
 input[type="text"], input[type="password"] {
   padding: 4px;

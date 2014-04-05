@@ -396,20 +396,7 @@ $flex-base-width : 200px;
 	}	
 }
 
-.loading{
-	$size : 24px;
-	$weight: 2px;
-	animation-name: rotate_loading;
-	animation-duration: 1s;
-	animation-timing-function: ease;
-	animation-iteration-count: infinite;
-	width: $size;
-	height: $size;
-	border-radius: $size + $weight;
-	border: $weight solid rgba(0,0,0,0.4);
-	border-top: $weight solid rgba(0,0,0,0.8);
-	margin: 8px;
-}
+
 
 @keyframes rotate_loading{
 	0% {
@@ -449,6 +436,20 @@ table.form{
 			padding: 0;
 			margin: 0;
 		}
+	}
+	.loading{
+		$size : 24px;
+		$weight: 2px;
+		animation-name: rotate_loading;
+		animation-duration: 1s;
+		animation-timing-function: ease;
+		animation-iteration-count: infinite;
+		width: $size;
+		height: $size;
+		border-radius: $size + $weight;
+		border: $weight solid rgba(0,0,0,0.4);
+		border-top: $weight solid rgba(0,0,0,0.8);
+		margin: 8px;
 	}
 }
 
