@@ -141,6 +141,8 @@ table{
 	}
 }
 
+$border-color : #999;
+
 $box-padding : 16px;
 
 .box{
@@ -175,7 +177,7 @@ $box-padding : 16px;
 .btn-default {
 	color: #333;
 	background-color: #fff;
-	border-color: #ccc;
+	border-color: $border-color;
 	&:hover{
 		color: #333;
 		text-decoration: none;
@@ -210,21 +212,21 @@ $box-padding : 16px;
 h1{
 	font-size: 28px;
 	@extend .mp;
-	border-bottom: solid #ccc 1px;
+	border-bottom: solid $border-color 1px;
 }
 
 h2{
 	font-size: 24px;
 	line-height: 46px;
 	@extend .mp;
-	border-bottom: solid #ccc 1px;
+	border-bottom: solid $border-color 1px;
 }
 
 h3{		
 	font-size: 20px;
 	line-height: 40px;
 	@extend .mp;
-	border-bottom: solid #ccc 1px;
+	border-bottom: solid $border-color 1px;
 }
 
 h1,h2,h3{
@@ -245,10 +247,10 @@ pre{
 	line-height: 2em;
 	@extend .basic-font;
 }
-.article{
+.article-body{
 	li{
 		margin: 0.5em 16px 0.5em 0;
-		line-height: 2em;
+		line-height: 1.6em;
 	}
 	ul,ol{
 		padding-left:2em;
@@ -310,7 +312,7 @@ pre{
 }
 
 .gray{
-	color: #ccc;
+	color: $border-color;
 }
 .red{
 	color: #f00;
@@ -375,7 +377,7 @@ $flex-base-width : 200px;
 }
 
 .bordered{
-	border: solid 1px #ccc;
+	border: solid 1px $border-color;
 	@extend .p8;
 	@extend .mp;
 }
@@ -511,7 +513,7 @@ input[type="text"],input[type="password"]{
 	@extend .basic-font;
 	padding: 4px;
 	color:#333;
-	border:solid 1px #ccc;
+	border:solid 1px $border-color;
 	border-radius: 3px;
 }
 
@@ -524,7 +526,7 @@ textarea{
 	border: 2px solid #dadada;
 	padding: 4px;
 	color:#333;
-	border:solid 1px #ccc;
+	border:solid 1px $border-color;
 	border-radius: 3px;
 }
 
@@ -551,7 +553,7 @@ select[multiple="multiple"]{
 
 
 table.table-default{
-	border: 1px solid #cccccc;
+	border: 1px solid $border-color;
 	color: #333;
 	// width: 100%;
 	border-collapse: collapse;
@@ -564,7 +566,7 @@ table.table-default{
 		th,td{
 			vertical-align: middle;
 			padding: 16px;
-			border: 1px solid #cccccc;
+			border: 1px solid $border-color;
 		}
 		th{
 			background: #f8f8f8;

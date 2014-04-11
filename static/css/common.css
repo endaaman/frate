@@ -177,7 +177,7 @@ table tbody {
 .btn-default {
   color: #333;
   background-color: #fff;
-  border-color: #ccc; }
+  border-color: #999999; }
   .btn-default:hover {
     color: #333;
     text-decoration: none; }
@@ -204,17 +204,17 @@ table tbody {
 
 h1 {
   font-size: 28px;
-  border-bottom: solid #ccc 1px; }
+  border-bottom: solid #999999 1px; }
 
 h2 {
   font-size: 24px;
   line-height: 46px;
-  border-bottom: solid #ccc 1px; }
+  border-bottom: solid #999999 1px; }
 
 h3 {
   font-size: 20px;
   line-height: 40px;
-  border-bottom: solid #ccc 1px; }
+  border-bottom: solid #999999 1px; }
 
 h1, h2, h3 {
   line-height: 2em; }
@@ -236,16 +236,16 @@ pre {
   margin: 8px 16px 8px;
   line-height: 2em; }
 
-.article li {
+.article-body li {
   margin: 0.5em 16px 0.5em 0;
-  line-height: 2em; }
-.article ul, .article ol {
+  line-height: 1.6em; }
+.article-body ul, .article-body ol {
   padding-left: 2em; }
-.article ul li {
+.article-body ul li {
   list-style-type: disc; }
-.article ol li {
+.article-body ol li {
   list-style-type: decimal; }
-.article strong {
+.article-body strong {
   font-weight: bold; }
 
 .ribbon {
@@ -289,7 +289,7 @@ pre {
     z-index: 2; }
 
 .gray {
-  color: #ccc; }
+  color: #999999; }
 
 .red {
   color: #f00; }
@@ -362,7 +362,7 @@ pre {
   border-radius: 4px; }
 
 .bordered {
-  border: solid 1px #ccc; }
+  border: solid 1px #999999; }
 
 .hidden {
   display: none; }
@@ -473,7 +473,7 @@ ul.form input[type="text"], ul.form input[type="password"], ul.form textarea {
 input[type="text"], input[type="password"] {
   padding: 4px;
   color: #333;
-  border: solid 1px #ccc;
+  border: solid 1px #999999;
   border-radius: 3px; }
 
 textarea {
@@ -481,7 +481,7 @@ textarea {
   border: 2px solid #dadada;
   padding: 4px;
   color: #333;
-  border: solid 1px #ccc;
+  border: solid 1px #999999;
   border-radius: 3px; }
 
 select {
@@ -500,7 +500,7 @@ select[multiple="multiple"] {
     line-height: 24px; }
 
 table.table-default {
-  border: 1px solid #cccccc;
+  border: 1px solid #999999;
   color: #333;
   border-collapse: collapse;
   border-spacing: 2px;
@@ -512,7 +512,7 @@ table.table-default {
     table.table-default tr th, table.table-default tr td {
       vertical-align: middle;
       padding: 16px;
-      border: 1px solid #cccccc; }
+      border: 1px solid #999999; }
     table.table-default tr th {
       background: #f8f8f8;
       text-align: center; }

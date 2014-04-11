@@ -13,7 +13,7 @@
         <div class="right f14">
             投稿者：{{ thread.author }} / 投稿日時：{{ thread.pub_date}}
         </div>
-        <div class="article">
+        <div class="article-body">
         {{ thread.message|md2html|safe }}                 
         </div>        
         <div class="right f14">
@@ -30,7 +30,7 @@
                 <span>投稿者：{{comment.author}} / 投稿日時：{{comment.pub_date}}</span>
             </div>
             <h3>{{comment.title}}</h3>
-            <div class="article">                
+            <div>                
             {{comment.message|linebreaks}}
             </div>
             <div class="right f14">
