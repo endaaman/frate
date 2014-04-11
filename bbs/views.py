@@ -72,7 +72,7 @@ def home(request):
     return render_to_response(
         'bbs/home.html',
         dict(
-            threads=Thread.objects.all(),
+            threads=Thread.objects.order_by('-pub_date'),
         ),
         context_instance=RequestContext(request)
     )

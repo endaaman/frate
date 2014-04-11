@@ -36,7 +36,7 @@ def get_bg(request):
 
 
 def home(request):
-    albums=Album.objects.order_by('-pub_date')
+    albums = Album.objects.order_by('-pub_date')
 
     return render_to_response('photo/home.html',
                               dict(
