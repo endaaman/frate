@@ -412,6 +412,8 @@ table.form {
     table.form ul.errorlist * {
       padding: 0;
       margin: 0; }
+  table.form input[type="text"], table.form input[type="password"], table.form textarea {
+    width: 100%; }
   table.form .loading {
     -webkit-animation-name: rotate_loading;
     animation-name: rotate_loading;
@@ -428,16 +430,54 @@ table.form {
     border-top: 2px solid rgba(0, 0, 0, 0.8);
     margin: 8px; }
 
+ul.form li {
+  margin-bottom: 16px; }
+  ul.form li label {
+    display: block; }
+  ul.form li * {
+    margin-bottom: 8px; }
+    ul.form li *:last-child {
+      margin-bottom: 0px; }
+ul.form li:last-child {
+  margin-bottom: 0px; }
+ul.form ul.errorlist {
+  list-style: none;
+  color: #f00;
+  padding: 0;
+  margin: 0; }
+  ul.form ul.errorlist * {
+    padding: 0;
+    margin: 0; }
+ul.form .loading {
+  -webkit-animation-name: rotate_loading;
+  animation-name: rotate_loading;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  width: 24px;
+  height: 24px;
+  border-radius: 26px;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  border-top: 2px solid rgba(0, 0, 0, 0.8);
+  margin: 8px; }
+ul.form input[type="text"], ul.form input[type="password"], ul.form textarea {
+  display: block;
+  width: 100%;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box; }
+
 input[type="text"], input[type="password"] {
   padding: 4px;
-  width: 100%;
   color: #333;
   border: solid 1px #ccc;
   border-radius: 3px; }
 
 textarea {
-  width: 100%;
-  height: 200px;
+  height: 400px;
   border: 2px solid #dadada;
   padding: 4px;
   color: #333;

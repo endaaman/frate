@@ -9,16 +9,13 @@
             <h3>ブログを{% if blog.id %}編集{% else %}追加{% endif %}する</h3>
             <div class="well">
                 <form action="." method="post" data-use-ajax="false">
-                    <table class="form centered">
+                    <ul class="form">                        
                         {% csrf_token %}
-                        {{ blog_form }}                                    
-                        <tr>
-                            <th></th>
-                            <td>
-                                <button type="submit" class="btn btn-primary">確定</button>
-                            </td>
-                        </tr>
-                    </table>
+                        {{ blog_form.as_ul }}                                    
+                        <li>                    
+                            <button type="submit" class="btn btn-primary">確定</button>
+                        </li>
+                    </ul>
                 </form>
             </div>
         </section>
