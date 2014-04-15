@@ -69,6 +69,7 @@ class DeleteForm(forms.Form):
 
 
 def home(request):
+
     return render_to_response(
         'bbs/home.html',
         dict(
