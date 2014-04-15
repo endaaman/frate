@@ -154,6 +154,8 @@ table tbody {
 
 .box.glass {
   background-color: rgba(255, 255, 255, 0.7); }
+  .box.glass * {
+    border-color: #999; }
 
 .btn {
   display: inline-block;
@@ -177,7 +179,7 @@ table tbody {
 .btn-default {
   color: #333;
   background-color: #fff;
-  border-color: #999999; }
+  border-color: #cccccc; }
   .btn-default:hover {
     color: #333;
     text-decoration: none; }
@@ -204,17 +206,17 @@ table tbody {
 
 h1 {
   font-size: 28px;
-  border-bottom: solid #999999 1px; }
+  border-bottom: solid #cccccc 1px; }
 
 h2 {
   font-size: 24px;
   line-height: 46px;
-  border-bottom: solid #999999 1px; }
+  border-bottom: solid #cccccc 1px; }
 
 h3 {
   font-size: 20px;
   line-height: 40px;
-  border-bottom: solid #999999 1px; }
+  border-bottom: solid #cccccc 1px; }
 
 h1, h2, h3 {
   line-height: 2em; }
@@ -292,7 +294,7 @@ pre {
     z-index: 2; }
 
 .gray {
-  color: #999999; }
+  color: #cccccc; }
 
 .red {
   color: #f00; }
@@ -365,7 +367,7 @@ pre {
   border-radius: 4px; }
 
 .bordered {
-  border: solid 1px #999999; }
+  border: solid 1px #cccccc; }
 
 .hidden {
   display: none; }
@@ -476,7 +478,7 @@ ul.form input[type="text"], ul.form input[type="password"], ul.form textarea {
 input[type="text"], input[type="password"] {
   padding: 4px;
   color: #333;
-  border: solid 1px #999999;
+  border: solid 1px #cccccc;
   border-radius: 3px; }
 
 textarea {
@@ -484,7 +486,7 @@ textarea {
   border: 2px solid #dadada;
   padding: 4px;
   color: #333;
-  border: solid 1px #999999;
+  border: solid 1px #cccccc;
   border-radius: 3px; }
 
 select {
@@ -503,7 +505,7 @@ select[multiple="multiple"] {
     line-height: 24px; }
 
 table.table-default {
-  border: 1px solid #999999;
+  border: 1px solid #cccccc;
   color: #333;
   border-collapse: collapse;
   border-spacing: 2px;
@@ -515,7 +517,7 @@ table.table-default {
     table.table-default tr th, table.table-default tr td {
       vertical-align: middle;
       padding: 16px;
-      border: 1px solid #999999; }
+      border: 1px solid #cccccc; }
     table.table-default tr th {
       background: #f8f8f8;
       text-align: center; }

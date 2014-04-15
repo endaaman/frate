@@ -144,7 +144,7 @@ table{
 	}
 }
 
-$border-color : #999;
+$border-color : #CCC;
 
 $box-padding : 16px;
 
@@ -157,6 +157,9 @@ $box-padding : 16px;
 }
 .box.glass{
 	background-color: rgba(255, 255, 255, 0.7);	
+	*{
+		border-color: #999;
+	}
 }
 
 .btn{
