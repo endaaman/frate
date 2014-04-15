@@ -67,9 +67,12 @@
 .m16{
 	margin: 16px;
 }
+
+$p-margin : 12px;
 .mp{
-	margin: 8px 8px 8px 0;
+	margin: $p-margin 0;
 }
+
 .f8{
 	font-size: 8px;
 }	
@@ -238,8 +241,12 @@ h1,h2,h3{
 
 p{
 	font-size: 1em;
-	line-height: 2em;
+	line-height: 2.0em;
 	@extend .mp;
+}
+p.float-left
+{
+	margin-right: $p-margin;
 }
 pre{
 	font-size: 1em;

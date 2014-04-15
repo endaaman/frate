@@ -82,7 +82,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   margin: 16px; }
 
 .mp, h1, h2, h3, p, .bordered {
-  margin: 8px 8px 8px 0; }
+  margin: 12px 0; }
 
 .f8 {
   font-size: 8px; }
@@ -229,7 +229,10 @@ h1, h2, h3 {
 
 p {
   font-size: 1em;
-  line-height: 2em; }
+  line-height: 2.0em; }
+
+p.float-left {
+  margin-right: 12px; }
 
 pre {
   font-size: 1em;
