@@ -1,13 +1,8 @@
 #-*- encoding: utf-8 -*-
 
 from django.db import models
-from django import forms
-# from django.conf import settings
-from django.core.files.storage import FileSystemStorage
-from django_thumbs.db.models import ImageWithThumbsField
 from member.models import Member
-from django.db.models.signals import pre_save
-
+from django.core.files import File
 from PIL import Image
 import os
 
@@ -69,15 +64,15 @@ class Photo(models.Model):
                 im.thumbnail(y and (new_size, a) or (a, new_size), Image.ANTIALIAS)
                 print 'resize'
 
-            fp = StringIO()
-            im.save(fp, format=im.format)
+                fp = StringIO()
+                im.save(fp, format=im.format)
 
-            self.image.truncate(0)
-            self.image.seek(0)
-            self.image.write(fp.getvalue())
+                self.image.truncate(0)
+                self.image.seek(0)
+                self.image.write(fp.getvalue())
 
-            # self.image.close()
-            fp.close()
+                # self.image.close()
+                fp.close()
 
         root, ext = os.path.splitext(self.image.path)
 
@@ -93,9 +88,10 @@ class Photo(models.Model):
 
         thumb_size = 200
 
-        if l > thumb_size:
-            a = thumb_size * l / s
-            im.resize(y and (a, thumb_size) or (thumb_size, a), Image.ANTIALIAS).save(thumb_filename)
+        a = thumb_size * l / s
+        im.resize(y and (a, thumb_size) or (thumb_size, a), Image.ANTIALIAS).save(thumb_filename)
+
+        self.thumb = File(open(thumb_filename))
 
         r = super(Photo, self).save(force_insert, force_update, using, update_fields)
         return r

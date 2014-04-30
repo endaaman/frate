@@ -36,11 +36,13 @@
 			</div>
 
 			<div class="float-adjust">				
-				<p class="float-left">
+				<div class="mp float-left">
 					<a class="fancybox-photo" rel="album.id" href="{{photo.image.url}}" title="{{photo.title}}">
-						<img class="thumb" src="{{ photo.image.url_200x200 }}" alt="{{photo.title}}" />
+						<div class="thumb">
+							<img src="{{ photo.thumb.url }}" alt="{{photo.title}}" />	
+						</div>
 					</a>					
-				</p>
+				</div>
 				{{photo.message|linebreaks}}
 			</div>
 

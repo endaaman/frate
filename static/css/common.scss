@@ -247,7 +247,7 @@ p{
 	line-height: 2.0em;
 	@extend .mp;
 }
-p.float-left
+.float-left
 {
 	margin-right: $p-margin;
 }
@@ -420,9 +420,20 @@ $flex-base-width : 200px;
 }
 
 
-img.thumb{
+.thumb{
 	width: 100px;
 	height: 100px;
+	position: relative;
+
+	overflow: hidden;
+	img{
+		zoom: 50%;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -100px;
+		margin-top: -100px;
+	}
 }
 
 
