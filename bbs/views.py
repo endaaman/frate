@@ -1,6 +1,6 @@
 #-*- encoding:utf-8 -*-
 from django.shortcuts import render, render_to_response, get_object_or_404
-from django.http import HttpResponseNotFound, HttpResponseForbidden, HttpResponse, HttpResponseRedirect
+from django import http
 from models import Thread, Comment
 from django.template import RequestContext
 from models import *
@@ -85,7 +85,7 @@ def show_thread(request, thread_id):
     thread = get_object_or_404(Thread, pk = thread_id)
     if thread.locked:
         if not request.user.is_active:
-            return HttpResponseRedirect('/auth/login?next=%s'%request.path)
+            return http.HttpResponseRedirect('/auth/login?next=%s'%request.path)
 
     if request.method == 'POST':
         comment = Comment()
@@ -98,12 +98,12 @@ def show_thread(request, thread_id):
         ajax = request.GET.get('use-ajax', None)
         if ajax != 'true':
             if v:
-                return HttpResponseRedirect(reverse('bbs.thread.show', args=(thread_id,)))
+                return http.HttpResponseRedirect(reverse('bbs.thread.show', args=(thread_id,)))
             else:
                 context = request.POST
         else:
             content = dict(result=v, errors=comment_form.errors, redirect_to=reverse('bbs.thread.show', args=(thread_id,)))
-            return HttpResponse(json.dumps(content), mimetype='text/plain')
+            return http.HttpResponse(json.dumps(content), mimetype='text/plain')
 
     else:
         context = {}
@@ -128,7 +128,7 @@ def edit_thread(request, thread_id=None):
         thread = get_object_or_404(Thread, pk=thread_id)
         if thread.locked:
             if not request.user.is_active:
-                return HttpResponseRedirect('/auth/login?next=%s' % request.path)
+                return http.HttpResponseRedirect('/auth/login?next=%s' % request.path)
     else:
         thread = Thread()
 
@@ -148,15 +148,15 @@ def edit_thread(request, thread_id=None):
             # ajaxでない
             if v:
                 # validならリダイレクト
-                return HttpResponseRedirect('/bbs/%s' % thread.id)
+                return http.HttpResponseRedirect('/bbs/%s' % thread.id)
             else:
                 # invalidなら下で処理
                 context = request.POST
         else:
             # ajaxなときvalid,invalid問わず
-            rt = '/bbs/%s' % thread.id
+            rt = reverse('bbs.thread.show', args=(thread.id, ))
             content = dict(result=v, errors=thread_form.errors, redirect_to=rt)
-            return HttpResponse(json.dumps(content), mimetype='text/plain')
+            return http.HttpResponse(json.dumps(content), mimetype='text/plain')
 
     else:
         context = {}
@@ -178,15 +178,14 @@ def delete_thread(request, thread_id):
         if v:
             thread.delete()
 
-        ajax = request.GET.get('use-ajax', None)
-        if ajax == 'true':
+        if request.is_ajax():
             # ajaxなときvalid,invalid問わず
-            content = dict(result=v, errors=form.errors, redirect_to='/bbs/')
-            return HttpResponse(json.dumps(content), mimetype='text/plain')
+            content = dict(result=v, errors=form.errors, redirect_to=reverse('bbs.home'))
+            return http.HttpResponse(json.dumps(content), mimetype='text/plain')
         else:
-            return HttpResponseForbidden()
+            return http.HttpResponseRedirect(reverse('bbs.home'))
     else:
-        return HttpResponseForbidden()
+        return http.HttpResponseForbidden()
 
 
 
@@ -211,14 +210,14 @@ def edit_comment(request, thread_id, comment_id=None):
             # ajaxでない
             if v:
                 # validならリダイレクト
-                return HttpResponseRedirect('/bbs/%s' % comment.thread_id )
+                return http.HttpResponseRedirect('/bbs/%s' % comment.thread_id )
             else:
                 # invalidなら下で処理
                 context = request.POST
         else:
             # ajaxなときvalid,invalid問わず
-            content = dict(result=v, errors=comment_form.errors, redirect_to='/bbs/%s' % comment.thread_id);
-            return HttpResponse(json.dumps(content), mimetype='text/plain')
+            content = dict(result=v, errors=comment_form.errors, redirect_to=reverse('bbs.thread.show', args=(comment.thread.id, )))
+            return http.HttpResponse(json.dumps(content), mimetype='text/plain')
     else:
         # postでないajaxでない(普通のアクセス)
         context = {}
@@ -242,14 +241,13 @@ def delete_comment(request, thread_id, comment_id):
         if v:
             comment.delete()
 
-        ajax = request.GET.get('use-ajax', None)
-        if ajax == 'true':
-            content = dict(result=v, errors=form.errors, redirect_to='/bbs/%s' % thread_id)
-            return HttpResponse(json.dumps(content), mimetype='text/plain')
+        if request.is_ajax():
+            content = dict(result=v, errors=form.errors, redirect_to=reverse('bbs.thread.show', args=(thread_id,)))
+            return http.HttpResponse(json.dumps(content), mimetype='text/plain')
         else:
-            return HttpResponseForbidden()
+            return http.HttpResponseRedirect(reverse('bbs.thread.show', args=(thread_id,)))
     else:
-        return HttpResponseForbidden()
+        return http.HttpResponseForbidden()
 
 
 
