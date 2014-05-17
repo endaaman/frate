@@ -56,6 +56,7 @@ def edit_album(request, album_id=None):
         album = get_object_or_404(Album, pk=album_id)
         op = '編集'
 
+    context = {}
     if request.method == 'POST':
         album_form = AlbumForm(request.POST, instance=album)
         v = album_form.is_valid()
@@ -63,19 +64,16 @@ def edit_album(request, album_id=None):
             album = album_form.save()
             album_id = album.id
 
-        ajax = request.GET.get('use-ajax', None)
-        if ajax == 'true':
-            content = dict(result=v, errors=album_form.errors, redirect_to=reverse('album.show', args=(album_id,)))
-            import json
-            return http.HttpResponse(json.dumps(content), content_type='text/plain')
-        else:
-            if v:
-                return http.HttpResponseRedirect(reverse('album.show', args=(album_id,)) )
+            if request.is_ajax():
+                content = dict(result=v, errors=album_form.errors, redirect_to=reverse('album.show', args=(album_id,)))
+                import json
+                return http.HttpResponse(json.dumps(content), content_type='text/plain')
             else:
-                context = request.POST
+                return http.HttpResponseRedirect(reverse('album.show', args=(album_id,)) )
+        else:
+            context = request.POST
 
     else:
-        context = {}
         album_form = AlbumForm(instance=album)
 
     return render_to_response('photo/edit_album.html',
@@ -94,8 +92,7 @@ def delete_album(request, album_id):
     album = get_object_or_404(Album, pk=album_id)
     if request.method == 'POST':
         album.delete()
-        ajax = request.GET.get('use-ajax', None)
-        if ajax == 'true':
+        if request.is_ajax():
             content = dict(result=True, errors={}, redirect_to=reverse('album.home'))
             return http.HttpResponse(json.dumps(content), content_type='text/plain')
         else:
@@ -130,28 +127,24 @@ def edit_photo(request, album_id=None, photo_id=None):
 
     photo.album_id = album_id
 
+    context = {}
+
     if request.method == 'POST':
         photo_form = PhotoForm(request.POST, request.FILES, instance=photo)
         v = photo_form.is_valid()
         if v:
             photo_form.save()
 
-        ajax = request.GET.get('use-ajax', None)
-        if ajax == 'true':
-            # ajaxなときvalid,invalid問わず
-            content = dict(result=v, errors=photo_form.errors, redirect_to=reverse('album.show', args=(album_id,)))
-            return http.HttpResponse(json.dumps(content), content_type='text/plain')
-        else:
-            # ajaxでない
-            if v:
-                # validならリダイレクト
-                return http.HttpResponseRedirect(reverse('album.show', args=(album_id,)))
+            if request.is_ajax():
+                content = dict(result=v, errors=photo_form.errors, redirect_to=reverse('album.show', args=(album_id,)))
+                return http.HttpResponse(json.dumps(content), content_type='text/plain')
             else:
-                # invalidなら下で処理
-                context = request.POST
+                return http.HttpResponseRedirect(reverse('album.show', args=(album_id,)))
+            # ajaxでない
+        else:
+            context = request.POST
 
     else:
-        context = {}
         photo_form = PhotoForm(instance=photo)
 
     return render_to_response('photo/edit_photo.html',
@@ -172,8 +165,7 @@ def delete_photo(request, album_id, photo_id):
     photo = get_object_or_404(Photo, pk=photo_id)
     if request.method == 'POST':
         photo.delete()
-        ajax = request.GET.get('use-ajax', None)
-        if ajax == 'true':
+        if request.is_ajax():
             content = dict(result=True, errors={}, redirect_to=reverse('album.show', args=(album_id, )))
             return http.HttpResponse(json.dumps(content), content_type='text/plain')
         else:
