@@ -394,12 +394,12 @@ pre {
     -ms-transform: rotateZ(360deg);
     transform: rotateZ(360deg); } }
 
-.thum {
+.thumb {
   width: 100px;
   height: 100px;
   position: relative;
   overflow: hidden; }
-  .thum img {
+  .thumb img {
     zoom: 50%;
     position: absolute;
     left: 50%;
