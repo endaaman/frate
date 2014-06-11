@@ -29,7 +29,7 @@ class Thread(models.Model):
 
     @property
     def is_new(self):
-        limit = datetime.datetime.utcnow().replace(tzinfo=utc) - datetime.timedelta(days=3)
+        limit = datetime.datetime.utcnow().replace(tzinfo=utc) - datetime.timedelta(days=7)
         return self.last_update > limit
 
 
