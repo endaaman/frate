@@ -7,6 +7,14 @@ from PIL import Image
 import os
 
 
+class Hero(models.Model):
+    image = models.ImageField(upload_to='hero', verbose_name="トップ背景")
+    used = models.BooleanField(default=False, blank=False, null=False)
+
+    class Meta:
+        verbose_name = verbose_name_plural = 'トップ'
+
+
 class Album(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True, editable=False, verbose_name="投稿日時")
     title = models.CharField(max_length=200, blank=False, verbose_name="タイトル")

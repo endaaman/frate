@@ -3,11 +3,12 @@ from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.csrf import csrf_exempt
-from photo.models import Album, Photo
+from photo.models import Hero
 
 
 def home(request):
-    return render_to_response('home.html', {}, context_instance=RequestContext(request))
+    heroes = Hero.objects.all()
+    return render_to_response('home.html', dict(heroes=heroes), context_instance=RequestContext(request))
 
 
 def about(request):

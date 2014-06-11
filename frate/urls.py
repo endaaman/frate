@@ -7,7 +7,6 @@ import views
 
 admin.autodiscover()
 
-
 urlpatterns = patterns(
     '',
     # Examples:

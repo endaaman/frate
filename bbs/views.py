@@ -69,11 +69,21 @@ class DeleteForm(forms.Form):
 
 
 def home(request):
+    offset = 10
+    page = request.GET.get('page', 1)
+    page = int(page)
+    threads = Thread.objects.order_by('-last_update')[(page-1)*offset:page*offset]
+    page_count = Thread.objects.count() / offset
+    has_next = page > 1
+    has_prev = page - 1 < page_count
 
     return render_to_response(
         'bbs/home.html',
         dict(
-            threads=Thread.objects.order_by('-pub_date'),
+            page=page,
+            has_prev=has_prev,
+            has_next=has_next,
+            threads=threads,
         ),
         context_instance=RequestContext(request)
     )

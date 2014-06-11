@@ -16,21 +16,20 @@ $(function() {
 		alert(errorThrown)
 	});
 	bg_flip()
-    update_bg()
+	update_bg()
 
 
-    $('.box').addClass('glass')
-    {%if css3%}
-    $('.bg').addClass('bg-css3')
-    {%endif%}
+	$('.box').addClass('glass')
+	{%if css3%}
+	$('.bg').addClass('bg-css3')
+	{%endif%}
 });	
 
 var bg_files = new Array(
-	'{{STATIC_URL}}img/hero/1.jpg',
-	'{{STATIC_URL}}img/hero/2.jpg',
-	'{{STATIC_URL}}img/hero/3.jpg',
-	'{{STATIC_URL}}img/hero/4.jpg',
-	'{{STATIC_URL}}img/hero/5.jpg');
+	{%for hero in heroes%}
+	'{{hero.image.url}}'{%if not forloop.last%},{%endif%}
+	{%endfor%}
+);
 
 var bg_fade_duration = 2000
 var bg_fade_interval = 10000
@@ -141,10 +140,10 @@ function resize(){
 
 var timer = false;
 $(window).resize(function() {
-    if (timer !== false) {
-        clearTimeout(timer);
-    }
-    timer = setTimeout(resize, 200);
+	if (timer !== false) {
+		clearTimeout(timer);
+	}
+	timer = setTimeout(resize, 200);
 });
 	
 </script>
@@ -167,23 +166,6 @@ $(window).resize(function() {
 <div class="box">
 
 	<div class="flex-contents">
-
-		<article class="flex-content flex4 p12 pickup article-body">
-			<h1>フラテ山の会は、新入部員を募集しています！</h1>
-			<p>この年新しく北大生となった新入生のみなさん、ご入学おめでとうございます。北大医学部山岳部・フラテ山の会は、部員を募集しています。
-			ガイダンスの際に配布したビラをお持ちの方は、そこに食事会の日程が書いてありますので、少しでも興味があるという方は是非参加してみてください。ビラは持ってないけど、ホームページを見てちょっと興味があるかもという方も、<a class="ml">xxxxxxxxxxxxxxxxxxx</a>までご連絡ください！</p>
-			<p>　また、4月中は毎週末、新歓登山も行っています。こちらもビラに記載されたメールアドレスか上記までご連絡ください。
-			<div class="bordered">				
-				<p>※フラテ山の会には以下のような方が<strong>向いて</strong>います。</p>
-				<ul>
-					<li>山が好き → いくらでも登れます。登りたい山も先輩が連れて行きます</li>
-					<li>きれいな景色が好き → 北大の医学部のサークルの中最も美しい景色が見られます</li>
-					<li>温泉が好き → 下山後は必ず温泉で汗を流します。登った山の数だけ温泉にいけます</li>
-					<li>部活には入りたいけどどこもピンと来ない → 山の会にはあなたのような部員がたくさんいます</li>
-				</ul>
-			</div>
-
-		</article>
 
 		<article class="flex-content flex3 p12">
 			<h1>フラテ山の会のホームページをリニューアルしました。</h1>
@@ -215,6 +197,10 @@ $(window).resize(function() {
 			<h1>更新情報</h1>
 
 			<table class="table-default  bg-white">
+				<tr>
+					<th>2014年6月11日</th>
+					<td><a href="http://frate.tk/bbs/">BBS</a>の昨日とレイアウトを微調整しました。</td>
+				</tr>
 				<tr>
 					<th>2014年4月3日</th>
 					<td><a href="http://frate.web.fc2.com/">旧ホームページ</a>から新ホームページに自動転送するようにしました。</td>
