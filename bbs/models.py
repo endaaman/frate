@@ -27,6 +27,12 @@ class Thread(models.Model):
         super(Thread, self).save(*args, **kwargs)
 
 
+    @property
+    def is_new(self):
+        limit = datetime.datetime.utcnow().replace(tzinfo=utc) - datetime.timedelta(days=3)
+        return self.last_update > limit
+
+
 class Comment(models.Model):
     thread = models.ForeignKey(Thread)
     pub_date = models.DateTimeField(auto_now_add=True, editable=False, verbose_name="投稿日時")

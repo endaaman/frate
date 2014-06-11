@@ -12,7 +12,7 @@
     </form>
     {% for thread in threads %}
     <article class="content">
-        <h2>{%if thread.locked %}<i class="fa fa-lock"></i> {%endif%}<a href="{%url "bbs.thread.show" thread.id%}">{{ thread.title }}({{thread.comment_set.count}})</a></h2>
+        <h2 class="thread-header {%if thread.is_new %}new{%endif%}">{%if thread.locked %}<i class="fa fa-lock"></i> {%endif%}<a href="{%url "bbs.thread.show" thread.id%}">{{ thread.title }}({{thread.comment_set.count}})</a></h2>
         <div class="right f14">
             投稿者：{{ thread.author }} / 最終更新日時:{{thread.last_update}}
         </div>                

@@ -94,7 +94,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 .f12 {
   font-size: 12px; }
 
-.f14, .pickup:before, input, textarea, select {
+.f14, .thread-header.new:after, input, textarea, select {
   font-size: 14px; }
 
 .f16, body {
@@ -303,12 +303,9 @@ pre {
 .bg-gray {
   background: #f8f8f8; }
 
-.pickup {
-  position: relative; }
-  .pickup:before {
-    position: absolute;
-    content: "Pick up!";
-    color: #ff5555; }
+.thread-header.new:after {
+  content: "new";
+  color: #ff5555; }
 
 .flex-contents {
   display: -webkit-box;
