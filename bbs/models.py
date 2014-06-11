@@ -23,7 +23,7 @@ class Thread(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        self.last_update = datetime.datetime.utcnow().replace(tzinfo=utc)
+        # self.last_update = datetime.datetime.utcnow().replace(tzinfo=utc)
         super(Thread, self).save(*args, **kwargs)
 
 
