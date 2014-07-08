@@ -14,8 +14,7 @@ class EditKeyError(forms.ValidationError):
         return forms.ValidationError.__init__(self, 'キーが間違っています。')
 
 
-class ThreadForm(forms.ModelForm):
-
+class ThreadFormMixin:
     def clean_edit_key(self):
         base = self.data.get('edit_key', '')
         if self.instance:
@@ -24,6 +23,8 @@ class ThreadForm(forms.ModelForm):
                     raise EditKeyError()
         return base
 
+
+class ThreadForm(forms.ModelForm, ThreadFormMixin):
     class Meta:
         model = Thread
         help_texts = {
@@ -31,9 +32,13 @@ class ThreadForm(forms.ModelForm):
         }
 
 
-class ThreadFormForAnon(ThreadForm):
+class ThreadFormForAnon(ThreadForm, ThreadFormMixin):
     class Meta:
+        model = Thread
         exclude = ('locked', )
+        help_texts = {
+            'message': '本文には<a href="%s" target="_blank">Markdown記法</a>が使えます。' % '/blog/markdown/',
+        }
 
 
 class CommentForm(forms.ModelForm):
