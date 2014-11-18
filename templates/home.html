@@ -23,7 +23,7 @@ $(function() {
 	{%if css3%}
 	$('.bg').addClass('bg-css3')
 	{%endif%}
-});	
+});
 
 var bg_files = new Array(
 	{%for hero in heroes%}
@@ -67,7 +67,7 @@ function bg_flip(){
 	}else{
 		bg_front = $('#bg-b')
 		bg_back = $('#bg-a')
-	}	
+	}
 	bg_front.addClass('bg-front')
 	bg_front.removeClass('bg-back')
 	bg_back.addClass('bg-back')
@@ -131,7 +131,7 @@ function adjust_bg(img){
 	}
 }
 
-function resize(){    
+function resize(){
 	{%if not css3%}
 	adjust_bg(bg_front)
 	adjust_bg(bg_back)
@@ -145,7 +145,7 @@ $(window).resize(function() {
 	}
 	timer = setTimeout(resize, 200);
 });
-	
+
 </script>
 {% endblock %}
 
@@ -198,8 +198,12 @@ $(window).resize(function() {
 
 			<table class="table-default  bg-white">
 				<tr>
+					<th>2014年11月18日</th>
+					<td>新ホームページ上の<a href="/bbs">掲示板</a>を一時停止します。</td>
+				</tr>
+				<tr>
 					<th>2014年6月11日</th>
-					<td><a href="http://frate.tk/bbs/">BBS</a>の昨日とレイアウトを微調整しました。</td>
+					<td><a href="/bbs/">BBS</a>の機能とレイアウトを微調整しました。</td>
 				</tr>
 				<tr>
 					<th>2014年4月3日</th>
@@ -209,12 +213,12 @@ $(window).resize(function() {
 					<th>2014年3月15日</th>
 					<td>ホームページをリニューアルしました。</td>
 				</tr>
-			</table>					
-				
+			</table>
+
 		</article>
 
 	</div>
 
-</div>	
+</div>
 
 {% endblock %}

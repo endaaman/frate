@@ -13,9 +13,10 @@
 <link rel="stylesheet" href="{{STATIC_URL}}fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
 <script src="{{STATIC_URL}}fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 <link rel="stylesheet" href="{{STATIC_URL}}fancybox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 {% block head %}{% endblock %}{% block style %}{% endblock %}
 {% block script %}{% endblock %}
-<body>	
+<body>
 {%block pre_process%}{% endblock %}
 {%block nav%}
 <nav id="g-nav">
@@ -30,7 +31,7 @@
 			<a class="link" href="{% url "album.home" %}"><i class="fa fa-picture-o"></i> アルバム</a>
 		</li>
 		<li class="nav-menu">
-			<a class="link" href="{% url "bbs.home" %}"><i class="fa fa-pencil-square"></i> 新掲示板</a>
+			<a class="link" href="{% url "bbs.home" %}"><i class="fa fa-pencil-square"></i> 掲示板</a>
 		</li>
 		<li class="nav-menu">
 			<a class="link" href="{% url "blog.home" %}"><i class="fa fa-bookmark"></i> ブログ</a>
@@ -62,7 +63,7 @@
 {% block content %}{% endblock %}
 
 {%if user.is_authenticated%}
-<div class="box">	
+<div class="box">
 	<p>{{user.username}} としてログインしています。</p>
 </div>
 {%endif%}

@@ -1,7 +1,4 @@
-@import "compass/reset"
-
-@import url("http://fonts.googleapis.com/css?family=Open+Sans")
-
+@import "reset"
 
 
 .basic-font
@@ -9,23 +6,23 @@
 
 @mixin a-plain()
     text-decoration: none
-    &:link 
+    &:link
         text-decoration: none
-    &:visited 
+    &:visited
         text-decoration: none
-    &:hover 
+    &:hover
         text-decoration: none
 
 
 @mixin a-col($col)
     color: $col
-    &:link 
+    &:link
         color: $col
 
-    &:visited 
+    &:visited
         color: $col
 
-    &:hover 
+    &:hover
         color: $col
 
 
@@ -71,7 +68,7 @@ $p-margin : 12px
 
 .f8
     font-size: 8px
-    
+
 .f10
     font-size: 10px
 
@@ -177,7 +174,7 @@ $box-padding : 16px
     border-radius: 4px
     user-select: none
 
-    &.btn-default 
+    &.btn-default
         color: #333
         background-color: #fff
         border-color: $border-color
@@ -185,14 +182,14 @@ $box-padding : 16px
             color: #333
             text-decoration: none
 
-    &.btn-primary 
+    &.btn-primary
         color: #fff
         background-color: #3498db
         border-color: #357ebd
         &:hover
             background-color: #3276b1
             border-color: #285e8e
-    &.btn-danger 
+    &.btn-danger
         color: #fff
         background-color: #d9534f
         border-color: #d43f3a
@@ -200,6 +197,10 @@ $box-padding : 16px
             color: #fff
             background-color: #d2322d
             border-color: #ac2925
+
+button.btn[disabled]
+    cursor: not-allowed
+    opacity: 0.65
 
 
 
@@ -225,7 +226,7 @@ h2
     border-bottom: solid $border-color 1px
 
 
-h3        
+h3
     font-size: 20px
 
     line-height: 40px
@@ -339,7 +340,11 @@ pre
     background: #f8f8f8
 
 
-
+ul
+    list-style: disc
+    margin-left: 20px
+    li
+        margin-bottom: 8px
 
 
 
@@ -411,16 +416,16 @@ $flex-base-width : 200px
             text-align: center
             display: block
 
-    
-   
+
+
 
 
 
 @keyframes rotate_loading
-    0% 
+    0%
         transform: rotateZ(0deg)
 
-    100% 
+    100%
         transform: rotateZ(360deg)
 
 
@@ -447,12 +452,12 @@ table.form
             @extend .p8
             @extend .center
             width: 120px
-    
+
         td
             @extend .p8
             position: relative
 
-    
+
 
     ul.errorlist
         list-style: none
@@ -501,14 +506,14 @@ ul.form
         label
             display: block
 
-    
+
         margin-bottom: 16px
         *
             margin-bottom: 8px
             &:last-child
                 margin-bottom: 0px
 
-        
+
 
 
     li:last-child
@@ -524,7 +529,7 @@ ul.form
             padding: 0
             margin: 0
 
-    
+
 
     .loading
         $size : 24px
@@ -606,7 +611,7 @@ table.table-default
             padding: 12px
             border: 1px solid $border-color
             line-height: 1.6em
-    
+
         th
             background: #f8f8f8
             text-align: center
@@ -614,7 +619,7 @@ table.table-default
         td
             text-align: left
 
-    
+
 
 
 
@@ -667,7 +672,7 @@ $nav-h : 48px
         &:hover
             background-color: #666
 
-    
+
 
 
 
@@ -708,7 +713,7 @@ $nav-h : 48px
         .btn-dropdown
             background-color: #666
 
-    
+
         ul.dropdown-list
             li.dropdown-menu
                 position: relative
@@ -747,7 +752,7 @@ $nav-h : 48px
         transition : opacity 2s ease
 
 
-@media screen and (min-width: 480px) 
+@media screen and (min-width: 480px)
     #wrap
         padding: $nav-h 16px 0px
 
@@ -757,7 +762,7 @@ $nav-h : 48px
 
 
 
-@media screen and (max-width: 480px) 
+@media screen and (max-width: 480px)
     #wrap
         // padding: $nav-h * @nav-count 10px 0px
         padding: 0 16px
@@ -770,7 +775,7 @@ $nav-h : 48px
 
                 width: 100%
 
-        
-    
+
+
 
 

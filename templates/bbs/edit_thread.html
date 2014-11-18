@@ -11,11 +11,11 @@
                 <form action="." method="post" data-use-ajax="false">
                     <table class="form centered">
                         {% csrf_token %}
-                        {{ thread_form }}                                    
+                        {{ thread_form }}
                         <tr>
                             <th></th>
                             <td>
-                                <button type="submit" class="btn btn-primary">確定</button>
+                                <button disabled type="submit" class="btn btn-primary">確定</button>
                             </td>
                         </tr>
                     </table>

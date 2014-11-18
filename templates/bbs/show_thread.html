@@ -14,8 +14,8 @@
             投稿者：{{ thread.author }} / 投稿日時：{{ thread.pub_date}}
         </div>
         <div class="article-body">
-        {{ thread.message|md2html|safe }}                 
-        </div>        
+        {{ thread.message|md2html|safe }}
+        </div>
         <div class="right f14">
             <a href="{%url "bbs.thread.edit" thread.id%}">編集</a> / <a class="btn-confirm-delete" href="#confirm-delete" data-url="{%url "bbs.thread.delete" thread.id%}">削除</a>
         </div>
@@ -30,7 +30,7 @@
                 <span>投稿者：{{comment.author}} / 投稿日時：{{comment.pub_date}}</span>
             </div>
             <h3>{{comment.title}}</h3>
-            <div>                
+            <div>
             {{comment.message|linebreaks}}
             </div>
             <div class="right f14">
@@ -46,14 +46,14 @@
     <section class="content">
         <h2>コメントする</h2>
         <div class="well">
-            <form action="." method="post" data-use-ajax="false">                
+            <form action="." method="post" data-use-ajax="false">
                 <table class="form centered">
                     {% csrf_token %}
                     {{ comment_form }}
                     <tr>
                         <th></th>
                         <td>
-                            <button type="submit" class="btn btn-primary">確定</button>
+                            <button disabled type="submit" class="btn btn-primary">確定</button>
                         </td>
                     </tr>
                 </table>

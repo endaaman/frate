@@ -6,23 +6,34 @@
 <div class="box main">
     <h1 class="ribbon">掲示板 - スレッド一覧</h1>
 
+    <div class="well">
+        <div class="red f20">新ホームページの掲示板についておしらせ</div>
+        <p>　スレッド-コメント方式の掲示板の使い勝手が良くないという意見をいくつかいただき、掲示板について現役部内で話し合った結果、再び掲示板を従来のものに戻すことに致しました。リンクを下に掲載しておきます。</p>
+        <ul>
+            <li><a href="http://8208.teacup.com/frate/bbs" target="_blank">掲示板</a></li>
+            <li><a href="http://frate.bbs.fc2.com/" target="_blank">パスワード付き掲示板(現役およびOB/OGに閲覧制限が掛かっています)</a></li>
+        </ul>
+        <p>これに際して、スレッドとコメントの投稿の機能を停止致します(閲覧は可能です)。よろしくお願いいたします。</p>
+    </div>
+
+
     <p><a href="{%url "bbs.thread.add"%}">スレッドを作成する</a></p>
     <form class="form">
-        
+
     </form>
     {% for thread in threads %}
     <article class="content">
         <h2 class="thread-header {%if thread.is_new %}new{%endif%}">{%if thread.locked %}<i class="fa fa-lock"></i> {%endif%}<a href="{%url "bbs.thread.show" thread.id%}">{{ thread.title }}({{thread.comment_set.count}})</a></h2>
         <div class="right f14">
             投稿者：{{ thread.author }} / 最終更新日時:{{thread.last_update}}
-        </div>                
+        </div>
     </article>
     {#comment#}
     {% if thread.locked and user.is_active or not thread.locked %}
     {% endif %}
     {#endcomment#}
     {% endfor %}
-    
+
     {%if has_prev or has_next%}
     <div class="pagination">
         {%if has_next%}
