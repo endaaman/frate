@@ -1,7 +1,9 @@
 from django.conf.urls import patterns, include, url
 
 from django.contrib import admin
-import settings
+from django.conf import settings
+
+from django.conf.urls.static import static
 
 import views
 
@@ -9,13 +11,9 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    # Examples:
-    # url(r'^$', 'frate.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
     url(r'^$', views.home, name='home'),
 
     url(r'^admin/', include(admin.site.urls)),
-    # url(r'^admin/', include(django.contrib.admin.urls)),
 
     url(r'^album/', include('photo.urls')),
     url(r'^member/', include('member.urls')),
@@ -26,8 +24,5 @@ urlpatterns = patterns(
     url(r'^ajax/mail/$', views.mail, name='ajax.mail'),
 )
 
-urlpatterns += patterns('django.views.static',
-    (r'media/(?P<path>.*)', 'serve', {'document_root': settings.MEDIA_ROOT}),
-    (r'static/(?P<path>.*)', 'serve', {'document_root': settings.STATIC_ROOT}),
-)
-
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

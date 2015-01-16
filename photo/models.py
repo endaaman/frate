@@ -8,7 +8,7 @@ import os
 
 
 class Hero(models.Model):
-    image = models.ImageField(upload_to='hero', verbose_name="トップ背景")
+    image = models.ImageField(upload_to='hero', verbose_name='トップ背景')
     used = models.BooleanField(default=False, blank=False, null=False)
 
     class Meta:
@@ -16,10 +16,11 @@ class Hero(models.Model):
 
 
 class Album(models.Model):
-    pub_date = models.DateTimeField(auto_now_add=True, editable=False, verbose_name="投稿日時")
-    title = models.CharField(max_length=200, blank=False, verbose_name="タイトル")
+    pub_date = models.DateTimeField(auto_now_add=True, editable=False, verbose_name='投稿日時')
+    title = models.CharField(max_length=200, blank=False, verbose_name='タイトル')
     author = models.ForeignKey(Member, blank=True, null=True, default=None)
-    message = models.TextField(blank=False, verbose_name="本文")
+    message = models.TextField(blank=False, verbose_name='本文')
+    locked = models.BooleanField(default=False, verbose_name='ログインユーザーのみの閲覧')
 
     class Meta:
         verbose_name = verbose_name_plural = 'アルバム'
@@ -30,20 +31,25 @@ class Album(models.Model):
 
 class Photo(models.Model):
     album = models.ForeignKey(Album)
-    pub_date = models.DateTimeField(auto_now_add=True, editable=False, verbose_name="投稿日時")
-    title = models.CharField(max_length=200, blank=False, verbose_name="タイトル")
+    pub_date = models.DateTimeField(auto_now_add=True, editable=False, verbose_name='投稿日時')
+    title = models.CharField(max_length=200, blank=False, verbose_name='タイトル')
     author = models.ForeignKey(Member, related_name='author')
-    message = models.TextField(blank=True, verbose_name="本文")
+    message = models.TextField(blank=True, verbose_name='本文')
     member = models.ManyToManyField(Member, blank=True, related_name='member')
-    image = models.ImageField(upload_to='photo', verbose_name="写真")
-    thumb = models.ImageField(upload_to='photo', editable=False, verbose_name="サムネイル")
-
+    image = models.ImageField(upload_to='photo', verbose_name='写真')
+    thumb = models.ImageField(upload_to='photo', editable=False, verbose_name='サムネイル')
 
     class Meta:
         verbose_name = verbose_name_plural = '写真'
 
     def __unicode__(self):
         return self.title
+
+    def filename(self, thumb=False):
+        if thumb:
+            return os.path.basename(self.thumb.name)
+        else:
+            return os.path.basename(self.image.name)
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):

@@ -88,19 +88,19 @@ def home(request):
             page=page,
             has_prev=has_prev,
             has_next=has_next,
+            offset=offset,
             threads=threads,
         ),
         context_instance=RequestContext(request)
     )
 
 
-
 @csrf_protect
 def show_thread(request, thread_id):
-    thread = get_object_or_404(Thread, pk = thread_id)
+    thread = get_object_or_404(Thread, pk=thread_id)
     if thread.locked:
         if not request.user.is_active:
-            return http.HttpResponseRedirect('/auth/login?next=%s'%request.path)
+            return http.HttpResponseRedirect('/auth/login?next=%s' % request.path)
 
     if request.method == 'POST':
         comment = Comment()
@@ -156,7 +156,9 @@ def edit_thread(request, thread_id=None):
         thread_form = tf(request.POST, instance=thread)
         v = thread_form.is_valid()
         if v:
-            thread = thread_form.save()
+            # スパム襲来のため投稿編集を禁止
+            # thread = thread_form.save()
+            pass
 
         ajax = request.GET.get('use-ajax', None)
         if ajax != 'true':
@@ -217,7 +219,9 @@ def edit_comment(request, thread_id, comment_id=None):
         comment_form = CommentForm(request.POST, instance=comment)
         v = comment_form.is_valid()
         if v:
-            comment_form.save()
+            # スパム襲来のため投稿編集を禁止
+            # comment_form.save()
+            pass
 
         # validationがtrueならjsonで結果を返す
         ajax = request.GET.get('use-ajax', None)

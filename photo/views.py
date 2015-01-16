@@ -25,8 +25,6 @@ class PhotoForm(forms.ModelForm):
 
 
 def get_bg(request):
-    albums=Album.objects.all()
-
     # other = Album.get_other_album()
     ps = Photo.objects.filter(album__isnull=True)
     for p in ps:
@@ -36,14 +34,24 @@ def get_bg(request):
 
 
 def home(request):
-    albums = Album.objects.order_by('-pub_date')
+    offset = 5
+    page = request.GET.get('page', 1)
+    page = int(page)
+    albums = Album.objects.order_by('-pub_date')[(page-1)*offset:page*offset]
+    page_count = Album.objects.count() / offset
+    has_next = page > 1
+    has_prev = page - 1 < page_count
 
-    return render_to_response('photo/home.html',
-                              dict(
-                                  albums=albums,
-                              ),
-                              context_instance=RequestContext(request))
-
+    return render_to_response(
+            'photo/home.html',
+            dict(
+                page=page,
+                has_prev=has_prev,
+                has_next=has_next,
+                offset=offset,
+                albums=albums,
+            ),
+            context_instance=RequestContext(request))
 
 
 @login_required(redirect_field_name='next')
@@ -104,6 +112,10 @@ def delete_album(request, album_id):
 
 def show_album(request, album_id):
     album = get_object_or_404(Album, pk=album_id)
+    if album.locked:
+        if not request.user.is_active:
+            return http.HttpResponseRedirect('/auth/login?next=%s' % request.path)
+
     return render_to_response('photo/show_album.html',
                               dict(
                                   album=album,
