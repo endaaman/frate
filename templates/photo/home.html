@@ -74,12 +74,12 @@ $(function() {
 	</article>
     {%if has_prev or has_next%}
     <div class="pagination">
-        {%if has_next%}
-        <a href="{%url "album.home" %}?page={{page | add:-1}}">新しい{{offset}}件</a>
-        {%endif%}
-        {%if has_prev and has_next%} / {%endif%}
         {%if has_prev%}
         <a href="{%url "album.home" %}?page={{page | add:1}}">過去の{{offset}}件</a>
+        {%endif%}
+        {%if has_prev and has_next%} / {%endif%}
+        {%if has_next%}
+        <a href="{%url "album.home" %}?page={{page | add:-1}}">新しい{{offset}}件</a>
         {%endif%}
     </div>
     {%endif%}

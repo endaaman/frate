@@ -9,7 +9,7 @@ $(function() {
 
 	$.ajax({
 		type: "POST",
-		url: "/ajax/mail/",
+		url: "/mail",
 	}).done(function( t ) {
 		$('.ml').text(t).attr('href', 'mailto:'+t)
 	}).fail(function(jqXHR, textStatus, errorThrown){
@@ -25,11 +25,13 @@ $(function() {
 	{%endif%}
 });
 
-var bg_files = new Array(
-	{%for hero in heroes%}
-	'{{hero.image.url}}'{%if not forloop.last%},{%endif%}
-	{%endfor%}
-);
+var bg_files = [
+	'/static/img/hero/1.jpg',
+	'/static/img/hero/2.jpg',
+	'/static/img/hero/3.jpg',
+	'/static/img/hero/4.jpg',
+	'/static/img/hero/5.jpg'
+]
 
 var bg_fade_duration = 2000
 var bg_fade_interval = 10000
@@ -197,6 +199,10 @@ $(window).resize(function() {
 			<h1>更新情報</h1>
 
 			<table class="table-default  bg-white">
+				<tr>
+					<th>2015年1月17日</th>
+					<td>ホームページのドメイン(frate.tk)が切れてしまったので新たに(frate-alpine.club)を取得。</td>
+				</tr>
 				<tr>
 					<th>2014年11月18日</th>
 					<td>新ホームページ上の<a href="/bbs">掲示板</a>を一時停止します。</td>

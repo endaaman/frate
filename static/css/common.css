@@ -578,7 +578,7 @@ table.table-default {
     #g-nav ul.nav-list li.nav-menu {
       position: relative;
       float: left;
-      width: 16.66667%;
+      width: 20%;
       height: 48px;
       line-height: 48px;
       text-align: center; }
@@ -645,6 +645,6 @@ table.table-default {
     padding: 0 16px; }
   #g-nav {
     position: relative;
-    height: 288px; }
+    height: 240px; }
     #g-nav ul.nav-list li.nav-menu {
       width: 100%; } }

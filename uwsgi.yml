@@ -1,0 +1,19 @@
+uwsgi:
+    master: true
+    enable-threads: true
+    processes: 2
+    vacuum: true
+
+    chdir: /var/www/frate
+    home: /var/www/venv/frate
+    module: core.wsgi:application
+    env: DJANGO_SETTINGS_MODULE=core.settings.prod
+
+    pidfile: /var/www/frate/tmp/uwsgi.pid
+
+    socket: /var/www/frate/tmp/uwsgi.sock
+    chmod-socket: 666
+    daemonize: /var/www/frate/log/uwsgi.log
+    logfile-chmod: 666
+
+    # http: :8080

@@ -15,13 +15,13 @@ urlpatterns = patterns(
 
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^album/', include('photo.urls')),
-    url(r'^member/', include('member.urls')),
-    url(r'^bbs/', include('bbs.urls')),
-    url(r'^auth/', include('auth.urls')),
-    url(r'^blog/', include('blog.urls')),
+    url(r'^album/', include('apps.photo.urls')),
+    url(r'^member/', include('apps.member.urls')),
+    url(r'^bbs/', include('apps.bbs.urls')),
+    url(r'^auth/', include('apps.auth.urls')),
+    url(r'^blog/', include('apps.blog.urls')),
 
-    url(r'^ajax/mail/$', views.mail, name='ajax.mail'),
+    url(r'^mail$', views.mail, name='mail'),
 )
 
 if settings.DEBUG:

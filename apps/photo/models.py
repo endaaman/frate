@@ -1,18 +1,11 @@
 #-*- encoding: utf-8 -*-
 
 from django.db import models
-from member.models import Member
 from django.core.files import File
 from PIL import Image
 import os
 
-
-class Hero(models.Model):
-    image = models.ImageField(upload_to='hero', verbose_name='トップ背景')
-    used = models.BooleanField(default=False, blank=False, null=False)
-
-    class Meta:
-        verbose_name = verbose_name_plural = 'トップ'
+from apps.member.models import Member
 
 
 class Album(models.Model):

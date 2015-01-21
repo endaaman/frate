@@ -1,20 +1,8 @@
-"""
-Django settings for frate project.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.6/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.6/ref/settings/
-"""
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
 BASE_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), '..')
 
-# This should be over written
-SECRET_KEY = 'THIS_IS_UNSAFE_DEFAULT_SECRET_KEY'
+SECRET_KEY_FILE = 'secret.txt'
 
 DEBUG = True
 
@@ -56,11 +44,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_reset',
-    'photo',
-    'member',
-    'bbs',
-    'blog',
+    'apps.photo',
+    'apps.member',
+    'apps.bbs',
+    'apps.blog',
 )
 
 
@@ -73,7 +60,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.csrf',
     'django.core.context_processors.request',
-    'frate.context_processor.custom_context'
 )
 
 
@@ -87,13 +73,26 @@ MIDDLEWARE_CLASSES = (
 )
 
 
-ROOT_URLCONF = 'frate.urls'
+ROOT_URLCONF = 'core.urls'
 
-WSGI_APPLICATION = 'frate.wsgi.application'
+WSGI_APPLICATION = 'core.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+
+# SIGN SECRET_KEY
+try:
+    SECRET_KEY
+except NameError:
+    SECRET_FILE = os.path.join(BASE_DIR, SECRET_KEY_FILE)
+    try:
+        SECRET_KEY = open(SECRET_FILE).read().strip()
+    except IOError:
+        try:
+            import random
+            SECRET_KEY = ''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)') for i in range(50)])
+            secret = file(SECRET_FILE, 'w')
+            secret.write(SECRET_KEY)
+            secret.close()
+        except IOError:
+            Exception('Please create a %s file with random characters \
+            to generate your secret key!' % SECRET_FILE)
+

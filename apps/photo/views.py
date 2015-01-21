@@ -2,13 +2,13 @@
 
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django import http
-from models import *
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_protect
 from django import forms
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 import json
+from models import *
 
 
 class AlbumForm(forms.ModelForm):
