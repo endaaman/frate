@@ -1,12 +1,17 @@
-from fabric.api import task, local, run, prefix, env, cd
+from fabric.api import task, local, run, prefix, cd
 
-env.hosts = '133.242.149.25'
-env.port = 4545
-env.user = 'endaken'
-env.password = 'hoge'
-env.key_filename = '~/.ssh/sakura'
+# loda ssl env
+try:
+    from local import *
+except:
+    pass
+
 
 @task(default=True)
 def t():
-    with cd('~/sites/frate'):
+    with cd('/var/www/frate'), prefix('workon frate'):
         run('git pull origin master')
+        run('pip install -r freeze.txt')
+        run('python manage.py migrate')
+        run('python manage.py collectstatic')
+        run('fab uwsgi')
