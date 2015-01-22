@@ -15,22 +15,19 @@ class AlbumForm(forms.ModelForm):
 
     class Meta:
         model = Album
+        fields = ('title', 'author', 'message', 'locked', )
 
 
 class PhotoForm(forms.ModelForm):
+    compression = forms.BooleanField(initial=True, required=False, label='圧縮する', help_text='容量節約のため写真は長辺1920pxになるように圧縮されます。基本的にチェックは外さないでください。')
 
     class Meta:
         model = Photo
-        exclude = ('album', )
+        fields = ('title', 'author', 'message', 'image', )
 
-
-def get_bg(request):
-    # other = Album.get_other_album()
-    ps = Photo.objects.filter(album__isnull=True)
-    for p in ps:
-        p.album_id = 1
-    # albums.apped(other)
-    return http.HttpResponse('frate1839@gmail.com', content_type='text/plain')
+    def save(self, *args, **kwargs):
+        self.instance.compression = self.cleaned_data['compression']
+        super(PhotoForm, self).save(*args, **kwargs)
 
 
 def home(request):
@@ -93,9 +90,6 @@ def edit_album(request, album_id=None):
                               context_instance=RequestContext(request, context))
 
 
-
-
-
 def delete_album(request, album_id):
     album = get_object_or_404(Album, pk=album_id)
     if request.method == 'POST':
@@ -124,10 +118,8 @@ def show_album(request, album_id):
                               context_instance=RequestContext(request, {}))
 
 
-
-
 def edit_photo(request, album_id=None, photo_id=None):
-    if not album_id is None:
+    if album_id is not None:
         album = get_object_or_404(Album, pk=album_id)
 
     if photo_id is None:
@@ -137,7 +129,7 @@ def edit_photo(request, album_id=None, photo_id=None):
         photo = get_object_or_404(Photo, pk=photo_id)
         op = u'編集'
 
-    photo.album_id = album_id
+    photo.album = album
 
     context = {}
 
@@ -167,9 +159,6 @@ def edit_photo(request, album_id=None, photo_id=None):
                                   op=op,
                               ),
                               context_instance=RequestContext(request, context))
-
-
-
 
 
 def delete_photo(request, album_id, photo_id):
