@@ -20,6 +20,7 @@
 
 * fabric
   * sshはfabfile/local.pyを作成しておく（git管理外）
+  
       ```python
       # fabfile/local.py
       from fabric.api import env
@@ -29,6 +30,7 @@
       env.user = 'user'
       env.key_filename = '/path/to/ssh/key'
       ```
+
   * uwsgiのプロセス管理
     * `fab uwsgi.start`で起動
     * `fab uwsgi.reload`でGraceful Reload
@@ -51,11 +53,11 @@
 * Nginx
   * `/etc/nginx/conf.d/`に`nginx/frate.conf`のSymLinkを張る
   * `/etc/nginx/nginx.conf`はマシンスペックに応じて適当に。ただ必ずhttpディレクティブからincludeする。
-    ``` 
-    http {
-      include mime.types;
-      include conf.d/*.conf;
-    }
-    ```
+      ```
+      http {
+        include mime.types;
+        include conf.d/*.conf;
+      }
+      ```
 
 
