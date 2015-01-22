@@ -27,6 +27,7 @@ class ThreadFormMixin:
 class ThreadForm(forms.ModelForm, ThreadFormMixin):
     class Meta:
         model = Thread
+        fields = ('title', 'author', 'message', 'locked', 'edit_key', )
         help_texts = {
             'message': '本文には<a href="%s" target="_blank">Markdown記法</a>が使えます。' % '/blog/markdown/',
         }
@@ -35,7 +36,7 @@ class ThreadForm(forms.ModelForm, ThreadFormMixin):
 class ThreadFormForAnon(ThreadForm, ThreadFormMixin):
     class Meta:
         model = Thread
-        exclude = ('locked', )
+        fields = ('title', 'author', 'message', 'edit_key', )
         help_texts = {
             'message': '本文には<a href="%s" target="_blank">Markdown記法</a>が使えます。' % '/blog/markdown/',
         }
@@ -53,7 +54,7 @@ class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        exclude = ('thread', )
+        fields = ('author', 'message', 'edit_key', )
 
 
 # generic form in thread and comment

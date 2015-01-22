@@ -26,6 +26,7 @@ class BlogForm(forms.ModelForm):
 
     class Meta:
         model = Blog
+        fields = ('title', 'author', 'message', 'url_name', )
         help_texts = {
             'message': '本文には<a href="%s" target="_blank">Markdown記法</a>が使えます。' % '/blog/markdown/',
             'url_name': 'URLに使われる名前です。「test」の場合はhttp:/frate.tk/blog/test/が記事のURLになります。',
@@ -35,9 +36,7 @@ class BlogForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        exclude = ('blog', )
-
-
+        fields = ('author', 'message', 'edit_key', )
 
 
 def home(request):
