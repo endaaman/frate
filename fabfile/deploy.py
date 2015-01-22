@@ -12,7 +12,6 @@ def t():
     with cd('/var/www/frate'), prefix('workon frate'):
         run('git pull origin master')
         run('pip install -r freeze.txt')
-        run('python manage.py makemigrations')
         run('python manage.py migrate')
         run('python manage.py collectstatic')
         run('fab uwsgi')
