@@ -35,17 +35,17 @@
     * `fab uwsgi.stop`でストップ
     * `fab uwsgi`ですでに起動していなければスタート、起動してればリロード
     * `fab uwsgi.lookup`で起動しているのuwsgiを探索
-      * プロセスがゾンビ化したときにすぐ捕まえられる
+      プロセスがゾンビ化したときにすぐ捕まえられる
   
   * `fab deploy`
     1. `workon frate`
-      * `mkvirtualenv frate`しておく
-    * run('git pull origin master')
-    * run('pip install -r freeze.txt')
-    * run('python manage.py makemigrations')
-    * run('python manage.py migrate')
-    * run('python manage.py collectstatic')
-    * run('fab uwsgi')
+      事前に`mkvirtualenv frate`しておく
+    * `git pull origin master`
+    * `pip install -r freeze.txt`
+    * `python manage.py makemigrations`
+    * `python manage.py migrate`
+    * `python manage.py collectstatic`
+    * `fab uwsgi`
 
 
 * Nginx
