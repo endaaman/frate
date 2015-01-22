@@ -12,6 +12,4 @@ urlpatterns = patterns('',
     url(r'^(?P<album_id>\d+)/photo/add/$', views.edit_photo, name='photo.add'),
     url(r'^(?P<album_id>\d+)/photo/(?P<photo_id>\d+)/edit/$', views.edit_photo, name='photo.edit'),
     url(r'^(?P<album_id>\d+)/photo/(?P<photo_id>\d+)/delete/$', views.delete_photo, name='photo.delete'),
-
-    url(r'bg/$', views.get_bg, name='photo.bg'),
 )
