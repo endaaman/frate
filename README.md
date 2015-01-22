@@ -53,6 +53,7 @@
 * Nginx
   * `/etc/nginx/conf.d/`に`nginx/frate.conf`のSymLinkを張る
   * `/etc/nginx/nginx.conf`はマシンスペックに応じて適当に。ただ必ずhttpディレクティブからincludeする。
+ 
       ```
       http {
         include mime.types;
