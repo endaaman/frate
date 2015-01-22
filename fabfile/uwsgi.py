@@ -4,33 +4,52 @@ import os
 uwsgi_pid = 'tmp/uwsgi.pid'
 
 
-def uwsgi_start():
+def started():
+    return os.path.exists('%s' % uwsgi_pid)
+
+
+def do_start():
     local('uwsgi uwsgi.yml')
 
 
-def uwsgi_reload():
+def do_reload():
     local('uwsgi --reload %s' % uwsgi_pid)
 
 
-def uwsgi_stop():
+def do_stop():
     local('kill -QUIT `cat %s`' % uwsgi_pid)
 
 
 @task(default=True)
 def uwsgi(param=None):
-    started = os.path.exists('%s' % uwsgi_pid)
-    stop = param == 'stop'
-    if stop:
-        if started:
-            uwsgi_stop()
-        else:
-            print 'uwsgi process has not started.'
+    if started():
+        do_reload()
     else:
-        if started:
-            uwsgi_reload()
-        else:
-            uwsgi_start()
+        do_start()
 
+
+@task
+def stop():
+    if started():
+        do_stop()
+    else:
+        print('uwsgi process is not started')
+
+
+@task
+def start():
+    if started():
+        print('uwsgi process is already started')
+    else:
+        do_start()
+
+
+@task
+def reload():
+    if started():
+        do_reload()
+    else:
+        print('uwsgi process is not started')
 
 @task
 def lookup():
