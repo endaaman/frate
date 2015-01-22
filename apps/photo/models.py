@@ -1,9 +1,10 @@
 #-*- encoding: utf-8 -*-
+import os
+from PIL import Image
+from cStringIO import StringIO
 
 from django.db import models
-from django.core.files import File
-from PIL import Image
-import os
+from django.core.files.base import ContentFile
 
 from apps.member.models import Member
 
@@ -28,7 +29,6 @@ class Photo(models.Model):
     title = models.CharField(max_length=200, blank=False, verbose_name='タイトル')
     author = models.ForeignKey(Member, related_name='author')
     message = models.TextField(blank=True, verbose_name='本文')
-    member = models.ManyToManyField(Member, blank=True, related_name='member')
     image = models.ImageField(upload_to='photo', verbose_name='写真')
     thumb = models.ImageField(upload_to='photo', editable=False, verbose_name='サムネイル')
 
@@ -38,6 +38,10 @@ class Photo(models.Model):
     def __unicode__(self):
         return self.title
 
+    def __init__(self, *args, **kwargs):
+        self.compression = True
+        super(Photo, self).__init__(*args, **kwargs)
+
     def filename(self, thumb=False):
         if thumb:
             return os.path.basename(self.thumb.name)
@@ -46,11 +50,6 @@ class Photo(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-
-        # if self.image and not os.path.exists(self.image.path):
-
-        from cStringIO import StringIO
-        from django.core.files.base import ContentFile
 
         root, ext = os.path.splitext(self.image.path)
 
@@ -65,11 +64,10 @@ class Photo(models.Model):
             l = im.size[1]
 
         new_size = 1920
-        # 1920 以下ならリサイズなし
-        if l > new_size:
+        # 1920px以下 かつ 圧縮フラグがTrueでリサイズ
+        if l > new_size and self.compression:
             a = new_size * s / l
             im.thumbnail(y and (new_size, a) or (a, new_size), Image.ANTIALIAS)
-            print 'resize'
 
             fp = StringIO()
             im.save(fp, format=im.format)
@@ -78,9 +76,7 @@ class Photo(models.Model):
             self.image.seek(0)
             self.image.write(fp.getvalue())
 
-            # self.image.close()
             fp.close()
-
 
         y = im.size[0] > im.size[1]
         if y:
