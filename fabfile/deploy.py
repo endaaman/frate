@@ -1,4 +1,4 @@
-from fabric.api import task, local, run, prefix, cd
+from fabric.api import task, run, prefix, cd
 
 # loda ssl env
 try:
@@ -8,7 +8,7 @@ except:
 
 
 @task(default=True)
-def t():
+def deploy():
     with cd('/var/www/frate'), prefix('workon frate'):
         run('git pull origin master')
         run('pip install -r freeze.txt')
