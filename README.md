@@ -1,7 +1,6 @@
 # 北大医学部山岳部・フラテ山の会のウェブサイト
 
 <http://frate-alpine.club>
-主に写真のホスティング
 
 
 ## Feature
@@ -13,6 +12,11 @@
   * settingsは開発で`core.settings.devel`、本番で`core.settings.prod`
   * 各appは`apps/`に隔離
   * `static/`を`STATICFILES_DIRS`、`dist/`を`STATIC_ROOT`にしている
+  * 必須ライブラリなど
+    * python 2.7.*
+      * virtualenv
+      * virtualenvwrapper
+    * nginx
 
 * uwsgi
   * デーモン化
