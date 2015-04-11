@@ -2,7 +2,87 @@
 
 {% block title %}{{ block.super }} - トップ{% endblock %}
 
+
+{%block pre_process%}
+<div id="bg-container">
+	{%if css3%}
+	<div id="bg-a" class="bg"></div>
+	<div id="bg-b" class="bg"></div>
+	{%else%}
+	<img id="bg-a" class="bg" style="opacity:1;" />
+	<img id="bg-b" class="bg" style="opacity:1;" />
+	{%endif%}
+</div>
+{%endblock%}
+
+{% block content %}
+
+<div class="box">
+
+	<div class="flex-contents">
+
+		<article class="flex-content flex3 p12">
+			<h1>フラテ山の会のホームページをリニューアルしました。</h1>
+			<p>OB/OGの方は変更に伴うお知らせがあります。<a href="{%url "bbs.thread.show" 1%}">こちら</a>を御覧ください。</p>
+			<p>　鍵マーク付きのスレッドの閲覧にはログインが必要になります。ユーザー名・パスワードについては、<a href="http://frate.bbs.fc2.com/">今までのパスワード付き掲示板</a>に詳しい説明を書いておきましたので、そちらを御覧ください。</p>
+			<p>　また、古いホームページ等は上のメニューの「その他」からアクセス可能です。</p>
+		</article>
+
+		<article class="flex-content flex2 p12">
+			<h1>フラテ山の会とは？</h1>
+			<p>フラテ山の会は、別名:北海道大学医学部山岳部です。軽登山・沢登り・ロッククライミング・山スキーなど、四季にわたって精力的に活動しています。例会は月曜日の18:00からで、山行は基本的に自由参加です。サークルや部活との掛け持ちも可能です。新入生の皆様は是非、見学に来てください。</p>
+			<table class="table-default bg-white">
+				<tr>
+					<th class="bg-gray">住所</th>
+					<td>
+						<p>〒060-0814<br />
+						北海道札幌市北区北14条西5丁目<br />
+						医学部部室棟</p>
+					</td>
+				</tr>
+				<tr>
+					<th class="bg-gray">メールアドレス</th>
+					<td><a class="ml">xxxxxxxxxxxxxxxxxxx</a></td>
+				</tr>
+			</table>
+		</article>
+
+		<article class="flex-content flex2 p12">
+			<h1>更新情報</h1>
+
+			<table class="table-default  bg-white">
+				<tr>
+					<th>2015年1月17日</th>
+					<td>ホームページのドメイン(frate.tk)が切れてしまったので新たに(frate-alpine.club)を取得。</td>
+				</tr>
+				<tr>
+					<th>2014年11月18日</th>
+					<td>新ホームページ上の<a href="/bbs">掲示板</a>を一時停止します。</td>
+				</tr>
+				<tr>
+					<th>2014年6月11日</th>
+					<td><a href="/bbs/">BBS</a>の機能とレイアウトを微調整しました。</td>
+				</tr>
+				<tr>
+					<th>2014年4月3日</th>
+					<td><a href="http://frate.web.fc2.com/">旧ホームページ</a>から新ホームページに自動転送するようにしました。</td>
+				</tr>
+				<tr>
+					<th>2014年3月15日</th>
+					<td>ホームページをリニューアルしました。</td>
+				</tr>
+			</table>
+
+		</article>
+
+	</div>
+
+</div>
+
+{% endblock %}
+
 {% block script %}
+{{block.super}}
 <script type="text/javascript">
 
 $(function() {
@@ -149,82 +229,4 @@ $(window).resize(function() {
 });
 
 </script>
-{% endblock %}
-
-{%block pre_process%}
-<div id="bg-container">
-	{%if css3%}
-	<div id="bg-a" class="bg"></div>
-	<div id="bg-b" class="bg"></div>
-	{%else%}
-	<img id="bg-a" class="bg" style="opacity:1;" />
-	<img id="bg-b" class="bg" style="opacity:1;" />
-	{%endif%}
-</div>
-{%endblock%}
-
-{% block content %}
-
-<div class="box">
-
-	<div class="flex-contents">
-
-		<article class="flex-content flex3 p12">
-			<h1>フラテ山の会のホームページをリニューアルしました。</h1>
-			<p>OB/OGの方は変更に伴うお知らせがあります。<a href="{%url "bbs.thread.show" 1%}">こちら</a>を御覧ください。</p>
-			<p>　鍵マーク付きのスレッドの閲覧にはログインが必要になります。ユーザー名・パスワードについては、<a href="http://frate.bbs.fc2.com/">今までのパスワード付き掲示板</a>に詳しい説明を書いておきましたので、そちらを御覧ください。</p>
-			<p>　また、古いホームページ等は上のメニューの「その他」からアクセス可能です。</p>
-		</article>
-
-		<article class="flex-content flex2 p12">
-			<h1>フラテ山の会とは？</h1>
-			<p>フラテ山の会は、別名:北海道大学医学部山岳部です。軽登山・沢登り・ロッククライミング・山スキーなど、四季にわたって精力的に活動しています。例会は月曜日の18:00からで、山行は基本的に自由参加です。サークルや部活との掛け持ちも可能です。新入生の皆様は是非、見学に来てください。</p>
-			<table class="table-default bg-white">
-				<tr>
-					<th class="bg-gray">住所</th>
-					<td>
-						<p>〒060-0814<br />
-						北海道札幌市北区北14条西5丁目<br />
-						医学部部室棟</p>
-					</td>
-				</tr>
-				<tr>
-					<th class="bg-gray">メールアドレス</th>
-					<td><a class="ml">xxxxxxxxxxxxxxxxxxx</a></td>
-				</tr>
-			</table>
-		</article>
-
-		<article class="flex-content flex2 p12">
-			<h1>更新情報</h1>
-
-			<table class="table-default  bg-white">
-				<tr>
-					<th>2015年1月17日</th>
-					<td>ホームページのドメイン(frate.tk)が切れてしまったので新たに(frate-alpine.club)を取得。</td>
-				</tr>
-				<tr>
-					<th>2014年11月18日</th>
-					<td>新ホームページ上の<a href="/bbs">掲示板</a>を一時停止します。</td>
-				</tr>
-				<tr>
-					<th>2014年6月11日</th>
-					<td><a href="/bbs/">BBS</a>の機能とレイアウトを微調整しました。</td>
-				</tr>
-				<tr>
-					<th>2014年4月3日</th>
-					<td><a href="http://frate.web.fc2.com/">旧ホームページ</a>から新ホームページに自動転送するようにしました。</td>
-				</tr>
-				<tr>
-					<th>2014年3月15日</th>
-					<td>ホームページをリニューアルしました。</td>
-				</tr>
-			</table>
-
-		</article>
-
-	</div>
-
-</div>
-
 {% endblock %}

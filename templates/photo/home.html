@@ -2,23 +2,6 @@
 
 {% block title %}フラテ山の会 - アルバム{% endblock %}
 
-{% block script %}
-{{ block.super }}
-<script type="text/javascript">
-$(function() {
- 	var owl = $('.album-carousel');
-	owl.owlCarousel({
-		autoPlay: 3000,
-		lazyLoad : true,
-		items : 7,
-		itemsDesktop : [900,4],
-		itemsDesktopSmall : [700,3],
-		itemsTablet: [500,2],
-		itemsMobile: [300,1],
-	})
-});
-</script>
-{% endblock %}
 {% block content %}
 <div class="box">
 	<article>
@@ -43,7 +26,7 @@ $(function() {
 							<div class="item center">
 								<a class="fancybox-photo" rel="{{album.id}}" href="{{p.image.url}}" title="{{p.title}}">
 									<div class="thumb">
-										<img class="lazyOwl" data-src="{{ p.thumb.url }}" alt="{{p.title}}" />
+										<img class="lazy" data-original="{{ p.thumb.url }}" alt="{{p.title}}" />
 									</div>
 								</a>
 							</div>
@@ -84,8 +67,29 @@ $(function() {
     </div>
     {%endif%}
 </div>
+{% endblock %}
 
-{% include "photo/confirm-delete.html" %}
+{%block post_process%}
+	{% include "photo/confirm-delete.html" %}
+{%endblock%}
 
+{% block script %}
+{{ block.super }}
+<script type="text/javascript">
+$(function() {
+	$("img.lazy").lazyload();
 
+	$('.album-carousel').owlCarousel({
+		autoPlay: 3000,
+		lazyLoad : true,
+		items : 7,
+		itemsDesktop : [900,4],
+		itemsDesktopSmall : [700,3],
+		itemsTablet: [500,2],
+		itemsMobile: [300,1],
+	})
+});
+</script>
+<script src="{{STATIC_URL}}js/album.js"></script>
+<script src="{{STATIC_URL}}js/delete_modal.js"></script>
 {% endblock %}

@@ -1,0 +1,8 @@
+db/
+media/
+
+log/
+
+static/vendor/
+fabfile/local.py
+secret.txt

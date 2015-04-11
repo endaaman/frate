@@ -2,7 +2,8 @@ from django.conf.urls import patterns, url
 
 import views
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^$', views.home, name='album.home'),
     url(r'^add/$', views.edit_album, name='album.add'),
     url(r'^(?P<album_id>\d+)/$', views.show_album, name='album.show'),

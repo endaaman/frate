@@ -2,7 +2,8 @@ from django.conf.urls import patterns, url
 
 import views
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^$', views.home, name='bbs.home'),
     url(r'^(?P<thread_id>\d+)/$', views.show_thread, name='bbs.thread.show'),
 

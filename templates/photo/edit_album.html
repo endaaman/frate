@@ -1,25 +1,13 @@
-{% extends "base.html" %}
+{% extends "photo/base.html" %}
 
 {% block title %}フラテ山の会 - アルバムの{{op}}{% endblock %}
-
-{% block script %}
-{% if album.id %}
-<script type="text/javascript">
-$(function(){
-    $('.btn-delete').on('click', function(){
-        $(this).parents('form').attr('action', '{%url "album.delete" album.id%}')
-    })
-})    
-</script>
-{% endif %}
-{% endblock%}
 
 {% block content %}
 <div class="main box">
 
 	<p><a href="{%url "album.home"%}">アルバム一覧に戻る</a></p>
 	<section>
-		<h1>アルバムの{{op}}</h1>		
+		<h1>アルバムの{{op}}</h1>
 		<div class="well">
 
 			<form action="./" method="post" data-use-ajax="false">
@@ -38,8 +26,22 @@ $(function(){
 		</div>
 
 	</section>
-	
+
 </div>
 {% endblock %}
+
+
+{% block script %}
+{{ block.super }}
+{% if album.id %}
+<script type="text/javascript">
+$(function(){
+    $('.btn-delete').on('click', function(){
+        $(this).parents('form').attr('action', '{%url "album.delete" album.id%}')
+    })
+})
+</script>
+{% endif %}
+{% endblock%}
 
 

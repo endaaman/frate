@@ -1,4 +1,4 @@
-from fabric.api import task, local, run, put
+from fabric.api import task, local
 import os
 
 uwsgi_pid = 'tmp/uwsgi.pid'
@@ -50,6 +50,7 @@ def reload():
         do_reload()
     else:
         print('uwsgi process is not started')
+
 
 @task
 def lookup():

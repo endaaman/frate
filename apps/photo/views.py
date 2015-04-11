@@ -19,7 +19,8 @@ class AlbumForm(forms.ModelForm):
 
 
 class PhotoForm(forms.ModelForm):
-    compression = forms.BooleanField(initial=True, required=False, label='圧縮する', help_text='容量節約のため写真は長辺1920pxになるように圧縮されます。基本的にチェックは外さないでください。')
+    compression = forms.BooleanField(
+        initial=True, required=False, label='圧縮する', help_text='容量節約のため写真は長辺1920pxになるように圧縮されます。基本的にチェックは外さないでください。')
 
     class Meta:
         model = Photo
@@ -34,21 +35,21 @@ def home(request):
     offset = 5
     page = request.GET.get('page', 1)
     page = int(page)
-    albums = Album.objects.order_by('-pub_date')[(page-1)*offset:page*offset]
+    albums = Album.objects.order_by('-pub_date')[(page - 1) * offset:page * offset]
     page_count = Album.objects.count() / offset
     has_next = page > 1
     has_prev = page - 1 < page_count
 
     return render_to_response(
-            'photo/home.html',
-            dict(
-                page=page,
-                has_prev=has_prev,
-                has_next=has_next,
-                offset=offset,
-                albums=albums,
-            ),
-            context_instance=RequestContext(request))
+        'photo/home.html',
+        dict(
+            page=page,
+            has_prev=has_prev,
+            has_next=has_next,
+            offset=offset,
+            albums=albums,
+        ),
+        context_instance=RequestContext(request))
 
 
 @login_required(redirect_field_name='next')
@@ -74,7 +75,7 @@ def edit_album(request, album_id=None):
                 import json
                 return http.HttpResponse(json.dumps(content), content_type='text/plain')
             else:
-                return http.HttpResponseRedirect(reverse('album.show', args=(album_id,)) )
+                return http.HttpResponseRedirect(reverse('album.show', args=(album_id,)))
         else:
             context = request.POST
 
@@ -101,7 +102,6 @@ def delete_album(request, album_id):
             return http.HttpResponseRedirect(reverse('album.home'))
     else:
         return http.HttpResponseNotFound()
-
 
 
 def show_album(request, album_id):
@@ -151,14 +151,15 @@ def edit_photo(request, album_id=None, photo_id=None):
     else:
         photo_form = PhotoForm(instance=photo)
 
-    return render_to_response('photo/edit_photo.html',
-                              dict(
-                                  photo=photo,
-                                  photo_form=photo_form,
-                                  album_id=album_id,
-                                  op=op,
-                              ),
-                              context_instance=RequestContext(request, context))
+    return render_to_response(
+        'photo/edit_photo.html',
+        dict(
+            photo=photo,
+            photo_form=photo_form,
+            album_id=album_id,
+            op=op,
+        ),
+        context_instance=RequestContext(request, context))
 
 
 def delete_photo(request, album_id, photo_id):
@@ -173,5 +174,3 @@ def delete_photo(request, album_id, photo_id):
             return http.HttpResponseRedirect(reverse('album.show', args=(album_id,)))
     else:
         return http.HttpResponseNotFound()
-
-

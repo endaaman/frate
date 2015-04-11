@@ -77,6 +77,10 @@ ROOT_URLCONF = 'core.urls'
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+try:
+    from local import *
+except:
+    pass
 
 # SIGN SECRET_KEY
 try:

@@ -1,12 +1,5 @@
 $(function() {
 
-	$('.fancybox').fancybox({
-		// openEffect : 'none',
-		// closeEffect	: 'none',
-		prevEffect : 'none',
-		nextEffect : 'none'
-	});
-
 	$('.delete-button').fancybox({
 	    modal:true,
 	})
@@ -21,4 +14,4 @@ $(function() {
 		$.fancybox.close()
 		return false
 	})
-});	
+});

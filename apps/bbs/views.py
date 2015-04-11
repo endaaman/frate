@@ -9,12 +9,15 @@ import json
 from django.core.urlresolvers import reverse
 from django import forms
 
+
 class EditKeyError(forms.ValidationError):
+
     def __init__(self):
         return forms.ValidationError.__init__(self, 'キーが間違っています。')
 
 
 class ThreadFormMixin:
+
     def clean_edit_key(self):
         base = self.data.get('edit_key', '')
         if self.instance:
@@ -25,6 +28,7 @@ class ThreadFormMixin:
 
 
 class ThreadForm(forms.ModelForm, ThreadFormMixin):
+
     class Meta:
         model = Thread
         fields = ('title', 'author', 'message', 'locked', 'edit_key', )
@@ -34,6 +38,7 @@ class ThreadForm(forms.ModelForm, ThreadFormMixin):
 
 
 class ThreadFormForAnon(ThreadForm, ThreadFormMixin):
+
     class Meta:
         model = Thread
         fields = ('title', 'author', 'message', 'edit_key', )
@@ -78,7 +83,7 @@ def home(request):
     offset = 10
     page = request.GET.get('page', 1)
     page = int(page)
-    threads = Thread.objects.order_by('-last_update')[(page-1)*offset:page*offset]
+    threads = Thread.objects.order_by('-last_update')[(page - 1) * offset:page * offset]
     page_count = Thread.objects.count() / offset
     has_next = page > 1
     has_prev = page - 1 < page_count
@@ -118,7 +123,8 @@ def show_thread(request, thread_id):
             else:
                 context = request.POST
         else:
-            content = dict(result=v, errors=comment_form.errors, redirect_to=reverse('bbs.thread.show', args=(thread_id,)))
+            content = dict(result=v, errors=comment_form.errors, redirect_to=reverse(
+                'bbs.thread.show', args=(thread_id,)))
             return http.HttpResponse(json.dumps(content), mimetype='text/plain')
 
     else:
@@ -187,6 +193,7 @@ def edit_thread(request, thread_id=None):
                               ),
                               context_instance=RequestContext(request, context))
 
+
 @csrf_protect
 def delete_thread(request, thread_id):
     if request.method == 'POST':
@@ -204,8 +211,6 @@ def delete_thread(request, thread_id):
             return http.HttpResponseRedirect(reverse('bbs.home'))
     else:
         return http.HttpResponseForbidden()
-
-
 
 
 @csrf_protect
@@ -230,13 +235,14 @@ def edit_comment(request, thread_id, comment_id=None):
             # ajaxでない
             if v:
                 # validならリダイレクト
-                return http.HttpResponseRedirect('/bbs/%s' % comment.thread_id )
+                return http.HttpResponseRedirect('/bbs/%s' % comment.thread_id)
             else:
                 # invalidなら下で処理
                 context = request.POST
         else:
             # ajaxなときvalid,invalid問わず
-            content = dict(result=v, errors=comment_form.errors, redirect_to=reverse('bbs.thread.show', args=(comment.thread.id, )))
+            content = dict(result=v, errors=comment_form.errors, redirect_to=reverse(
+                'bbs.thread.show', args=(comment.thread.id, )))
             return http.HttpResponse(json.dumps(content), mimetype='text/plain')
     else:
         # postでないajaxでない(普通のアクセス)
@@ -268,7 +274,3 @@ def delete_comment(request, thread_id, comment_id):
             return http.HttpResponseRedirect(reverse('bbs.thread.show', args=(thread_id,)))
     else:
         return http.HttpResponseForbidden()
-
-
-
-

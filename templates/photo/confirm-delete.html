@@ -1,36 +1,10 @@
-<script type="text/javascript">
-$(function() {
-
-	$('.fancybox-photo').fancybox({
-		// openEffect : 'none',
-		// closeEffect	: 'none',
-		prevEffect : 'none',
-		nextEffect : 'none'
-	});
-
-	$('.btn-confirm-delete-close').on('click', function(){
-		$.fancybox.close()
-	})
-	$('.btn-confirm-delete').on('click', function(){
-		$("#confirm-delete").find('form').attr('action', $(this).data('url'))
-	})
-	$('.btn-confirm-delete').fancybox({
-		modal: true,
-		closeBtn: true
-	})
-});	
-</script>
-
 <div id="confirm-delete" class="hidden">
-	<div class="well">
-		<p>削除しますか？</p>
-		<form id="delete-form" method="post" data-use-ajax="true">
-		    {% csrf_token %}
-			<button class="btn btn-danger" type="submit">削除する</button>
-			<button class="btn-confirm-delete-close btn btn-default" type="reset">閉じる</button>
-		</form>
-	</div>
+    <div class="well">
+        <p>削除しますか？</p>
+        <form id="delete-form" method="post" data-use-ajax="true">
+            {% csrf_token %}
+            <button class="btn btn-danger" type="submit">削除する</button>
+            <button class="btn-confirm-delete-close btn btn-default" type="reset">閉じる</button>
+        </form>
+    </div>
 </div>
-
-
-

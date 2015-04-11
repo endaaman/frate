@@ -10,6 +10,7 @@ import json
 
 
 class UrlNameError(forms.ValidationError):
+
     def __init__(self):
         return forms.ValidationError.__init__(self, 'This name is already allocated.')
 
@@ -34,6 +35,7 @@ class BlogForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
+
     class Meta:
         model = Comment
         fields = ('author', 'message', 'edit_key', )
@@ -83,7 +85,6 @@ def show_blog(request, blog_name):
         comment_form = CommentForm()
         comment_form.blog = blog.id
 
-
     return render(
         request,
         'blog/show_blog.html',
@@ -94,7 +95,6 @@ def show_blog(request, blog_name):
         ),
         context_instance=RequestContext(request, context)
     )
-
 
 
 @user_passes_test(lambda u: u.has_module_perms('blog'))
@@ -137,7 +137,6 @@ def edit_blog(request, blog_name=None):
                                   blog_form=blog_form,
                               ),
                               context_instance=RequestContext(request, context))
-
 
 
 @user_passes_test(lambda u: u.has_module_perms('blog'))

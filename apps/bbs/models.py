@@ -26,7 +26,6 @@ class Thread(models.Model):
         self.last_update = datetime.datetime.utcnow().replace(tzinfo=utc)
         super(Thread, self).save(*args, **kwargs)
 
-
     @property
     def is_new(self):
         limit = datetime.datetime.utcnow().replace(tzinfo=utc) - datetime.timedelta(days=7)
@@ -39,7 +38,6 @@ class Comment(models.Model):
     author = models.CharField(max_length=100, verbose_name="投稿者")
     message = models.TextField(blank=False, verbose_name="本文")
     edit_key = models.CharField(max_length=10, verbose_name="編集キー")
-
 
     class Meta:
         verbose_name = verbose_name_plural = 'コメント'

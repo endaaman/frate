@@ -20,7 +20,7 @@ class Member(models.Model):
     description = models.TextField(default='', blank=True)
     join_year = models.IntegerField(default=0, null=True)
     grade = models.IntegerField(default=0, null=True)
-    image = ImageWithThumbsField(upload_to='photo', storage=fs, default='', null=True, blank=True, sizes=((200, 200),) )
+    image = ImageWithThumbsField(upload_to='photo', storage=fs, default='', null=True, blank=True, sizes=((200, 200),))
 
     class Meta:
         verbose_name = verbose_name_plural = 'メンバー'
@@ -35,15 +35,15 @@ class Member(models.Model):
     def grade(self):
         # print('%d年入学 %d期 %d留 %d年目 %d年生' % (nyugaku, enter, ryunen, nenme, nenme - ryunen))
         d = datetime.datetime.today()
-        return d.year - self.entrance - MED_START - self.remaining + ( 1 if d.month > 3 else 0 )
+        return d.year - self.entrance - MED_START - self.remaining + (1 if d.month > 3 else 0)
 
     def belonging_for(self):
         d = datetime.datetime.today()
-        return d.year - self.join_year + ( 1 if d.month > 3 else 0 )
+        return d.year - self.join_year + (1 if d.month > 3 else 0)
 
 
 def pre_save_member(sender, instance, **kwargs):
-    if (instance.join_year is None) or (instance.join_year is 0 ):
+    if (instance.join_year is None) or (instance.join_year is 0):
         instance.join_year = instance.entrance + MED_START
 
 

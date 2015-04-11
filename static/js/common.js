@@ -6,16 +6,24 @@ $.fn.visible = function() {
 
 $(function(){
 
+	$('.fancybox').fancybox({
+		// openEffect : 'none',
+		// closeEffect	: 'none',
+		prevEffect : 'none',
+		nextEffect : 'none'
+	});
+
+
 	$('form').each(function(){
 		var req;
 		if( $(this).data('use-ajax') ){
-			
-		    $(this).bind("submit", function(e) {
-				
-		        e.stopPropagation();
-					
 
-		        var form = $(this);        
+		    $(this).bind("submit", function(e) {
+
+		        e.stopPropagation();
+
+
+		        var form = $(this);
 		        var submit_btn = form.find('*[type="submit"]');
 
 
@@ -45,14 +53,14 @@ $(function(){
 		            },
 		            success: function(result, textStatus, xhr) {
 		            	console.log(result)
-						var json = $.parseJSON(result);             
+						var json = $.parseJSON(result);
 						if( json.result ){
 							window.location.href = json.redirect_to
 						}else{
-							$.each(json.errors, function(key) { 
+							$.each(json.errors, function(key) {
 								val = json.errors[key]
 								errors = $('<ul />', {class: "errorlist"})
-								$.each(val, function(key) { 
+								$.each(val, function(key) {
 									errors.append($('<li />', {text: val[key]}))
 								})
 								$('#id_'+key).before(errors)
@@ -60,7 +68,7 @@ $(function(){
 						}
 		            },
 		            error: function(xhr, textStatus, error) {
-						console.log('error')					
+						console.log('error')
 				        console.log(error)
 				        console.log(xhr.statusText)
 		            }
@@ -72,7 +80,7 @@ $(function(){
 
 				return false;
 			});
-		}		
+		}
 	})
 
-})    
+})

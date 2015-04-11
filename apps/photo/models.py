@@ -1,4 +1,4 @@
-#-*- encoding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 import os
 from PIL import Image
 from cStringIO import StringIO
@@ -96,7 +96,7 @@ class Photo(models.Model):
         tmp.seek(0)
         tmp_file = ContentFile(tmp.read())
 
-        self.thumb.save('%s-thumb%s'%(root, ext), tmp_file, save=False)
+        self.thumb.save('%s-thumb%s' % (root, ext), tmp_file, save=False)
 
         r = super(Photo, self).save(force_insert, force_update, using, update_fields)
         return r

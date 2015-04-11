@@ -62,7 +62,28 @@
 	</article>
 </div>
 
-{% include "photo/confirm-delete.html" %}
+{%block post_process%}
+	{% include "photo/confirm-delete.html" %}
+{%endblock%}
+
+{% block script %}
+{{ block.super }}
+<script type="text/javascript">
+$(function() {
+	$('.album-carousel').owlCarousel({
+		autoPlay: 3000,
+		lazyLoad : true,
+		items : 7,
+		itemsDesktop : [900,4],
+		itemsDesktopSmall : [700,3],
+		itemsTablet: [500,2],
+		itemsMobile: [300,1],
+	})
+});
+</script>
+<script src="{{STATIC_URL}}js/delete_photo.js"></script>
+{% endblock %}
+
 
 {% endblock %}
 

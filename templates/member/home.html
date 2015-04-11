@@ -2,22 +2,6 @@
 
 {% block title %}フラテ山の会 - 部員紹介{% endblock %}
 
-
-{% block script %}
-<script type="text/javascript">
-
-$(function() {
-    $(".fancybox").fancybox({
-        openEffect : 'none',
-        closeEffect : 'none',
-        prevEffect : 'none',
-        nextEffect : 'none'
-    });
-}); 
-    
-</script>
-{% endblock %}
-
 {% block content %}
 <div class="main box">
 
@@ -26,7 +10,7 @@ $(function() {
     {% for ms in members %}
     <section>
         <h2>{{ms.0.belonging_for}}年目</h2>
-        
+
         {% for m in ms %}
         <section class="bordered float-adjust">
             <h3 class="inner_link_fixer" id="member_id_{{m.id}}">{{m.name}}</h3>
@@ -46,4 +30,20 @@ $(function() {
 
 </div>
 
+{% endblock %}
+
+{% block script %}
+{{ block.super }}
+<script type="text/javascript">
+
+$(function() {
+    $(".fancybox").fancybox({
+        openEffect : 'none',
+        closeEffect : 'none',
+        prevEffect : 'none',
+        nextEffect : 'none'
+    });
+});
+
+</script>
 {% endblock %}

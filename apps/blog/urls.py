@@ -2,7 +2,8 @@ from django.conf.urls import patterns, url
 
 import views
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^$', views.home, name='blog.home'),
 
     url(r'^add/$', views.edit_blog, name='blog.add'),

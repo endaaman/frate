@@ -26,9 +26,7 @@ def login(request):
                 pass
                 # invalid account
 
-
     nxt = request.GET.get('next', '/')
-
 
     return render(
         request,
@@ -41,14 +39,13 @@ def login(request):
     )
 
 
-
 def logout(request):
     if request.POST:
         nxt = request.POST.get('next', '/')
     elif request.GET:
         nxt = request.GET.get('next', '/')
     else:
-        nxt='/'
+        nxt = '/'
 
     auth.logout(request)
     return HttpResponseRedirect(nxt)

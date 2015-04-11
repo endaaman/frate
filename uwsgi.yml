@@ -1,5 +1,5 @@
 uwsgi:
-    master: true
+    vhost: true
     enable-threads: true
     processes: 2
     vacuum: true
@@ -15,5 +15,3 @@ uwsgi:
     chmod-socket: 666
     daemonize: /var/www/frate/log/uwsgi.log
     logfile-chmod: 666
-
-    # http: :8080

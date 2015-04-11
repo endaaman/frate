@@ -3,22 +3,19 @@
 <title>{% block title %}フラテ山の会{% endblock %}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="shortcut icon" href="{{STATIC_URL}}favicon.ico"></link>
-<link rel="stylesheet" href="{{STATIC_URL}}css/common.css" />
-<script src="{{STATIC_URL}}js/jquery-2.1.0.min.js"></script>
-<script src="{{STATIC_URL}}js/jquery.lazyload.min.js"></script>
-<script src="{{STATIC_URL}}js/common.js"></script>
-<link rel="stylesheet" href="{{STATIC_URL}}font-awesome/css/font-awesome.min.css" type="text/css" />
-<link rel="stylesheet" href="{{STATIC_URL}}owl-carousel/owl.carousel.css">
-<link rel="stylesheet" href="{{STATIC_URL}}owl-carousel/owl.theme.css">
-<script src="{{STATIC_URL}}owl-carousel/owl.carousel.js"></script>
-<link rel="stylesheet" href="{{STATIC_URL}}fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
-<script src="{{STATIC_URL}}fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-<link rel="stylesheet" href="{{STATIC_URL}}fancybox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="{{STATIC_URL}}vendor/font-awesome/css/font-awesome.min.css" type="text/css" />
+<link rel="stylesheet" href="{{STATIC_URL}}vendor/owl.carousel/dist/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="{{STATIC_URL}}vendor/owl.carousel/dist/assets/owl.theme.default.min.css">
+<link rel="stylesheet" href="{{STATIC_URL}}vendor/fancybox/source/jquery.fancybox.css" type="text/css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}vendor/fancybox/source/helpers/jquery.fancybox-buttons.css" type="text/css"/>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-{% block head %}{% endblock %}{% block style %}{% endblock %}
-{% block script %}{% endblock %}
+<link rel="stylesheet" href="{{STATIC_URL}}css/common.css" />
+{% block head %}{% endblock %}
 <body>
+
 {%block pre_process%}{% endblock %}
+
 {%block nav%}
 <nav id="g-nav">
 	<ul class="nav-list">
@@ -56,19 +53,26 @@
 	</ul>
 </nav>
 {%endblock%}
-{% block wrap-outer%}{% endblock %}
+
 <div id="wrap">
-{% block content %}{% endblock %}
+	{% block content %}{% endblock %}
 
-{%if user.is_authenticated%}
-<div class="box">
-	<p>{{user.username}} としてログインしています。</p>
+	{%if user.is_authenticated%}
+	<div class="box">
+		<p>{{user.username}} としてログインしています。</p>
+	</div>
+	{%endif%}
 </div>
-{%endif%}
 
-</div>
 {%block post_process%}{%endblock%}
-</body>
+
+{% block script %}
+<script src="{{STATIC_URL}}vendor/jquery/dist/jquery.min.js"></script>
+<script src="{{STATIC_URL}}vendor/jquery.lazyload/jquery.lazyload.min.js"></script>
+<script src="{{STATIC_URL}}vendor/fancybox/source/jquery.fancybox.pack.js"></script>
+<script src="{{STATIC_URL}}vendor/owl.carousel/dist/owl.carousel.js"></script>
+{% endblock %}
+<script src="{{STATIC_URL}}js/common.js"></script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -77,7 +81,8 @@
 
   ga('create', 'UA-50080183-1', 'auto');
   ga('send', 'pageview');
-
 </script>
+
+</body>
 </html>
 
