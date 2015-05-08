@@ -160,27 +160,28 @@ def edit_thread(request, thread_id=None):
         tf = ThreadFormForAnon
 
     if request.method == 'POST':
-        thread_form = tf(request.POST, instance=thread)
-        v = thread_form.is_valid()
-        if v:
-            # スパム襲来のため投稿編集を禁止
-            # thread = thread_form.save()
-            pass
-
-        ajax = request.GET.get('use-ajax', None)
-        if ajax != 'true':
-            # ajaxでない
-            if v:
-                # validならリダイレクト
-                return http.HttpResponseRedirect('/bbs/%s' % thread.id)
-            else:
-                # invalidなら下で処理
-                context = request.POST
-        else:
-            # ajaxなときvalid,invalid問わず
-            rt = reverse('bbs.thread.show', args=(thread.id, ))
-            content = dict(result=v, errors=thread_form.errors, redirect_to=rt)
-            return http.HttpResponse(json.dumps(content), mimetype='text/plain')
+        # thread_form = tf(request.POST, instance=thread)
+        # v = thread_form.is_valid()
+        # if v:
+        #     スパム襲来のため投稿編集を禁止
+        #     # thread = thread_form.save()
+        #     pass
+        #
+        # ajax = request.GET.get('use-ajax', None)
+        # if ajax != 'true':
+        #     # ajaxでない
+        #     if v:
+        #         # validならリダイレクト
+        #         return http.HttpResponseRedirect('/bbs/%s' % thread.id)
+        #     else:
+        #         # invalidなら下で処理
+        #         context = request.POST
+        # else:
+        #     # ajaxなときvalid,invalid問わず
+        #     rt = reverse('bbs.thread.show', args=(thread.id, ))
+        #     content = dict(result=v, errors=thread_form.errors, redirect_to=rt)
+        #     return http.HttpResponse(json.dumps(content), mimetype='text/plain')
+            return http.HttpResponse(content='', content_type='text/plain', status=400)
 
     else:
         context = {}
@@ -222,28 +223,30 @@ def edit_comment(request, thread_id, comment_id=None):
         comment.thread_id = thread_id
 
     if request.method == 'POST':
-        comment_form = CommentForm(request.POST, instance=comment)
-        v = comment_form.is_valid()
-        if v:
-            # スパム襲来のため投稿編集を禁止
-            # comment_form.save()
-            pass
+        # comment_form = CommentForm(request.POST, instance=comment)
+        # v = comment_form.is_valid()
+        # if v:
+        #     # スパム襲来のため投稿編集を禁止
+        #     # comment_form.save()
+        #     pass
+        #
+        # # validationがtrueならjsonで結果を返す
+        # ajax = request.GET.get('use-ajax', None)
+        # if ajax != 'true':
+        #     # ajaxでない
+        #     if v:
+        #         # validならリダイレクト
+        #         return http.HttpResponseRedirect('/bbs/%s' % comment.thread_id)
+        #     else:
+        #         # invalidなら下で処理
+        #         context = request.POST
+        # else:
+        #     # ajaxなときvalid,invalid問わず
+        #     content = dict(result=v, errors=comment_form.errors, redirect_to=reverse(
+        #         'bbs.thread.show', args=(comment.thread.id, )))
+        #     return http.HttpResponse(json.dumps(content), mimetype='text/plain')
+        return http.HttpResponse(content='', content_type='text/plain', status=400)
 
-        # validationがtrueならjsonで結果を返す
-        ajax = request.GET.get('use-ajax', None)
-        if ajax != 'true':
-            # ajaxでない
-            if v:
-                # validならリダイレクト
-                return http.HttpResponseRedirect('/bbs/%s' % comment.thread_id)
-            else:
-                # invalidなら下で処理
-                context = request.POST
-        else:
-            # ajaxなときvalid,invalid問わず
-            content = dict(result=v, errors=comment_form.errors, redirect_to=reverse(
-                'bbs.thread.show', args=(comment.thread.id, )))
-            return http.HttpResponse(json.dumps(content), mimetype='text/plain')
     else:
         # postでないajaxでない(普通のアクセス)
         context = {}
