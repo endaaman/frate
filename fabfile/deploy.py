@@ -1,5 +1,6 @@
-from fabric.api import task, run
-# loda ssl env
+from fabric.api import task, run, cd
+
+# load ssl env
 try:
     from local import *
 except:
@@ -8,5 +9,5 @@ except:
 
 @task(default=True)
 def deploy():
-    run('bash scripts/build.sh')
-    
+    with cd('/var/www/frate'):
+        run('bash scripts/build.sh')
