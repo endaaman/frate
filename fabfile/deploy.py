@@ -1,5 +1,4 @@
-from fabric.api import run
-
+from fabric.api import task, run
 # loda ssl env
 try:
     from local import *
@@ -9,4 +8,5 @@ except:
 
 @task(default=True)
 def deploy():
-    run('scripts/build.sh')
+    run('bash scripts/build.sh')
+    
