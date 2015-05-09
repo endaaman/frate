@@ -24,10 +24,8 @@
 						<div class="album-carousel carousel">
 							{%for p in album.photo_set.all %}
 							<div class="item center">
-								<a class="fancybox-photo" rel="{{album.id}}" href="{{p.image.url}}" title="{{p.title}}">
-									<div class="thumb">
-										<img class="lazy" data-original="{{ p.thumb.url }}" alt="{{p.title}}" />
-									</div>
+								<a class="thumb fancybox-photo" rel="{{album.id}}" href="{{p.image.url}}" title="{{p.title}}">
+									<img class="lazy" data-original="{{ p.thumb.url }}" alt="{{p.title}}" width="200px" height="200px"/>
 								</a>
 							</div>
 							{% endfor %}
