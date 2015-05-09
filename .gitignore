@@ -4,6 +4,7 @@ db/
 media/
 
 log/
+tmp/
 
 static/vendor/
 fabfile/local.py
