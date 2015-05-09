@@ -9,6 +9,7 @@ except:
 
 @task(default=True)
 def deploy():
+    run("source ~/.bash_profile")
     with cd('/var/www/frate'), prefix('workon frate'):
         run('git pull origin master')
         run('pip install -r freeze.txt')
