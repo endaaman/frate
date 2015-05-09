@@ -25,7 +25,7 @@
 							{%for p in album.photo_set.all %}
 							<div class="item center">
 								<a class="thumb fancybox-photo" rel="{{album.id}}" href="{{p.image.url}}" title="{{p.title}}">
-									<img class="lazy" data-original="{{ p.thumb.url }}" alt="{{p.title}}" width="200px" height="200px"/>
+									<img class="lazy" data-original="{{ p.thumb.url }}" alt="{{p.title}}" width="200" height="200"/>
 								</a>
 							</div>
 							{% endfor %}
