@@ -2,6 +2,7 @@
 
 db/
 media/
+dist/
 
 log/
 tmp/
