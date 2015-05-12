@@ -10,3 +10,7 @@ tmp/
 static/vendor/
 fabfile/local.py
 secret.txt
+
+public/
+bower_components/
+node_modules/
