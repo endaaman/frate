@@ -4,12 +4,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="shortcut icon" href="{{STATIC_URL}}favicon.ico"></link>
 
+<link rel="stylesheet" href="{{STATIC_URL}}vendor/normalize.css/normalize.css" type="text/css" />
 <link rel="stylesheet" href="{{STATIC_URL}}vendor/font-awesome/css/font-awesome.min.css" type="text/css" />
-<link rel="stylesheet" href="{{STATIC_URL}}vendor/owl.carousel/dist/assets/owl.carousel.min.css">
-<link rel="stylesheet" href="{{STATIC_URL}}vendor/owl.carousel/dist/assets/owl.theme.default.min.css">
 <link rel="stylesheet" href="{{STATIC_URL}}vendor/fancybox/source/jquery.fancybox.css" type="text/css"/>
 <link rel="stylesheet" href="{{STATIC_URL}}vendor/fancybox/source/helpers/jquery.fancybox-buttons.css" type="text/css"/>
+<link rel="stylesheet" href="{{STATIC_URL}}vendor/slick-carousel/slick/slick.css" type="text/css"/>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{STATIC_URL}}css/slick-theme.css" type="text/css"/>
 <link rel="stylesheet" href="{{STATIC_URL}}css/common.css" />
 {% block head %}{% endblock %}
 <body>
@@ -68,9 +69,9 @@
 
 {% block script %}
 <script src="{{STATIC_URL}}vendor/jquery/dist/jquery.min.js"></script>
-<script src="{{STATIC_URL}}vendor/jquery.lazyload/jquery.lazyload.js"></script>
+<script src="{{STATIC_URL}}vendor/jquery-migrate/jquery-migrate.min.js"></script>
+<script src="{{STATIC_URL}}vendor/slick-carousel/slick/slick.min.js"></script>
 <script src="{{STATIC_URL}}vendor/fancybox/source/jquery.fancybox.pack.js"></script>
-<script src="{{STATIC_URL}}vendor/owl.carousel/dist/owl.carousel.js"></script>
 {% endblock %}
 <script src="{{STATIC_URL}}js/common.js"></script>
 <script>

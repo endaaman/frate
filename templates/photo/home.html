@@ -20,16 +20,19 @@
 			{{ album.message | linebreaks}}
 			{%if not album.locked %}
 				{% if album.photo_set.all %}
-					<div class="well">
-						<div class="album-carousel carousel">
-							{%for p in album.photo_set.all %}
-							<div class="item center">
-								<a class="thumb fancybox-photo" rel="{{album.id}}" href="{{p.image.url}}" title="{{p.title}}">
-									<img class="lazy" src="{{ p.thumb.url }}" alt="{{p.title}}" width="200" height="200"/>
-								</a>
-							</div>
-							{% endfor %}
+					<div class="js-slider slider">
+						{%for p in album.photo_set.all %}
+						<div class="slider-item">
+							<a class="js-fancybox thumb" rel="{{album.id}}" href="{{p.image.url}}" title="{{p.title}}">
+								<img data-lazy="{{p.thumb.url}}" alt="{{p.title}}"/>
+								<div class="thumb-preview">
+									<div class="thumb-preview-icon">
+										<i class="fa fa-eye"></i>
+									</div>
+								</div>
+							</a>
 						</div>
+						{% endfor %}
 					</div>
 				{% else %}
 					<p class="gray">このアルバムにはまだ画像が投稿されていません。</p>
@@ -45,7 +48,7 @@
 				{% endif %}
 	  			{% if perms.photo.change_album %}
 				<a href="{%url "album.edit" album.id%}">編集</a>
-				<a class="btn-confirm-delete" href="#confirm-delete" data-url="{%url "album.delete" album.id %}">削除</a>
+				<a class="js-confirm-delete" href="#confirm-delete" data-url="{%url "album.delete" album.id %}">削除</a>
 				{% endif%}
 			</div>
 			{%endif%}
@@ -70,24 +73,3 @@
 {%block post_process%}
 	{% include "photo/confirm-delete.html" %}
 {%endblock%}
-
-{% block script %}
-{{ block.super }}
-<script type="text/javascript">
-$(function() {
-	$("img.lazy").lazyload();
-
-	$('.album-carousel').owlCarousel({
-		autoPlay: 3000,
-		lazyLoad : true,
-		items : 7,
-		itemsDesktop : [900,4],
-		itemsDesktopSmall : [700,3],
-		itemsTablet: [500,2],
-		itemsMobile: [300,1],
-	})
-});
-</script>
-<script src="{{STATIC_URL}}js/album.js"></script>
-<script src="{{STATIC_URL}}js/delete_modal.js"></script>
-{% endblock %}
