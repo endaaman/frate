@@ -1,38 +1,9 @@
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline; }
-
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
-  display: block; }
-
-body {
-  line-height: 1; }
-
-ol, ul {
-  list-style: none; }
-
-blockquote, q {
-  quotes: none; }
-
-blockquote:before, blockquote:after, q:before, q:after {
-  content: '';
-  content: none; }
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0; }
-
 .basic-font, body, pre, input[type="text"], input[type="password"], textarea {
   font-family: "Open Sans", "Meiryo", "Hiragino Kaku Gothic ProN", sans-serif; }
+
+h1, h2, h3, h4, h5 {
+    font: inherit;
+}
 
 .p4 {
   padding: 4px; }
@@ -359,12 +330,55 @@ ul {
 .hidden {
   display: none; }
 
-.carousel .item {
-  margin: 3px; }
-  .carousel .item a {
+
+
+.thumb {
+    display: block;
+    width: 200px;
+    height: 120px;
+    position: relative;
+    overflow: hidden;
+}
+
+.thumb-preview {
+    position: relative;
+    opacity: 0;
+    background-color: #000;
+    width: 100%;
+    height: 100%;
+
+    transition: opacity .2s ease-out;
+
+    color: #999;
+}
+
+.thumb-preview-icon {
+    position: absolute;
     width: 100%;
     text-align: center;
-    display: block; }
+    font-size: 24px;
+    margin: 0 auto;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.thumb:hover .thumb-preview {
+    opacity: .4;
+}
+
+
+.thumb img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transform: -webkit-translate(-50%, -50%);
+}
+
+.slider-item .thumb{
+    margin-left: auto;
+    margin-right: auto;
+}
 
 @-webkit-keyframes rotate_loading {
   0% {
@@ -384,10 +398,6 @@ ul {
     -webkit-transform: rotateZ(360deg);
             transform: rotateZ(360deg); } }
 
-.thumb {
-  width: 100px;
-  height: 100px;
-}
 
 table.form {
   display: block; }
