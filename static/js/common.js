@@ -8,9 +8,9 @@ $(document).ready(function(){
         nextEffect : 'none'
     });
 
-
+    
     $('.js-slider').slick({
-        lazyLoad: 'ondemand',
+        // lazyLoad: 'ondemand',
         infinite: false,
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -38,7 +38,14 @@ $(document).ready(function(){
                 settings: {
                     slidesToShow: 4,
                 }
+            },
+            {
+                breakpoint: 99999,
+                settings: {
+                    slidesToShow: 5,
+                }
             }
+
         ]
     });
 

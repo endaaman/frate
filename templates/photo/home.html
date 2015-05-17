@@ -24,7 +24,7 @@
 						{%for p in album.photo_set.all %}
 						<div class="slider-item">
 							<a class="js-fancybox thumb" rel="{{album.id}}" href="{{p.image.url}}" title="{{p.title}}">
-								<img data-lazy="{{p.thumb.url}}" alt="{{p.title}}"/>
+								<img src="{{p.thumb.url}}" alt="{{p.title}}"/>
 								<div class="thumb-preview">
 									<div class="thumb-preview-icon">
 										<i class="fa fa-eye"></i>
