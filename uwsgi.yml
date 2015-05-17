@@ -1,7 +1,8 @@
 uwsgi:
+    master: true
     vhost: true
     enable-threads: true
-    processes: 1
+    processes: 2
     vacuum: true
 
     chdir: /var/www/frate
