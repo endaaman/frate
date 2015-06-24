@@ -17,26 +17,26 @@ $(function(){
 {% block content %}
 <div class="main box">
 
-	<p><a href="{%url "album.home"%}">アルバム一覧に戻る</a></p>
-	<section>
+    <p><a href="{%url "album.home"%}">アルバム一覧に戻る</a></p>
+    <section>
         <h1>写真の{{op}}</h1>
         <div class="well">
 
-			<form enctype="multipart/form-data" action="./" method="post" data-use-ajax="false">
-				<table class="form centered">
-	                {% csrf_token %}
-	                {{photo_form}}
-					<tr>
-	                    <th></th>
-	                    <td>
+            <form enctype="multipart/form-data" action="./" method="post" data-use-ajax="false">
+                <table class="form centered">
+                    {% csrf_token %}
+                    {{photo_form}}
+                    <tr>
+                        <th></th>
+                        <td>
                             <button type="submit" class="btn btn-primary">確定</button>
-	                    </td>
-	                </tr>
-				</table>
-			</form>
-		</div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
 
-	</section>
+    </section>
 
 </div>
 {% endblock %}

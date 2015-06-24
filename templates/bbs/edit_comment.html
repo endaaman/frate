@@ -6,30 +6,28 @@
 
 {% block content %}
 <div class="main box">
-	<p><a href="{%url "bbs.home"%}">スレッド一覧に戻る</a></p>
-	<section>
+    <p><a href="{%url "bbs.home"%}">スレッド一覧に戻る</a></p>
+    <section>
 
         <h1>コメントの編集</h1>
         <div class="well">
 
-			<form action="{%url "bbs.comment.edit" comment.thread.id comment.id%}" method="post" data-use-ajax="false">
-				<table class="form centered">
-	                {% csrf_token %}
-	                {{ comment_form }}
-					<tr>
-	                    <th></th>
-	                    <td>
+            <form action="{%url "bbs.comment.edit" comment.thread.id comment.id%}" method="post" data-use-ajax="false">
+                <table class="form centered">
+                    {% csrf_token %}
+                    {{ comment_form }}
+                    <tr>
+                        <th></th>
+                        <td>
                             <button disabled type="submit" class="btn btn-primary">確定</button>
-	                    </td>
-	                </tr>
-				</table>
-			</form>
+                        </td>
+                    </tr>
+                </table>
+            </form>
 
-		</div>
+        </div>
 
-	</section>
+    </section>
 
 </div>
 {% endblock %}
-
-

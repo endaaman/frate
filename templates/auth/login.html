@@ -8,24 +8,22 @@
 
 <div class="box">
 
-	<section class="content">
-		<h1>ログイン</h1>
+    <section class="content">
+        <h1>ログイン</h1>
         <div class="well">
             <form action="." method="post">
                 <table class="form centered">
-	                {% csrf_token %}
-					<input type="hidden" name="next" value="{{next}}" />
-                    {{ form }}                                    
-    				<tr>
-	                    <th></th>
-	                    <td><input type="submit" class="btn btn-primary" value="ログイン" /></td>
-	                </tr>
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{next}}" />
+                    {{ form }}
+                    <tr>
+                        <th></th>
+                        <td><input type="submit" class="btn btn-primary" value="ログイン" /></td>
+                    </tr>
                 </table>
             </form>
         </div>
-	</section>
+    </section>
 </div>
 
 {% endblock %}
-
-

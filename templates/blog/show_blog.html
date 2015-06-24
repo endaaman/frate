@@ -13,30 +13,30 @@
         <div class="right f14">
             <span>投稿者：<a href="{%url "member.home" %}#member_id_{{blog.author.id}}">{{ blog.author.name }}</a></span>
             <span class="half-size-font">投稿日時:{{blog.pub_date}}</span>
-        </div>    
+        </div>
         <h1 class="ribbon">{{ blog.title }}</h1>
-        <div class="article-body">                
+        <div class="article-body">
         {{ blog.message|md2html|safe}}
         </div>
         <div class="right f14">
             {% if perms.blog.change_blog %}
             <a href="{%url "blog.edit" blog.url_name%}">編集</a>
-            {% endif%}          
+            {% endif%}
             {% if perms.blog.delete_blog %}
             <a class="btn-confirm-delete" href="#confirm-delete" data-url="{%url "blog.delete" blog.url_name %}">削除</a>
-            {% endif%}          
+            {% endif%}
         </div>
     </article>
 
-    
+
     <section>
         <h1 class="ribbon">コメント</h1>
 
         {% comment %}
         <p class="gray">現在ブログへのコメント機能は実装中です……</p>
-        {% endcomment %} 
+        {% endcomment %}
 
-        {% if comments %}      
+        {% if comments %}
         {% for comment in comments %}
         <section class="bordered">
             <div class="right f14">
@@ -47,13 +47,13 @@
             <div class="right f14">
                 <span>{{comment.pub_date}}</span>
             </div>
-        </section> 
+        </section>
         {% endfor %}
         {% else %}
         <p class="gray">現在この記事にコメントはありません。</p>
         {% endif %}
     </section>
-    
+
     <section class="content">
         <h2>コメントする</h2>
         <div class="well">
@@ -68,7 +68,7 @@
                 </table>
             </form>
         </div>
-    </section> 
+    </section>
 
 </div>
 
@@ -76,5 +76,3 @@
 
 
 {% endblock %}
-
-

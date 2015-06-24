@@ -7,62 +7,62 @@
 {% block content %}
 
 <div class="main box photos">
-	<p><a href="{%url "album.home"%}">アルバム一覧に戻る</a></p>
-	<article class="content_">
+    <p><a href="{%url "album.home"%}">アルバム一覧に戻る</a></p>
+    <article class="content_">
 
-		<h1 class="ribbon">{{album.title}}</h1>
-		<div class="right f14 mp">
-			投稿者:<a href="{%url "member.home" %}#member_id_{{album.author.id}}">{{ album.author.name }}</a> / 投稿日時:{{album.pub_date}}
-		</div>
+        <h1 class="ribbon">{{album.title}}</h1>
+        <div class="right f14 mp">
+            投稿者:<a href="{%url "member.home" %}#member_id_{{album.author.id}}">{{ album.author.name }}</a> / 投稿日時:{{album.pub_date}}
+        </div>
 
 
-		{{album.message|linebreaks}}
+        {{album.message|linebreaks}}
 
-		<div class="right f14 mp">
-  			{% if perms.photo.add_photo %}
-			<a href="{%url "photo.add" album.id%}">写真の追加</a>
-			{% endif %}
-  			{% if perms.photo.chnage_album  %}
-			<a href="{%url "album.edit" album.id%}">編集</a>
-			<a class="btn-confirm-delete" href="#confirm-delete" data-url="{%url "album.delete" album.id %}">削除</a>
-			{% endif%}
-		</div>
+        <div class="right f14 mp">
+              {% if perms.photo.add_photo %}
+            <a href="{%url "photo.add" album.id%}">写真の追加</a>
+            {% endif %}
+              {% if perms.photo.chnage_album  %}
+            <a href="{%url "album.edit" album.id%}">編集</a>
+            <a class="btn-confirm-delete" href="#confirm-delete" data-url="{%url "album.delete" album.id %}">削除</a>
+            {% endif%}
+        </div>
 
-		{%for photo in photos %}
-		<section class="content float-adjust">
-			<h2>{{photo.title}}</h2>
-	        <div class="right f14">
-				投稿者:<a href="{%url "member.home" %}#member_id_{{album.author.id}}">{{ photo.author.name }}</a> / 投稿日時:{{photo.pub_date}}
-			</div>
+        {%for photo in photos %}
+        <section class="content float-adjust">
+            <h2>{{photo.title}}</h2>
+            <div class="right f14">
+                投稿者:<a href="{%url "member.home" %}#member_id_{{album.author.id}}">{{ photo.author.name }}</a> / 投稿日時:{{photo.pub_date}}
+            </div>
 
-			<div class="float-adjust">
-				<div class="mp float-left">
-					<a class="thumb fancybox" rel="album.id" href="{{photo.image.url}}" title="{{photo.title}}">
-						<img src="{{photo.thumb.url}}" alt="{{photo.title}}" />
-					</a>
-				</div>
-				{{photo.message|linebreaks}}
-			</div>
+            <div class="float-adjust">
+                <div class="mp float-left">
+                    <a class="thumb fancybox" rel="album.id" href="{{photo.image.url}}" title="{{photo.title}}">
+                        <img src="{{photo.thumb.url}}" alt="{{photo.title}}" />
+                    </a>
+                </div>
+                {{photo.message|linebreaks}}
+            </div>
 
-			<div class="right f14">
-	        	<a href="{{photo.image.url}}" target="_blank">別ウィンドウで表示</a>
-	        	<a href="{{photo.image.url}}" download="{{photo.filename}}">ダウンロード</a>
-	  			{% if perms.photo.change_photo %}
-	        	<a href="{%url "photo.edit" album.id photo.id%}">編集</a>
-				{% endif%}
-	  			{% if perms.photo.delete_photo %}
-				<a class="btn-confirm-delete" href="#confirm-delete" data-url="{%url "photo.delete" album.id photo.id%}">削除</a>
-				{% endif%}
-			</div>
-		</section>
-		{% endfor %}
+            <div class="right f14">
+                <a href="{{photo.image.url}}" target="_blank">別ウィンドウで表示</a>
+                <a href="{{photo.image.url}}" download="{{photo.filename}}">ダウンロード</a>
+                  {% if perms.photo.change_photo %}
+                <a href="{%url "photo.edit" album.id photo.id%}">編集</a>
+                {% endif%}
+                  {% if perms.photo.delete_photo %}
+                <a class="btn-confirm-delete" href="#confirm-delete" data-url="{%url "photo.delete" album.id photo.id%}">削除</a>
+                {% endif%}
+            </div>
+        </section>
+        {% endfor %}
 
-	</article>
+    </article>
 </div>
 
 {% endblock %}
 
 
 {%block post_process%}
-	{% include "photo/confirm-delete.html" %}
+    {% include "photo/confirm-delete.html" %}
 {%endblock%}

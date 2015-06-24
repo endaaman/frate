@@ -4,58 +4,58 @@
 
 {% block content %}
 <div class="box">
-	<article>
+    <article>
 
-		<h1 class="ribbon">アルバム一覧</h1>
-		{% if perms.photo.add_album %}
-		<p><a href="{%url "album.add"%}">アルバムを追加</a></p>
-		{% endif %}
+        <h1 class="ribbon">アルバム一覧</h1>
+        {% if perms.photo.add_album %}
+        <p><a href="{%url "album.add"%}">アルバムを追加</a></p>
+        {% endif %}
 
-		{% for album in albums %}
-		<article class="p12">
-			<h2>{%if album.locked %}<i class="fa fa-lock"></i> {%endif%}<a href="{% url "album.show" album.id %}">{{album.title}}</a></h2>
-			<div class="right f14 mp">
-				投稿者:<a href="{%url "member.home" %}#member_id_{{album.author.id}}">{{ album.author.name }}</a> / 投稿日時:{{album.pub_date}}
-			</div>
-			{{ album.message | linebreaks}}
-			{%if not album.locked %}
-				{% if album.photo_set.all %}
-					<div class="js-slider slider">
-						{%for p in album.photo_set.all %}
-						<div class="slider-item">
-							<a class="js-fancybox thumb" rel="{{album.id}}" href="{{p.image.url}}" title="{{p.title}}">
-								<img src="{{p.thumb.url}}" alt="{{p.title}}"/>
-								<div class="thumb-preview">
-									<div class="thumb-preview-icon">
-										<i class="fa fa-eye"></i>
-									</div>
-								</div>
-							</a>
-						</div>
-						{% endfor %}
-					</div>
-				{% else %}
-					<p class="gray">このアルバムにはまだ画像が投稿されていません。</p>
-				{% endif %}
-			{% else %}
-				<p class="gray">このアルバムを閲覧するにはログインしてください。</p>
-			{% endif %}
+        {% for album in albums %}
+        <article class="p12">
+            <h2>{%if album.locked %}<i class="fa fa-lock"></i> {%endif%}<a href="{% url "album.show" album.id %}">{{album.title}}</a></h2>
+            <div class="right f14 mp">
+                投稿者:<a href="{%url "member.home" %}#member_id_{{album.author.id}}">{{ album.author.name }}</a> / 投稿日時:{{album.pub_date}}
+            </div>
+            {{ album.message | linebreaks}}
+            {%if not album.locked %}
+                {% if album.photo_set.all %}
+                    <div class="js-slider slider">
+                        {%for p in album.photo_set.all %}
+                        <div class="slider-item">
+                            <a class="js-fancybox thumb" rel="{{album.id}}" href="{{p.image.url}}" title="{{p.title}}">
+                                <img src="{{p.thumb.url}}" alt="{{p.title}}"/>
+                                <div class="thumb-preview">
+                                    <div class="thumb-preview-icon">
+                                        <i class="fa fa-eye"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="gray">このアルバムにはまだ画像が投稿されていません。</p>
+                {% endif %}
+            {% else %}
+                <p class="gray">このアルバムを閲覧するにはログインしてください。</p>
+            {% endif %}
 
-  			{% if user.is_active %}
-			<div class="right f14 mp">
-	  			{% if perms.photo.add_photo %}
-				<a href="{%url "photo.add" album.id%}">写真の追加</a>
-				{% endif %}
-	  			{% if perms.photo.change_album %}
-				<a href="{%url "album.edit" album.id%}">編集</a>
-				<a class="js-confirm-delete" href="#confirm-delete" data-url="{%url "album.delete" album.id %}">削除</a>
-				{% endif%}
-			</div>
-			{%endif%}
-		</article>
-		{% endfor %}
+              {% if user.is_active %}
+            <div class="right f14 mp">
+                  {% if perms.photo.add_photo %}
+                <a href="{%url "photo.add" album.id%}">写真の追加</a>
+                {% endif %}
+                  {% if perms.photo.change_album %}
+                <a href="{%url "album.edit" album.id%}">編集</a>
+                <a class="js-confirm-delete" href="#confirm-delete" data-url="{%url "album.delete" album.id %}">削除</a>
+                {% endif%}
+            </div>
+            {%endif%}
+        </article>
+        {% endfor %}
 
-	</article>
+    </article>
     {%if has_prev or has_next%}
     <div class="pagination">
         {%if has_prev%}
@@ -71,5 +71,5 @@
 {% endblock %}
 
 {%block post_process%}
-	{% include "photo/confirm-delete.html" %}
+    {% include "photo/confirm-delete.html" %}
 {%endblock%}

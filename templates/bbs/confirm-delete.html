@@ -1,37 +1,37 @@
 <div id="confirm-delete" class="hidden">
-	<div class="well">
-		<p class="center">削除しますか？</p>
-		<p class="center" id="confirm-delete-message"></p>
-		<form id="delete-form" method="post" data-use-ajax="true">
-			<table class="form">			
-			    {% csrf_token %}
-			    {{ delete_form }}
-			    <tr>
-			    	<th></th>
-			    	<td>
-						<button class="btn btn-danger" type="submit">削除する</button>
-						<button class="btn-confirm-delete-close btn btn-default" type="reset">閉じる</button>
-					</td>
-			    </tr>
-			</table>
-		</form>
-	</div>
+    <div class="well">
+        <p class="center">削除しますか？</p>
+        <p class="center" id="confirm-delete-message"></p>
+        <form id="delete-form" method="post" data-use-ajax="true">
+            <table class="form">
+                {% csrf_token %}
+                {{ delete_form }}
+                <tr>
+                    <th></th>
+                    <td>
+                        <button class="btn btn-danger" type="submit">削除する</button>
+                        <button class="btn-confirm-delete-close btn btn-default" type="reset">閉じる</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </div>
 <script>
 $(function(){
-	$('.btn-confirm-delete-close').on('click', function(){
-		$.fancybox.close()
-	})
-	$('.btn-confirm-delete').on('click', function(){
-		var m = $(this).data('message')
-		if(m){
-			$("#confirm-delete-message").text(m)			
-		}
-		$("#confirm-delete").find('form').attr('action', $(this).data('url'))
-	})
-	$('.btn-confirm-delete').fancybox({
-		modal: true,
-	})
+    $('.btn-confirm-delete-close').on('click', function(){
+        $.fancybox.close()
+    })
+    $('.btn-confirm-delete').on('click', function(){
+        var m = $(this).data('message')
+        if(m){
+            $("#confirm-delete-message").text(m)
+        }
+        $("#confirm-delete").find('form').attr('action', $(this).data('url'))
+    })
+    $('.btn-confirm-delete').fancybox({
+        modal: true,
+    })
 })
 </script>
 

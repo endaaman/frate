@@ -5,27 +5,27 @@
 {% block content %}
 <div class="main box">
 
-	<p><a href="{%url "album.home"%}">アルバム一覧に戻る</a></p>
-	<section>
-		<h1>アルバムの{{op}}</h1>
-		<div class="well">
+    <p><a href="{%url "album.home"%}">アルバム一覧に戻る</a></p>
+    <section>
+        <h1>アルバムの{{op}}</h1>
+        <div class="well">
 
-			<form action="./" method="post" data-use-ajax="false">
+            <form action="./" method="post" data-use-ajax="false">
                 {% csrf_token %}
-				<table class="form centered">
-	                {{ album_form }}
-					<tr>
-	                    <th></th>
-	                    <td>
-	                    	<button type="submit" class="btn btn-primary">確定</button>
-	                    </td>
-	                </tr>
+                <table class="form centered">
+                    {{ album_form }}
+                    <tr>
+                        <th></th>
+                        <td>
+                            <button type="submit" class="btn btn-primary">確定</button>
+                        </td>
+                    </tr>
 
-				</table>
-			</form>
-		</div>
+                </table>
+            </form>
+        </div>
 
-	</section>
+    </section>
 
 </div>
 {% endblock %}
