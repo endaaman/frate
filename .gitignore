@@ -1,11 +1,11 @@
 *.pyc
 
-db/
+db/*
 media/
 dist/
 
-log/
-tmp/
+log/*
+tmp/*
 
 static/vendor/
 fabfile/local.py

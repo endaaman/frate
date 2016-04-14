@@ -29,19 +29,19 @@
         <li class="nav-menu">
             <a class="link" href="{% url "album.home" %}"><i class="fa fa-picture-o"></i> アルバム</a>
         </li>
-        <li class="nav-menu">
-            <a class="link" href="{% url "bbs.home" %}"><i class="fa fa-pencil-square"></i> 掲示板</a>
-        </li>
+        <!-- <li class="nav-menu">
+            <a class="link" href="{% url "bbs.home" %}"><i class="fa fa-external-link"></i> 掲示板</a>
+        </li> -->
         <li class="nav-menu">
             <label class="dropdown">
                 <input class="dropdown-trigger" type="checkbox" >
                 <div class="dropping">
                     <span class="link btn-dropdown"><i class="fa fa-bars"></i> その他</span>
                     <ul class="dropdown-list">
-                        <li class="dropdown-menu"><a class="link" target="_blank" href="http://frate.web.fc2.com/?no-moved">旧ホームページ</a></li>
-                        <li class="dropdown-menu"><a class="link" target="_blank" href="http://asp.atomicweb.co.jp/id/frate1839/bbs/">旧画像掲示板</a></li>
-                        <li class="dropdown-menu"><a class="link" target="_blank" href="http://8208.teacup.com/frate/bbs">旧掲示板</a></li>
-                        <li class="dropdown-menu"><a class="link" target="_blank" href="http://frate.bbs.fc2.com/">旧掲示板(パス付き)</a></li>
+                        <!-- <li class="dropdown-menu"><a class="link" target="_blank" href="http://frate.web.fc2.com/?no-moved">旧ホームページ</a></li> -->
+                        <!-- <li class="dropdown-menu"><a class="link" target="_blank" href="http://asp.atomicweb.co.jp/id/frate1839/bbs/">旧画像掲示板</a></li> -->
+                        <li class="dropdown-menu"><a class="link" target="_blank" href="http://8208.teacup.com/frate/bbs">掲示板</a></li>
+                        <li class="dropdown-menu"><a class="link" target="_blank" href="http://frate.bbs.fc2.com/">掲示板(パス付き)</a></li>
                           {% if user.is_authenticated %}
                         <li class="dropdown-menu"><a class="link" href="{% url "auth.logout" %}?next={{request.path}}"><i class="fa fa-user"></i> ログアウト</a></li>
                         {%else%}
