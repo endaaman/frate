@@ -3,8 +3,10 @@ from django.shortcuts import render, render_to_response
 from models import Member
 from django.template import RequestContext
 import datetime
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(redirect_field_name='next')
 def home(request):
     members = []
     d = datetime.datetime.today()
@@ -28,4 +30,3 @@ def home(request):
                                   r=[i + 1 for i in range(6)]
                               ),
                               context_instance=RequestContext(request))
-
