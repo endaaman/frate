@@ -1,21 +1,28 @@
 FROM ubuntu:16.04
 
-RUN \
-  apt-get update && \
-  apt-get install -y python python-dev python-pip nginx nodejs-legacy npm supervisor
+RUN apt-get update
+RUN apt-get install -y \
+  python python-dev python-pip \
+  nginx \
+  curl git \
+  supervisor
+
+RUN curl -kL git.io/nodebrew | perl - setup
+ENV PATH /root/.nodebrew/current/bin:$PATH
+RUN nodebrew install-binary v4.4.3
+RUN nodebrew use v4.4.3
+
 
 RUN \
   chown -R www-data:www-data /var/lib/nginx && \
   echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
   rm /etc/nginx/sites-enabled/default
 
-ADD nginx/frate.conf /etc/nginx/sites-enabled
+RUN npm i -g bower
 
+ADD nginx/frate.conf /etc/nginx/sites-enabled
 ADD supervisor.conf /etc/supervisor/conf.d/
 
-
-
-RUN npm i -g bower
 
 RUN mkdir -p /var/www/frate
 ADD . /var/www/frate
@@ -28,7 +35,6 @@ RUN bower install --allow-root
 RUN python manage.py migrate --settings=core.settings.prod
 RUN python manage.py collectstatic --settings=core.settings.prod --noinput
 
-VOLUME ["/var/www/frate/media", "/var/www/frate/db"]
 CMD ["/usr/bin/supervisord"]
 
 EXPOSE 80
