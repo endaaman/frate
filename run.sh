@@ -1,4 +1,4 @@
-# docker build -t endaaman/frate .
+docker build -t endaaman/frate .
 
 # docker run -d -e VIRTUAL_HOST=frate-alpine.club \
 #   -v $(pwd)/media:/var/www/frate/media \
