@@ -5,7 +5,7 @@ docker build -t endaaman/frate .
 #   -v $(pwd)/db:/var/www/frate/db \
 #    endaaman/frate
 
-running_container_id=$(docker ps -ql --no-trunc --filter='ancestor=endaaman/frate')
+running_container_id=$(docker ps -lq --no-trunc --filter='ancestor=endaaman/frate')
 
 echo $running_container_id
 
@@ -17,9 +17,7 @@ container_id=$( \
     endaaman/frate \
 )
 
-echo $container_id
-
-docker exec $container_id bash -c 'while [ -z "$(cat /var/run/supervisord.pid 2>/dev/null)" ]; do sleep 1; done'
-if $running_container_id; then
+if ! [ -n "$running_container_id" ]; then
+  echo 'killing old container'
   docker kill -s QUIT $running_container_id
 fi
