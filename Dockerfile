@@ -25,12 +25,14 @@ ADD supervisor.conf /etc/supervisor/conf.d/
 
 
 RUN mkdir -p /var/www/frate
-ADD . /var/www/frate
 WORKDIR /var/www/frate
 
-
+ADD requirements.txt ./
 RUN pip install -r requirements.txt
+ADD bower.json ./
 RUN bower install --allow-root
+
+ADD . /var/www/frate
 
 RUN python manage.py migrate --settings=core.settings.prod
 RUN python manage.py collectstatic --settings=core.settings.prod --noinput
