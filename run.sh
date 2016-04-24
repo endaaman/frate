@@ -11,7 +11,7 @@ echo $running_container_id
 
 container_id=$( \
   docker run -d \
-    -e VIRTUAL_HOST=frate-alpine.club,frate.local \
+    -e VIRTUAL_HOST=frate-alpine.club,frate.endaaman.me,frate.local \
     -v $(pwd)/media:/var/www/frate/media \
     -v $(pwd)/db:/var/www/frate/db \
     endaaman/frate \
