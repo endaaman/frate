@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 RUN \
   apt-get update && \
@@ -28,7 +28,7 @@ RUN bower install --allow-root
 RUN python manage.py migrate --settings=core.settings.prod
 RUN python manage.py collectstatic --settings=core.settings.prod --noinput
 
-VOLUME ["media", "db"]
+VOLUME ["/var/www/frate/media", "/var/www/frate/db"]
 CMD ["/usr/bin/supervisord"]
 
 EXPOSE 80
