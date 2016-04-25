@@ -45,3 +45,6 @@
     ln -s /etc/nginx/sites-availave/frate.conf /etc/nginx/sites-enabled/
     ```
     で有効化
+
+## TODO
+* Improve the way to detect and remove old container when hot reloading
