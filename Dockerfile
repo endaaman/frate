@@ -24,20 +24,23 @@ RUN npm i -g bower
 ADD nginx/frate.conf /etc/nginx/sites-enabled
 ADD supervisor.conf /etc/supervisor/conf.d/
 
-
 RUN mkdir -p /var/www/frate
 WORKDIR /var/www/frate
 
-ADD requirements.txt ./
+ADD requirements.txt ./requirements.txt
 RUN pip install -r requirements.txt
-ADD bower.json ./
+ADD .bowerrc ./.bowerrc
+ADD bower.json ./bower.json
 RUN bower install --allow-root
 
 ADD . /var/www/frate
 
-RUN python manage.py migrate --settings=core.settings.prod
-RUN python manage.py collectstatic --settings=core.settings.prod --noinput
+ENV DJANGO_SETTINGS_MODULE core.settings.prod
 
-CMD ["/usr/bin/supervisord"]
+RUN python manage.py collectstatic --noinput
+
+CMD \
+  python manage.py migrate && \
+  /usr/bin/supervisord
 
 EXPOSE 80
