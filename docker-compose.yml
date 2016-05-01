@@ -3,6 +3,6 @@ frate:
   environment:
     VIRTUAL_HOST: frate-alpine.club,frate.endaaman.me,frate.local
   volumes:
-    - /var/www/frate/media:/var/www/frate/media
-    - /var/www/frate/db:/var/www/frate/db
+    - ./media:/var/www/frate/media
+    - ./db:/var/www/frate/db
   restart: always
