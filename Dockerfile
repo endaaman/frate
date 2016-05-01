@@ -5,6 +5,7 @@ RUN apt-get install -y \
   python python-dev python-pip \
   nginx \
   curl git \
+  zlib1g libjpeg8 libjpeg8-dev libfreetype6 libfreetype6-dev \
   supervisor
 
 RUN curl -kL git.io/nodebrew | perl - setup
