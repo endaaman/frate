@@ -1,2 +1,0 @@
-import uwsgi
-import deploy
