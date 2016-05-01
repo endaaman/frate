@@ -1,0 +1,8 @@
+frate:
+  build: .
+  environment:
+    VIRTUAL_HOST: frate-alpine.club,frate.endaaman.me,frate.local
+  volumes:
+    - /var/www/frate/media:/var/www/frate/media
+    - /var/www/frate/db:/var/www/frate/db
+  restart: always
