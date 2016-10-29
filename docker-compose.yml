@@ -1,5 +1,6 @@
 frate:
   image: endaaman/frate-alpine.club
+  container_name: frate
   environment:
     VIRTUAL_HOST: frate-alpine.club,frate.endaaman.me,frate.dev
   volumes:
